@@ -15,9 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from sharetech import views as sharetech_view
 
-from . import views
+# from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('sharetech/login/', sharetech_view.login),
 ]
