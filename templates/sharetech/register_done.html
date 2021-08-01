@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="discription" content="ログインページ">
+    <title>Login</title>
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="register.css">
+</head>
+
+<body>
+    <header class="register_header">
+        <h1>
+            Wellcome to <span>SHARE TECH</span>!
+        </h1>
+    </header>
+
+    <main>
+        <!--ログインフォーム-->
+        <div class="form_wrapper">
+            <h3>Create account and start service</h3>
+            <form>
+                <div class="form_item company_input">
+                    <label for="company">Company</label>
+                    <input type="text" name="company" value="" readonly>
+                </div>
+
+                <div class="base_info_wrapper">
+                    <div class="form_item">
+                        <label for="name">Name※</label>
+                        <input type="password" name="name" required="required" value="" readonly>
+                    </div>
+                    <div class="form_item">
+                        <label for="email">Email Adress※</label>
+                        <input type="password" name="email" required="required" value="" readonly>
+                    </div>
+                    <div class="form_item">
+                        <label for="password">Password※</label>
+                    <input type="password" name="password" required="required" value="" readonly>
+                    </div>
+                </div>
+
+                <div class="form_item role_input">
+                    <label for="role">Account Role※</label>
+                    <select name="role" required="required" list="role_list">
+                        <datalist id="role_list">
+                            <option value="閲覧者">Only View</option>
+                            <option value="投稿者" disabled>View and Post</option>
+                        </datalist>
+                    </select>
+                </div>
+                <div class="submit">
+                    <input class="return_to_edit_btn" type="submit" value="RETURN">
+                    <input class="submit_btn confirmed" type="submit" value="REGISTER">
+                </div>
+                
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <div class="login_page_copyright"><p>© 2021 Joshisukun, INC.</p></div>
+    </footer>
+</body>

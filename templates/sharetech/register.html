@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="discription" content="ログインページ">
+    <title>Register</title>
+    <link rel="stylesheet" href="{% static 'sharetech/css/common.css' %}">
+    <link rel="stylesheet" href="{% static 'sharetech/css/register.css' %}">
+</head>
+
+<body>
+    <header class="register_header">
+        <h1>
+            Wellcome to <span>SHARE TECH</span>!
+        </h1>
+    </header>
+
+    <main>
+        <!--ログインフォーム-->
+        <div class="form_wrapper">
+            <h3>Create account and start service</h3>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form_item company_input">
+                    <label for="name">{{form.company.label}}</label>
+                    {{form.company}}                
+                </div>
+                {% for field, error in form.errors.items %}
+                <h1>{{error|striptags}}</h1>
+                <h2>{{field}}</h2>
+                {% endfor %}
+                <div class="base_info_wrapper">
+                    <div class="form_item">
+                        <label for="name">{{form.username.label}}※</label>
+                        {{form.username}}
+                    </div>
+                    <div class="form_item">
+                        <label for="email">{{form.email.label}}※</label>
+                        {{form.email}}
+                    </div>
+                    <div class="form_item">
+                        <label for="password">{{form.password1.label}}※</label>
+                        {{form.password1}}
+                    </div>
+                </div>
+
+                <div class="form_item role_input">
+                    <!-- TODO チェックリストの実装 -->
+                    <label for="role">{{form.role_id.label}}※</label>
+                    {{form.role_id}}
+                </div>
+
+                <div class="submit">
+                    <input class="submit_btn" type="submit" value="REGISTER">
+                </div>
+                
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <div class="login_page_copyright"><p>© 2021 Joshisukun, INC.</p></div>
+    </footer>
+</body>

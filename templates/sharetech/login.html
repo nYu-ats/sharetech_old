@@ -22,21 +22,27 @@
         <!--ログインフォーム-->
         <div class="form_wrapper">
             <h1>Sign In</h1>
-            <form>
-                <div class="form_item">
-                    <label for="email"></label>
-                    <input type="email" name="email" required="required" placeholder="Email Address">
+            <form method="POST">
+                {% csrf_token %}
+                <!-- <div class="form_item"> -->
+                    {% for field in form %}
+                    <div class="form_item">
+                        {{field}}
+                    </div>
+                    {% endfor %}
+                    <!-- <label for="email"></label>
+                    <input type="email" name='username' required="required" placeholder="Email Address">
                 </div>
                 <div class="form_item">
                     <label for="password"></label>
-                    <input type="password" name="password" required="required" placeholder="Password">
-                </div>
+                    <input type="password" name='password' required="required" placeholder="Password">
+                </div> -->
                 <div class="login_button">
                     <input type="submit" class="button" title="Sign In" value="Sign In">
                 </div>
             </form>
             <div class="form_footer">
-                <p><a href="#">Create an account</a></p>
+                <p><a href="{% url 'register' %}">Create an account</a></p>
                 <p><a href="#">Forget password?</a></p>
             </div>
         </div>

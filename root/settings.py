@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-]
+    'sharetech',
+    ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -53,6 +54,11 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'root.urls'
+LOGIN_URL = 'login'
+LOGOUT_REDIRECT_URL = 'login'
+LOGIN_REDIRECT_URL = 'top'
+
+AUTH_USER_MODEL = 'sharetech.User'
 
 TEMPLATES = [
     {
@@ -72,14 +78,31 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'root.wsgi.application'
 
+# Mail
+# 仮でコンソール出力
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'nyu7931555@gmail.com'
+EMAIL_HOST_PASSWORD = 'mdcmg777'
+EMAIL_USE_TLS = True
+# メールアクティベーショントークン有効期限 : 30分
+ACTIVATION_TIMEOUT_SECONDS = 60 * 30
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR + '/db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'bubble',
+        'USER' : 'test',
+        'PASSWORD' : 'test123A!',
+        'HOST' : 'localhost',
+        'PORT' : '3306',
+        'OPTIONS' : {
+            'charset' : 'utf8mb4',
+        }
     }
 }
 

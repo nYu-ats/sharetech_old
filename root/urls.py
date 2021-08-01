@@ -15,11 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from sharetech import views as sharetech_view
-
-# from . import views
+from sharetech.views import (
+    LoginView, testView, UserCreateView, UserCreateDoneView,
+    UserCreateCompleteView, 
+    )
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('sharetech/login/', sharetech_view.login),
+    path('login/', LoginView.auth_login, name='login'),
+    path('', testView.testRouteView, name='top'),
+    path('register/', UserCreateView.user_create, name='register'),
+    path('register/done', UserCreateDoneView.user_create_done, name='register_done'),
+    path('register/complete/<token>/', UserCreateCompleteView.user_create_complete, name='register_complete'),
 ]
