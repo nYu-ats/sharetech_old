@@ -1,0 +1,172 @@
+/*ログインページ*/
+.login_header img{
+  margin-top: 2em;
+  height: 100;
+  width: 100;
+}
+.login_header{
+  text-align: center;
+}
+
+.form_wrapper {
+  background: #fafafa;
+  margin: 3em auto;
+  padding: 0 1em;
+  width: 50%;
+  min-width: 370px;
+  background-color: #F1F9FF;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  .form_wrapper .error_msg{
+    text-align: center;
+    padding: 3em 0;
+    color: red;
+    font-weight: bold;
+    }
+
+.form_wrapper h1{
+  font-weight: normal;
+  font-size: 3em;
+  text-align: center;
+  padding: 1em 0;
+  padding-bottom: .25em;
+  color: #2699FB;
+  }
+
+.form_wrapper form{
+  padding: 0 1.5em;
+  }
+
+.form_wrapper .form_item{
+  position: relative;
+  margin: 0 auto;
+  margin-bottom: 0.75em;
+  width: 50%; 
+  min-width: 300px;
+  }
+
+  .form_wrapper .form_item img{
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translate(0, -50%);
+    -webkit-transform: translate(0, -50%);
+    width: 16px;
+    height: 16px;
+    opacity: 0;
+  }
+
+.form_wrapper .form_item input{
+  color: #2699FB;
+  background: #F1F9FF;
+  border: 2px solid #BCE0FD;
+  border-radius: 10px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1em;
+  height: 40px;
+  transition: 0.3s;
+  width: 100%;
+  padding: .5em;
+  }
+
+  .form_wrapper .form_item input::placeholder{
+    color: #2699FB;
+  }
+  
+.form_wrapper .form_item input:focus{
+  outline: none;
+  }
+
+.form_wrapper .login_button{
+  margin: 2em auto;
+  width: 33%; 
+  min-width: 200px;
+  }
+
+.form_wrapper .login_button .button{
+  background-color: #2699FB;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  height: 40px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.2em;
+  letter-spacing: 0.05em;
+  text-align: center;
+  text-transform: uppercase;
+  transition: .3s;
+  width: 100%;   
+  }
+
+.form_wrapper .login_button .button:hover{
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.form_wrapper h2{
+  font-size: 1em;
+  text-align: center;
+  padding: 1em 0;
+  padding-bottom: .25em;
+  color: #908B8B;
+  }
+
+  .form_wrapper .oauth_link{
+    display: flex;
+    justify-content: center;
+    width: 30%;
+    min-width: 200px;
+    background-color: white;
+    margin: 0 auto;
+    padding: .5em;
+    border-radius: 8px;
+    transition: .3s;
+    pointer-events: none;
+  }
+
+  .form_wrapper .oauth_link:hover{
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .form_wrapper .oauth_link img{
+    width: 24px;
+    height: 24px;
+  }
+
+  .form_wrapper .oauth_link p{
+    margin-left: .5em;
+  }
+
+  .form_wrapper .oauth_link a{
+    color: #908B8B;
+    font-weight: bold;
+    pointer-events: auto;
+  }
+
+.form_wrapper .form_footer {
+  font-size: 1em;
+  font-weight: bold;
+  padding: 2em;
+  text-align: center;
+}
+
+.form_wrapper .form_footer p{
+  text-align: right;
+}
+
+.form_wrapper .form_footer a{ 
+  color: #908B8B;
+  text-decoration: none;
+  transition: .3s;
+}
+
+.form_wrapper .form_footer a:hover{
+  color: #2699FB;
+}
+
+.login_page_copyright{
+  text-align: center;
+  margin-top: 4em;
+  font-weight: bold;
+}
