@@ -1,0 +1,6 @@
+*.log
+*.pyc
+./sharetech/__pycache__/
+./sharetech/db-volumes/
+./sharetech/db.sqlite
+.devcontainer
