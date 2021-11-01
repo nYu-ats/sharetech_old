@@ -4,3 +4,4 @@
 ./sharetech/db-volumes/
 ./sharetech/db.sqlite
 .devcontainer
+.env
