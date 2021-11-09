@@ -1,6 +1,4 @@
-from .User import User
-from .Chapter import Chapter
-from .Article import Article
+from .user import CustomUser, CustomUserManager 
 
 """
 Modelファイル分割のためサブディレクトリを作成

@@ -1,16 +1,19 @@
 import django
 from django.core.exceptions import ValidationError
-from ..models.User import User
+from ..models.user import CustomUser
 from django.forms import ModelForm
 from django import forms
 from django.contrib.auth.forms import  UserCreationForm
 
 class UserCreateForm(UserCreationForm):
+    '''
+    ユーザー新規登録用フォーム
+    '''
 
     class Meta:
-        model = User
-        fields = ['company', 'username', 'email', 'role_id', 'password1']
-        field_order = ['company', 'username', 'email', 'role_id', 'password']
+        model = CustomUser
+        fields = ['company', 'username', 'email', 'role_code', 'password1']
+        field_order = ['company', 'username', 'email', 'role_code', 'password']
 
 
     def __init__(self, *args, **kwargs):
@@ -19,9 +22,9 @@ class UserCreateForm(UserCreationForm):
         # 不要なパスワードフィールド削除
         del self.fields['password2']
         self.fields['password1'].widget = forms.PasswordInput(attrs={'type':'password'})
-        self.fields['role_id'].widget = forms.widgets.Select
-        self.fields['role_id'].choices = [('Only View', '1'),('View and Post', '2')]
-        self.fields['role_id'] = forms.fields.ChoiceField(
+        self.fields['role_code'].widget = forms.widgets.Select
+        self.fields['role_code'].choices = [('Only View', '1'),('View and Post', '2')]
+        self.fields['role_code'] = forms.fields.ChoiceField(
             choices = [('1', 'Only View'), ('2', 'View and Post')],
             widget = forms.widgets.Select,
         )

@@ -1,105 +1,128 @@
-/*ログインページ*/
+/*新規登録ページ*/
+
 .register_header{
-  text-align: center;
-  font-size: 2em;
-  font-weight: bold;
-  margin: 5em 0 2em 0;
+text-align: center;
+font-size: 2em;
+font-weight: bold;
+margin: 5em 0 2em 0;
+color: #666;
 }
 
 .register_header span{
-  color: #1e90ff;
+color: #1e90ff;
 }
 
 .form_wrapper {
-  background: #1e90ff;
-  width: 100%;
-  }
+background: #F1F9FF;
+width: 100%;
+box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
 
 .form_wrapper h3{
-  text-align: center;
-  margin: 2em 0;
-  color: white;
-  }
+text-align: center;
+color: #2699FB;
+padding-top: 2em;
+}
 
-  .form_wrapper .form_item{
-    width: 500px;
-  }
+.form_wrapper .user_info_wrapper{
+  width: 45%;
+  margin: 0 2.5%;
+  min-width: 450px;
+}
 
-  .form_wrapper label{
-    font-size: 1.2em;
-    color: white;
-    font-weight: bold;
-  }
+.form_wrapper .user_info_wrapper .form_item{
+  width: 100%;
+  padding: 2em 3em;
+}
 
-  .form_wrapper .company_input,
-  .form_wrapper .base_info_wrapper,
-  .form_wrapper .role_input{
-    margin: 1.5em 3em;
-  }
-
-  .form_wrapper .role_input{
-    padding-bottom: 5em;
-  }
-
-  .form_wrapper .base_info_wrapper{
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
-
-.form_wrapper .form_item input,
-.form_wrapper .form_item select{
-  background: #fafafa;
-  border: none;
-  border-bottom: 2px solid #e9e9e9;
-  color: #666;
-  font-family: 'Open Sans', sans-serif;
+.form_wrapper .user_info_wrapper label{
   font-size: 1.2em;
-  height: 50px;
-  width: 100%;  
-  padding: .5em;
-  }
-  
+  color: #2699FB;
+  font-weight: bold;
+}
+
+.form_wrapper .role_input{
+  padding-bottom: 5em;
+}
+
+.form_wrapper .item_container{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.form_wrapper .user_info_wrapper .form_item input,
+.form_wrapper .user_info_wrapper .form_item select{
+background: #F1F9FF;
+border: 2px solid #2699FB;
+border-radius: 1em;
+color: #666;
+font-family: 'Open Sans', sans-serif;
+font-size: 1.2em;
+height: 50px;
+width: 100%;  
+padding: .5em;
+}
+
+.form_wrapper .user_info_wrapper .form_item select{
+  color: #2699FB;
+}
+
 .form_wrapper .form_item input:focus,
 .form_wrapper .form_item select:focus{
-  border-bottom: 2px solid #c0c0c0;
-  outline: none;
-  }
+border: 4px solid #2699FB;
+outline: none;
+}
 
-  .submit{
-    text-align: center;
-  }
+.submit{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
 
-.submit_btn,
-.return_to_edit_btn{
-  width: 10%;
-  min-width: 200px;
-    display: inline-block;
-    border-radius: 10px;
-    background-color: rgb(150, 150, 150);
-    text-align: center;
-    padding: .5em 1em;
-    margin: 2em 2em;
-    font-size: 1.5em;
-    cursor: pointer;
-    color: white;
-    border: none;
-    transition: .5s;
-  }
+.submit_btn{
+  width: 5em;
+  min-width: 150px;
+  display: inline-block;
+  border-radius: .5em;
+  background-color: #2699FB;
+  border: 2px solid #2699FB;
+  text-align: center;
+  padding: .5em 1em;
+  margin: 2em 0;
+  font-size: 1.2em;
+  cursor: pointer;
+  color: white;
+  transition: .5s;
+}
 
-  .submit_btn.confirmed{
-    background-color: red;
-  }
+.return_btn{
+  width: 5em;
+  min-width: 150px;
+  display: inline-block;
+  border-radius: 10px;
+  background-color: rgb(150, 150, 150);
+  border: 2px solid rgb(150, 150, 150);
+  text-align: center;
+  padding: .5em 1em;
+  margin: 2em 2em;
+  font-size: 1.2em;
+  cursor: pointer;
+  color: white;
+  transition: .5s;
+}
 
-  .submit_btn:hover,
-  .return_to_edit_btn:hover{
-    box-shadow: 4px 4px 8px #0080ff;
-  }
+.submit_btn.confirmed{
+  background-color: red;
+}
 
-
+.submit_btn:hover,
+.return_btn:hover{
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+}
 
 .login_page_copyright{
-  text-align: center;
-  margin-top: 4em;
-  color: #666;
+text-align: center;
+margin-top: 4em;
+color: #2699FB;
 }
