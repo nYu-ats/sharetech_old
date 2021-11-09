@@ -1,5 +1,5 @@
 
-from sharetech.forms.UserCreateForm import UserCreateForm
+from sharetech.forms.user_create_form import UserCreateForm
 from django.views.generic.edit import FormView
 from django.urls import reverse_lazy
 from django.shortcuts import render, redirect
@@ -34,7 +34,8 @@ class UserCreateView(generic.CreateView):
         subject = render_to_string('sharetech/mail_template/create/subject_register_done.txt', context)
         message = render_to_string('sharetech/mail_template/create/register_done.txt', context)
 
-        user.email_user(subject, message)
+        # TODO メール送信処理実行(未定義なので、utilあたりにメール送信処理を作る)
+
         return redirect('register_done')
 
 user_create = UserCreateView.as_view()

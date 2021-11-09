@@ -20,40 +20,50 @@
     <main>
         <!--ログインフォーム-->
         <div class="form_wrapper">
-            <h3>Create account and start service</h3>
+            <h3>ご登録申請及び、審査項目となります<br>可能な限り項目を埋めていただくことで、審査が通りやすくなります</h3>
             <form method="POST">
                 {% csrf_token %}
-                <div class="form_item company_input">
-                    <label for="name">{{form.company.label}}</label>
-                    {{form.company}}                
-                </div>
                 {% for field, error in form.errors.items %}
                 <h1>{{error|striptags}}</h1>
                 <h2>{{field}}</h2>
                 {% endfor %}
-                <div class="base_info_wrapper">
-                    <div class="form_item">
-                        <label for="name">{{form.username.label}}※</label>
-                        {{form.username}}
+                <div class="item_container">
+                    <div class="user_info_wrapper">
+                        <!-- 必須入力の項目についてはこっちの要素div内に入れる -->
+                        <div class="form_item user_name_input">
+                            <label for="name">{{form.username.label}}※</label>
+                            {{form.username}}
+                        </div>
+                        <div class="form_item role_input">
+                            <label for="role">{{form.role_code.label}}※</label>
+                            {{form.role_code}}
+                        </div>
+                        <div class="form_item">
+                            <label for="email">{{form.email.label}}※</label>
+                            {{form.email}}
+                        </div>
+                        <div class="form_item">
+                            <label for="password">{{form.password1.label}}※</label>
+                            {{form.password1}}
+                        </div>
+                        <div class="form_item">
+                            <label for="password">{{form.password1.label}} confirm※</label>
+                            {{form.password1}}
+                        </div>
                     </div>
-                    <div class="form_item">
-                        <label for="email">{{form.email.label}}※</label>
-                        {{form.email}}
-                    </div>
-                    <div class="form_item">
-                        <label for="password">{{form.password1.label}}※</label>
-                        {{form.password1}}
-                    </div>
-                </div>
 
-                <div class="form_item role_input">
-                    <!-- TODO チェックリストの実装 -->
-                    <label for="role">{{form.role_id.label}}※</label>
-                    {{form.role_id}}
+                    <div class="user_info_wrapper">
+                        <!-- オプション入力の項目についてはこっちの要素div内に入れる -->
+                        <div class="form_item company_input">
+                            <label for="name">{{form.company.label}}</label>
+                            {{form.company}}                
+                        </div>
+                    </div>    
                 </div>
 
                 <div class="submit">
-                    <input class="submit_btn" type="submit" value="REGISTER">
+                    <input class="return_btn" type="submit" value="戻る">
+                    <input class="submit_btn" type="submit" value="確認">
                 </div>
                 
             </form>
@@ -61,6 +71,6 @@
     </main>
 
     <footer>
-        <div class="login_page_copyright"><p>© 2021 Joshisukun, INC.</p></div>
+        <div class="login_page_copyright"><p>©2021 ShareTech Co., Ltd., All rights reserved</p></div>
     </footer>
 </body>

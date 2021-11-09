@@ -42,12 +42,18 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# 認証カスタマイズ
+AUTHENTICATION_BACKENDS = [
+    'sharetech.backends.authenticate_backend.EmailAuthBackend',
+]
+
+AUTH_USER_MODEL = 'sharetech.CustomUser'
+
+# 認証可否によるルーティング設定
 ROOT_URLCONF = 'root.urls'
 LOGIN_URL = 'login'
 LOGOUT_REDIRECT_URL = 'login'
 LOGIN_REDIRECT_URL = 'top'
-
-AUTH_USER_MODEL = 'sharetech.User'
 
 TEMPLATES = [
     {
@@ -68,7 +74,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'root.wsgi.application'
 
 # Mail
-# 仮でコンソール出力
+# 仮でコンソール出力しているので、アプリケーション送信のため修正が必要
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
