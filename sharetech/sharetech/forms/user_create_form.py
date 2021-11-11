@@ -12,7 +12,7 @@ class UserCreateForm(UserCreationForm):
 
     class Meta:
         model = CustomUser
-        fields = ['company', 'username', 'email', 'role_code', 'password1']
+        fields = ['company', 'first_name_jp', 'family_name_jp', 'first_name_en', 'family_name_en', 'email', 'role_code', 'password1']
         field_order = ['company', 'username', 'email', 'role_code', 'password']
 
 

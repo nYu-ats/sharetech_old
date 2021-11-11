@@ -71,11 +71,35 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     null -> false
     blank -> false
     """
-    # ユーザー名
-    username = models.CharField(
-        verbose_name = 'Name',
-        help_text='必須項目です。全角文字で50文字以下にしてください。',
-        max_length = 64,
+    # ユーザー日本語名前
+    first_name_jp = models.CharField(
+        verbose_name = 'First Name Japanese',
+        help_text='必須項目です。全角文字で20文字以下にしてください。',
+        max_length = 20,
+        validators=[username_validator],
+    )
+
+    # ユーザー日本語名字
+    family_name_jp = models.CharField(
+        verbose_name = 'Family Name Japanese',
+        help_text='必須項目です。全角文字で20文字以下にしてください。',
+        max_length = 20,
+        validators=[username_validator],
+    )
+
+    # ユーザー英語名前
+    first_name_en = models.CharField(
+        verbose_name = 'First Name Englist',
+        help_text='必須項目です。全角文字で20文字以下にしてください。',
+        max_length = 20,
+        validators=[username_validator],
+    )
+
+    # ユーザー英語名字
+    family_name_en = models.CharField(
+        verbose_name = 'Family Name Englist',
+        help_text='必須項目です。全角文字で20文字以下にしてください。',
+        max_length = 20,
         validators=[username_validator],
     )
 
