@@ -54,7 +54,7 @@ services:
     init: true
 
     volumes:
-      - .:/usr/src/sharetech:cached
+      - .:/workspace:cached
       - /var/run/docker.sock:/var/run/docker.sock
 
     command: /bin/sh -c "while sleep 1000; do :; done"
