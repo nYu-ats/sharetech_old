@@ -66,6 +66,7 @@ services:
 1. Visual Studio Codeでターミナルを開き、下記コマンド実行
 ```
 $ pipenv shell
+$ python3 manage.py migrate
 $ python3 manage.py runserver 0.0.0.0:8000
 ```
 2. ブラウザで http://127.0.0.1:8000 にアクセス
