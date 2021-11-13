@@ -12,22 +12,27 @@ class UserCreateForm(UserCreationForm):
 
     class Meta:
         model = CustomUser
-        fields = ['company', 'first_name_jp', 'family_name_jp', 'first_name_en', 'family_name_en', 'email', 'role_code', 'password1']
+        fields = [
+            'company', 
+            'first_name_jp', 
+            'family_name_jp', 
+            'first_name_en', 
+            'family_name_en', 
+            'email', 
+            'role_code', 
+            'password', 
+            'industry_id', 
+            'occupation_id', 
+            'position_id',
+            ]
         field_order = ['company', 'username', 'email', 'role_code', 'password']
 
 
     def __init__(self, *args, **kwargs):
         kwargs.setdefault('label_suffix', '')
         super().__init__(*args, **kwargs)
-        # 不要なパスワードフィールド削除
-        del self.fields['password2']
         self.fields['password1'].widget = forms.PasswordInput(attrs={'type':'password'})
-        self.fields['role_code'].widget = forms.widgets.Select
-        self.fields['role_code'].choices = [('Only View', '1'),('View and Post', '2')]
-        self.fields['role_code'] = forms.fields.ChoiceField(
-            choices = [('1', 'Only View'), ('2', 'View and Post')],
-            widget = forms.widgets.Select,
-        )
+        self.fields['password2'].widget = forms.PasswordInput(attrs={'type':'password'})
 
     def clean_password(self):
         password = self.cleaned_data['password1']
