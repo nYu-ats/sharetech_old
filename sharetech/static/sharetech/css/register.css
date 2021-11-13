@@ -1,5 +1,7 @@
 /*新規登録ページ*/
+/* 仮登録完了ページ */
 
+/* 新規登録・仮登録ページ共通 */
 .register_header{
 text-align: center;
 font-size: 2em;
@@ -26,7 +28,7 @@ padding-top: 2em;
 
 .form_wrapper .user_info_wrapper{
   width: 45%;
-  margin: 0 2.5%;
+  margin: 2em 2.5%;
   min-width: 450px;
 }
 
@@ -125,4 +127,11 @@ outline: none;
 text-align: center;
 margin-top: 4em;
 color: #2699FB;
+}
+
+/* 仮登録ページ */
+.form_wrapper .complete_pre_register{
+  font-size: 2em;
+  padding: 5em 0;
+  text-align: center;
 }
