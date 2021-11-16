@@ -25,8 +25,10 @@ services:
       image: mysql:8.0
       volumes:
         - mysql_data:/var/lib/mysql
+        - ./mysql_cnf/my.cnf:/etc/my.cnf
         # mysqlサーバー起動時に下記フォルダ内のsqlを自動実行することで、sharetechスキーマを事前に作成する
         - ./initdb.d:/docker-entrypoint-initdb.d
+
       environment:
             - MYSQL_ROOT_PASSWORD=root123A!
             - MYSQL_USER=django
