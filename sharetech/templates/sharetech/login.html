@@ -37,12 +37,16 @@
             {% endif %}
             <form method="POST">
                 {% csrf_token %}
-                    {% for field in form %}
                     <div class="form_item">
-                        <img src="{% static 'sharetech/img/input_valid_mark.png' %}">
-                        {{field}}
+                        <div class="username">
+                            <label for="name">{{form.family_name_jp.label}}</label>
+                            {{form.family_name_jp}}    
+                        </div>
+                        <div class="username">
+                            <label for="name">{{form.first_name_jp.label}}</label>
+                            {{form.first_name_jp}}    
+                        </div>
                     </div>
-                    {% endfor %}
                 <div class="login_button">
                     <input type="submit" class="button" title="Sign In" value="ログイン">
                 </div>

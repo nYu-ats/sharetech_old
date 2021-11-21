@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import Form
 from django.forms.fields import EmailField
-from sharetech.models.user import CustomUser
+from sharetech.models.consult_window import ConsultWindow
 from django.contrib.auth import (get_user_model, authenticate)
 from django.utils.translation import gettext_lazy
 from django.utils.text import capfirst
@@ -10,18 +10,16 @@ class AdviserRegisterForm(Form):
     '''
     専門家登録窓口フォーム
     '''
-    organization = forms.CharField(
-        widget = forms.TextInput()
-    )
-    name = forms.CharField(
-        widget = forms.TextInput()
-    )
-    special = forms.CharField(
-        widget = forms.TextInput()
-    )
-    email = EmailField(
-        widget = forms.EmailInput(attrs={'placeholder':'Email', 'autofocus' : True,})
-    )
+
+    class Meta:
+        model = ConsultWindow
+        fields = [
+            'consult_window_title', 
+            'consult_window_overview', 
+            'consult_price', 
+            'timerex_url', 
+            'archivement', 
+            ]
 
     error_messages = {
         'invalid_login' : gettext_lazy(
