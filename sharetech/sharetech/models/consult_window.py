@@ -47,6 +47,12 @@ class ConsultWindow(models.Model):
         max_length = 512,
     )
 
+    # 実績
+    archivement = models.CharField(
+        verbose_name = '実績',
+        max_length = 512,
+    )
+
     # 閲覧数
     viewed_num = models.PositiveIntegerField(
         verbose_name = '閲覧数',

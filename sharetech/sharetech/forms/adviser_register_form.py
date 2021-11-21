@@ -1,12 +1,12 @@
 from django import forms
-from django.forms import Form
+from django.forms import ModelForm
 from django.forms.fields import EmailField
 from sharetech.models.consult_window import ConsultWindow
 from django.contrib.auth import (get_user_model, authenticate)
 from django.utils.translation import gettext_lazy
 from django.utils.text import capfirst
 
-class AdviserRegisterForm(Form):
+class AdviserRegisterForm(ModelForm):
     '''
     専門家登録窓口フォーム
     '''

@@ -8,7 +8,7 @@ User = get_user_model()
 class AdviserRegisterView(generic.TemplateView):
 
     # 専門家登録窓口フォーム
-    authentication_form = AdviserRegisterForm
+    adviser_register_form = AdviserRegisterForm
     template_name = 'sharetech/adviser_register.html'
 
 adiviser_register = AdviserRegisterView.as_view()
