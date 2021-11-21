@@ -10,6 +10,12 @@ class CategoryConsultWindowMapping(models.Model):
 
     class Meta:
         db_table = 'category_consult_window_mapping'
+        constraints = [
+            models.UniqueConstraint(
+                fields = ['category_id', 'consult_window_id'],
+                name = 'mapping_unique'
+            )
+        ]
 
     '''
     カラム定義
@@ -23,8 +29,8 @@ class CategoryConsultWindowMapping(models.Model):
     category_id = models.ForeignKey(
         'CategoryMst',
         verbose_name = 'カテゴリID',
-        on_delete = models.SET(1),
-        null = True,
+        on_delete = models.CASCADE,
+        default = 99,
     )
 
     # 相談窓口ID
