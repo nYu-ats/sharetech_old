@@ -9,7 +9,7 @@ from django.http.response import JsonResponse
 
 User = get_user_model()
 
-class TopPageView(LoginRequiredMixin, View):
+class TopPageView(View):
     # template_name = 'sharetech/top.html'
     # # TODO 固定値置き換え
     # __lateset_article_display_num = 10
@@ -17,7 +17,7 @@ class TopPageView(LoginRequiredMixin, View):
     # __follow_user_article_display_num = 10
     # __reccomend_article_display_num = 20
     
-    # def get(self, request, *args, **kwargs):
+    def get(self, request, *args, **kwargs):
     #     latest_articles_object_list = list(Article.objects.order_by('created_at')[:self.__lateset_article_display_num])
     #     # TODO 注目、おすすめ、フォローに表示する記事の抽出条件
     #     attention_article_object_list = list(Article.objects.order_by('viewed_count')[:self.__attention_article_display_num])
@@ -32,8 +32,8 @@ class TopPageView(LoginRequiredMixin, View):
     #         'reccomend_article' : ArticleAdapter(reccomend_article_object_list).convert_to_template_context(),
     #         }
 
-    #     return render(request, 'sharetech/top.html', selected_article_list)
-    pass
+        return render(request, 'sharetech/top.html')
+    # pass
 
 topPage = TopPageView.as_view()
 

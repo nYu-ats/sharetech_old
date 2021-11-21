@@ -3,7 +3,7 @@ from django.urls import include, path
 from django.contrib.auth.views import LogoutView
 from sharetech.views import (
     login_view, TopPageView, user_create_view, UserCreateDoneView,
-    UserCreateCompleteView, 
+    UserCreateCompleteView, AdviserRegisterView,
     )
 
 urlpatterns = [
@@ -14,5 +14,6 @@ urlpatterns = [
     path('register/', user_create_view.user_create, name='register'),
     path('register/done', UserCreateDoneView.user_create_done, name='register_done'),
     path('register/complete/<token>/', UserCreateCompleteView.user_create_complete, name='register_complete'),
+    path('adviser_register/', AdviserRegisterView.adiviser_register, name='adiviser_register'),
     path('asyncLoad/', TopPageView.asyncArticleLoad),
 ]
