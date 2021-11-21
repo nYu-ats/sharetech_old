@@ -120,7 +120,7 @@ main .up_to_date_article_title{
 
 .flex_block{
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   flex-wrap: wrap;
   margin: 30px 60px 60px 60px;
 }
@@ -136,12 +136,12 @@ main .up_to_date_article_title{
 }
 
 .flex_block .article{
-  width: 350px;
-  height : 350px;
+  width: 250px;
+  height : 250px;
   background:white;
   box-sizing: border-box;
-  border-radius: 20px;
-  margin: 16px; 
+  border-radius: 4px;
+  margin: 1em; 
   text-align: left;
   position: relative;
   box-shadow: 2px 2px 2px #C0C0C0;

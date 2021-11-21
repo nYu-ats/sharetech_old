@@ -14,5 +14,5 @@ urlpatterns = [
     path('register/', user_create_view.user_create, name='register'),
     path('register/done', user_create_done_view.user_create_done, name='register_done'),
     path('register/complete/<token>/', user_create_complete_view.user_create_complete, name='register_complete'),
-    path('asyncLoad/', async_consult_window_view.async_article_load),
+    path('asyncLoad/', async_consult_window_view.async_consult_window_load),
 ]

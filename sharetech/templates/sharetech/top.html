@@ -135,7 +135,8 @@
   </header>
             
       <main>
-        <div class="up_to_date_article">
+        <!-- デザイン変更に伴いスライド削除、リファクタのタイミングで削除 -->
+        <!-- <div class="up_to_date_article">
             <h2 class="up_to_date_article_title">
                 新着記事
             </h2>
@@ -143,7 +144,6 @@
               <button type="button" class="go_to_left">＜</button>
               <button type="button" class="go_to_right">＞</button>
               <div class="slides">
-                <!-- 新着記事の表示 -->
                 {% for article in latest_article%}
                 <div class="article" value={{article.number}}>
                   <a href="#">
@@ -156,8 +156,6 @@
                         <p>{{article.applyed_num}}</p>
                       </div>
                       <h3>{{ article.title }}</h3>
-                      <!-- タグなしでok? -->
-                      <!-- <p class="tags">test/test/test/test/test/test/test/test/test</p> -->
                       <div class="presenter_flex">
                         <img src="{% static article.expert_icon_path %}" class="presenter_icon"/>
                         <div class="presenter_info">
@@ -169,14 +167,13 @@
                   </a>
                 </div>
                 {% endfor %}
-
               </div>
             </div>
-          </div>
+          </div> -->
 
           <div class="attention_article">
             <h2 class="attention_article_title">
-                注目記事
+                注目
             </h2>        
             <div class="flex_block">
               {% for article in attention_article %}
@@ -192,7 +189,6 @@
                       </div>
                     </div>
                     <h3>{{ article.title }}</h3>
-                    <!-- <p class="tags">test/test/test/test/test/test/test/test/test</p> -->
                     <div class="presenter_flex">
                       <img src="{% static article.expert_icon_path %}" class="presenter_icon"/>
                       <div class="presenter_info">
@@ -207,47 +203,11 @@
             </div>
           </div>
 
-        <!-- フォローユーザーがいれば記事表示 -->
-        {%if follow_user_article|length > 0 %}
         <div class="recommend_article">
             <h2 class="recommend_article_title">
-                フォロー
+                おすすめ
             </h2>        
             <div class="flex_block">
-              {% for article in follow_user_article %}
-              <div class="article">
-                <a href="#">
-                  <img src='{% static article.expert_icon_path %}' class="contain_img"/>
-                  <div class="discription">
-                    <div class="article_info_flex">
-                      <p>{{article.created_at|date:"M j, Y"}}</p>
-                      <div class="favorite_count">
-                        <img src='{% static "favorite_icon.png" %}' class="favorite_icon"/>
-                        <p>{{article.applyed_num}}</p>
-                      </div>
-                    </div>
-                    <h3>{{ article.title }}</h3>
-                    <!-- <p class="tags">test/test/test/test/test/test/test/test/test</p> -->
-                    <div class="presenter_flex">
-                      <img src="{% static article.expert_icon_path %}" class="presenter_icon"/>
-                      <div class="presenter_info">
-                        <p>{{article.expert_companey}}</p>
-                        <p>{{article.expert_name}}</p>
-                    </div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              {% endfor %}
-            </div>
-        </div>
-        {% endif %}
-        
-          <div class="article_search">
-            <h2 class="article_search_title">
-                探す
-            </h2>        
-            <div class="flex_block async_load_article_area">
               {% for article in reccomend_article %}
               <div class="article">
                 <a href="#">
@@ -261,7 +221,70 @@
                       </div>
                     </div>
                     <h3>{{ article.title }}</h3>
-                    <!-- <p class="tags">test/test/test/test/test/test/test/test/test</p> -->
+                    <div class="presenter_flex">
+                      <img src="{% static article.expert_icon_path %}" class="presenter_icon"/>
+                      <div class="presenter_info">
+                        <p>{{article.expert_companey}}</p>
+                        <p>{{article.expert_name}}</p>
+                    </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              {% endfor %}
+            </div>
+        </div>
+
+        <div class="recommend_article">
+          <h2 class="recommend_article_title">
+              新着
+          </h2>        
+          <div class="flex_block">
+            {% for article in latest_article %}
+            <div class="article">
+              <a href="#">
+                <img src='{% static article.expert_icon_path %}' class="contain_img"/>
+                <div class="discription">
+                  <div class="article_info_flex">
+                    <p>{{article.created_at|date:"M j, Y"}}</p>
+                    <div class="favorite_count">
+                      <img src='{% static "favorite_icon.png" %}' class="favorite_icon"/>
+                      <p>{{article.applyed_num}}</p>
+                    </div>
+                  </div>
+                  <h3>{{ article.title }}</h3>
+                  <div class="presenter_flex">
+                    <img src="{% static article.expert_icon_path %}" class="presenter_icon"/>
+                    <div class="presenter_info">
+                      <p>{{article.expert_companey}}</p>
+                      <p>{{article.expert_name}}</p>
+                  </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+            {% endfor %}
+          </div>
+      </div>
+        
+          <div class="article_search">
+            <h2 class="article_search_title">
+                発見
+            </h2>        
+            <div class="flex_block async_load_article_area">
+              {% for article in discover_article %}
+              <div class="article">
+                <a href="#">
+                  <img src='{% static article.expert_icon_path %}' class="contain_img"/>
+                  <div class="discription">
+                    <div class="article_info_flex">
+                      <p>{{article.created_at|date:"M j, Y"}}</p>
+                      <div class="favorite_count">
+                        <img src='{% static "favorite_icon.png" %}' class="favorite_icon"/>
+                        <p>{{article.applyed_num}}</p>
+                      </div>
+                    </div>
+                    <h3>{{ article.title }}</h3>
                     <div class="presenter_flex">
                       <img src="{% static article.expert_icon_path %}" class="presenter_icon"/>
                       <div class="presenter_info">
