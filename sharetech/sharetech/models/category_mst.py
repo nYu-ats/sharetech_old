@@ -1,26 +1,32 @@
 from django.utils import timezone
 from django.db import models
 
-class IndustryMst(models.Model):
+class CategoryMst(models.Model):
     '''
-    業種マスタモデル
+    相談窓口カテゴリマスタ
     '''
 
     class Meta:
-        db_table = 'industry_mst'
+        db_table = 'category_mst'
     
-    '''
+    """
     カラム定義
 
     default値
     null -> false
     blank -> false
-    '''
+    """
 
-    # 業種名
-    industry_name = models.CharField(
-        verbose_name = 'Industry Name',
+    # カテゴリ名
+    category_name = models.CharField(
+        verbose_name = 'カテゴリ名',
         max_length = 64,
+    )
+
+    # 親カテゴリID
+    parent_category_id = models.PositiveIntegerField(
+        verbose_name = '親カテゴリID',
+        null = True,
     )
 
     # 論理削除フラグ
