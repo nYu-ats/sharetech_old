@@ -134,107 +134,133 @@
     </div>
   </header>
             
-      <main>
-        <!-- デザイン変更に伴いスライド削除、リファクタのタイミングで削除 -->
-        <!-- <div class="up_to_date_article">
-            <h2 class="up_to_date_article_title">
-                新着記事
-            </h2>
-            <div class="slide_show_block">
-              <button type="button" class="go_to_left">＜</button>
-              <button type="button" class="go_to_right">＞</button>
-              <div class="slides">
-                {% for article in latest_article%}
-                <div class="article" value={{article.number}}>
-                  <a href="#">
-                    <div class="slide_mask"></div>
-                    <img src="{% static article.expert_icon_path %}" class="contain_img"/>
-                    <div class="discription">
-                      <p class="created_at">{{article.created_at|date:"M j, Y"}}</p>
-                      <div class="favorite_count">
-                        <img src='{% static "favorite_icon.png" %}' class="favorite_icon"/>
-                        <p>{{article.applyed_num}}</p>
-                      </div>
-                      <h3>{{ article.title }}</h3>
-                      <div class="presenter_flex">
-                        <img src="{% static article.expert_icon_path %}" class="presenter_icon"/>
-                        <div class="presenter_info">
-                          <p>{{article.expert_companey}}</p>
-                          <p>{{article.expert_name}}</p>
-                        </div>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-                {% endfor %}
+  <main>
+    <div class="split">
+      <div class="split_item split_left">
+        <div class="split_left_inner">
+          <ul class="category_contena">
+            <li class="big_category">
+              <input type="button" class="category_network" value="ネットワーク">
+              <div class="small_category">
+                <ul>
+                  <li><a href="#">5G</a></li>
+                  <li><a href="#">LAN</a></li>
+                  <li><a href="#">WAN</a></li>
+                  <li><a href="#">デバイス</a></li>
+                  <li><a href="#">サーバ</a></li>
+                </ul>
               </div>
-            </div>
-          </div> -->
-
-          <div class="attention_article">
-            <h2 class="attention_article_title">
-                注目
-            </h2>        
-            <div class="flex_block">
-              {% for article in attention_article %}
-              <div class="article">
-                <a href="#">
-                  <img src='{% static article.expert_icon_path %}' class="contain_img"/>
-                  <div class="discription">
-                    <div class="article_info_flex">
-                      <p>{{article.created_at|date:"M j, Y"}}</p>
-                      <div class="favorite_count">
-                        <img src='{% static "favorite_icon.png" %}' class="favorite_icon"/>
-                        <p>{{article.applyed_num}}</p>
-                      </div>
-                    </div>
-                    <h3>{{ article.title }}</h3>
-                    <div class="presenter_flex">
-                      <img src="{% static article.expert_icon_path %}" class="presenter_icon"/>
-                      <div class="presenter_info">
-                        <p>{{article.expert_companey}}</p>
-                        <p>{{article.expert_name}}</p>
-                    </div>
-                    </div>
-                  </div>
-                </a>
+            </li>
+            <li class="big_category">
+              <input type="button" class="category_network" value="セキュリティ">
+              <div class="small_category">
+                <ul>
+                  <li><a href="#">Webアプリケーション</a></li>
+                  <li><a href="#">OS</a></li>
+                  <li><a href="#">NWセキュリティ</a></li>
+                  <li><a href="#">エンドポイント</a></li>
+                  <li><a href="#">サービス</a></li>
+                </ul>
               </div>
-              {% endfor %}
-            </div>
-          </div>
-
-        <div class="recommend_article">
-            <h2 class="recommend_article_title">
-                おすすめ
-            </h2>        
-            <div class="flex_block">
-              {% for article in reccomend_article %}
-              <div class="article">
-                <a href="#">
-                  <img src='{% static article.expert_icon_path %}' class="contain_img"/>
-                  <div class="discription">
-                    <div class="article_info_flex">
-                      <p>{{article.created_at|date:"M j, Y"}}</p>
-                      <div class="favorite_count">
-                        <img src='{% static "favorite_icon.png" %}' class="favorite_icon"/>
-                        <p>{{article.applyed_num}}</p>
-                      </div>
-                    </div>
-                    <h3>{{ article.title }}</h3>
-                    <div class="presenter_flex">
-                      <img src="{% static article.expert_icon_path %}" class="presenter_icon"/>
-                      <div class="presenter_info">
-                        <p>{{article.expert_companey}}</p>
-                        <p>{{article.expert_name}}</p>
-                    </div>
-                    </div>
-                  </div>
-                </a>
+            </li>
+            <li class="big_category">
+              <input type="button" class="category_network" value="クラウド">
+              <div class="small_category">
+                <ul>
+                  <li><a href="#">SaaS</a></li>
+                  <li><a href="#">IaaS</a></li>
+                  <li><a href="#">PaaS</a></li>
+                  <li><a href="#">BaaS</a></li>
+                  <li><a href="#">IPaaS</a></li>
+                </ul>
               </div>
-              {% endfor %}
-            </div>
+            </li>
+            <li class="big_category">
+              <input type="button" class="category_network" value="XR">
+              <div class="small_category">
+                <ul>
+                  <li><a href="#">AR</a></li>
+                  <li><a href="#">VR</a></li>
+                </ul>
+              </div>
+            </li>
+            <li class="big_category">
+              <input type="button" class="category_network" value="その他">
+              <div class="small_category">
+                <ul>
+                  <li><a href="#">その他</a></li>
+                </ul>
+              </div>
+            </li>
+          </ul>
         </div>
 
+      </div>
+      <div class="split_item split_right">
+        <div class="attention_article">
+          <h2 class="attention_article_title">
+              注目
+          </h2>        
+          <div class="flex_block">
+            {% for article in attention_article %}
+            <div class="article">
+              <a href="#">
+                <img src='{% static article.expert_icon_path %}' class="contain_img"/>
+                <div class="discription">
+                  <div class="article_info_flex">
+                    <p>{{article.created_at|date:"M j, Y"}}</p>
+                    <div class="favorite_count">
+                      <img src='{% static "favorite_icon.png" %}' class="favorite_icon"/>
+                      <p>{{article.applyed_num}}</p>
+                    </div>
+                  </div>
+                  <h3>{{ article.title }}</h3>
+                  <div class="presenter_flex">
+                    <img src="{% static article.expert_icon_path %}" class="presenter_icon"/>
+                    <div class="presenter_info">
+                      <p>{{article.expert_companey}}</p>
+                      <p>{{article.expert_name}}</p>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+  
+        <div class="attention_article">
+          <h2 class="attention_article_title">
+              おすすめ
+          </h2>        
+          <div class="flex_block">
+            {% for article in reccomend_article %}
+            <div class="article">
+              <a href="#">
+                <img src='{% static article.expert_icon_path %}' class="contain_img"/>
+                <div class="discription">
+                  <div class="article_info_flex">
+                    <p>{{article.created_at|date:"M j, Y"}}</p>
+                    <div class="favorite_count">
+                      <img src='{% static "favorite_icon.png" %}' class="favorite_icon"/>
+                      <p>{{article.applyed_num}}</p>
+                    </div>
+                  </div>
+                  <h3>{{ article.title }}</h3>
+                  <div class="presenter_flex">
+                    <img src="{% static article.expert_icon_path %}" class="presenter_icon"/>
+                    <div class="presenter_info">
+                      <p>{{article.expert_companey}}</p>
+                      <p>{{article.expert_name}}</p>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+  
         <div class="recommend_article">
           <h2 class="recommend_article_title">
               新着
@@ -258,52 +284,22 @@
                     <div class="presenter_info">
                       <p>{{article.expert_companey}}</p>
                       <p>{{article.expert_name}}</p>
-                  </div>
+                    </div>
                   </div>
                 </div>
               </a>
             </div>
             {% endfor %}
           </div>
+        </div>
       </div>
-        
-          <div class="article_search">
-            <h2 class="article_search_title">
-                発見
-            </h2>        
-            <div class="flex_block async_load_article_area">
-              {% for article in discover_article %}
-              <div class="article">
-                <a href="#">
-                  <img src='{% static article.expert_icon_path %}' class="contain_img"/>
-                  <div class="discription">
-                    <div class="article_info_flex">
-                      <p>{{article.created_at|date:"M j, Y"}}</p>
-                      <div class="favorite_count">
-                        <img src='{% static "favorite_icon.png" %}' class="favorite_icon"/>
-                        <p>{{article.applyed_num}}</p>
-                      </div>
-                    </div>
-                    <h3>{{ article.title }}</h3>
-                    <div class="presenter_flex">
-                      <img src="{% static article.expert_icon_path %}" class="presenter_icon"/>
-                      <div class="presenter_info">
-                        <p>{{article.expert_companey}}</p>
-                        <p>{{article.expert_name}}</p>
-                    </div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              {% endfor %}
-            </div>
-          </div>
-
-          <div class="loading_gif is_loading">
-            <img src='{% static "sharetech/img/loading.gif" %}' alt="">
-          </div>
-      </main>
-      <button type="button" class="back_to_top">
-        <span>↑</span>
-      </button>
+    </div>
+      
+    <div class="loading_gif is_loading">
+      <img src='{% static "sharetech/img/loading.gif" %}' alt="">
+    </div>
+  </main>
+  <button type="button" class="back_to_top">
+    <span>↑</span>
+  </button>
 </body>

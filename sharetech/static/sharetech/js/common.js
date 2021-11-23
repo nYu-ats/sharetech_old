@@ -121,6 +121,9 @@ $(function(){
     var loadingIndex = 1;
     var isLoading = false;
     var baseURL = location.href + 'asyncLoad?page=' + document.title + '&index=';
+    // URLに#(自ページへのリンク)が含まれる可能性があるためトリミング
+    var baseURL = baseURL.replace('#', '');
+
     var $asyncLoadArticleArea = $('.async_load_article_area');
     var $window = $(window);
     var $loadingGif = $('.loading_gif');
@@ -138,6 +141,7 @@ $(function(){
             if(($window.height() + $window.scrollTop() === $(document).height()) && !isLoading){
                 isLoading = true;
                 $loadingGif.addClass('loading_gif is_loading');
+                console.log(baseURL);
                 // データ取得処理
                 $.ajax({
                     url: baseURL + loadingIndex,
