@@ -38,10 +38,10 @@ a{
 .page_header{
     background-color:#1e90ff;
     width: 100%;
-    height: 40px;
+    height: 100px;
     min-width: 980px;
     z-index: 99;
-    box-shadow: 0 2px 8px rgb(65, 65, 65);   
+    box-shadow: 0 2px 8px rgb(65, 65, 65);
 }
 
 .page_header.sticky{
@@ -49,20 +49,97 @@ a{
   top: 0;
 }
 
+.page_header .global_nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    height: 50px
+}
+
+.page_header .global_nav .link_other_menu{
+    display: flex;
+    margin-bottom: 0;
+}
+
+.page_header .global_nav .link_other_menu a{
+    color: white;
+    margin-left: 2em;
+    font-weight: bold;
+}
+
+.page_header .global_nav .link_other_menu a.selected{
+    border-bottom: 3px solid white;
+}
+
+.page_header .global_nav .search_menu_area .keyword_search{
+    margin-right: 1em;
+    margin-bottom: .5em;
+}
+
+.page_header .global_nav .search_menu_area .keyword_search .search_keyword{
+    width: 250px;
+    height: 24px;
+    border: none;
+    vertical-align: top;
+    border-radius: 4px 0 0 4px;
+    padding-left: 4px;
+}
+
+.page_header .global_nav .search_menu_area .keyword_search .search_keyword:focus{
+    outline: none;
+}
+
+.page_header .global_nav .search_menu_area .keyword_search .search_button{
+    width: 48px;
+    height: 24px;
+    border: none;
+    background-color: #1B435D;
+    color: white;
+    vertical-align: top;
+    text-align: center;
+    border-radius: 0 4px 4px 0;
+    font-weight: bold;
+}
+
+.page_header .global_nav .search_menu_area .keyword_search .search_button:hover{
+    cursor: pointer;
+}
+
 .page_header .inner{
     display: flex;
+    height: 50px;
 }
 
 .page_header .site_logo{
-    margin:0 0 0 50%;
+    margin:.25em auto 0 auto;
 }
 
 .page_header .site_logo img{
     height: 35px;
-    width: 35px;
+    width: auto;
 }
 
-.page_header .main_nav{
+.page_header .user_icon{
+    position: fixed;
+    top: 2em;
+    right: 0em;
+    transform: translate(-50%, -50%);
+    width: 2.5em;
+    height: 2.5em;
+}
+
+.page_header .user_icon:hover{
+    cursor: pointer;
+}
+
+.page_header .user_icon img{
+    width: 2.5em;
+    height: 2.5em;
+    border-radius: 50%;
+    border: 1px solid #666;
+}
+
+.main_nav{
     background-color: #1B435D;
     position: fixed;
     top: 0;
@@ -73,7 +150,7 @@ a{
     margin-top: 40px;
 }
 
-.page_header .main_nav .my_account{
+.main_nav .my_account{
     width: 48px;
     height: 48px;
     background-color: white;
@@ -81,30 +158,30 @@ a{
     margin: 20px 80px 40px auto;
 }
 
-.page_header .main_nav .my_account img{
+.main_nav .my_account img{
     width: 48px;
     height: 48px;
 }
 
-.page_header .main_nav .about_us{
+.main_nav .about_us{
     position: absolute;
     bottom: 30px;
     margin-bottom: 20px;
     margin-left: 20px;
 }
 
-.page_header .main_nav .about_us li{
+.main_nav .about_us li{
     list-style: none;
     display: flex;
     margin-bottom: 1em;
 }
 
-.page_header .main_nav .about_us li img{
+.main_nav .about_us li img{
     width: 24px;
     height: 24px;
 }
 
-.page_header .main_nav .about_us li p{
+.main_nav .about_us li p{
     font-size: 16px;
     color: white;
     line-height: 1.5em;
@@ -112,11 +189,11 @@ a{
 }
 
 /* 検索ボックス */
-.page_header .main_nav .keyword_search{
-    margin: 20px auto 20px 20px;
+.main_nav .keyword_search .search_keyword{
+    margin-left: auto;
 }
 
-.page_header .main_nav .keyword_search .search_keyword{
+.main_nav .keyword_search .search_keyword{
     width: 250px;
     height: 32px;
     border: none;
@@ -125,11 +202,11 @@ a{
     padding-left: 4px;
 }
 
-.page_header .main_nav .keyword_search .search_keyword:focus{
+.main_nav .keyword_search .search_keyword:focus{
     outline: none;
 }
 
-.page_header .main_nav .keyword_search .search_button{
+.main_nav .keyword_search .search_button{
     width: 48px;
     height: 32px;
     border: none;
@@ -140,66 +217,67 @@ a{
     border-radius: 0 8px 8px 0;
 }
 
-.page_header .main_nav .keyword_search .search_button:hover{
+.main_nav .keyword_search .search_button:hover{
     cursor: pointer;
     background-color: #1e90ff;
 }
 
 /* タグ検索 */
-.page_header .main_nav .tag_search{
+.main_nav .tag_search{
     margin: 24px;
     color: white;
 }
 
-.page_header .main_nav .tag_search h2{
+.main_nav .tag_search h2{
     margin-bottom: 16px;
 }
 
-.page_header .main_nav .tag_search .category_contena input{
+.main_nav .tag_search .category_contena input{
     background-color: #1B435D;
     color: white;
     border: none;
     font-size: 16px;
 }
 
-.page_header .main_nav .tag_search .category_contena input:hover{
+.main_nav .tag_search .category_contena input:hover{
     cursor: pointer;
 }
 
-.page_header .main_nav .tag_search li{
+.main_nav .tag_search li{
     list-style: none;
 }
 
-.page_header .main_nav .tag_search .small_category{
+.main_nav .tag_search .small_category{
     margin-left: 24px;
     overflow: hidden;
     height: 0;
 }
 
-.page_header .main_nav .tag_search .open_small_tags{
+.main_nav .tag_search .open_small_tags{
     height: 48px;
 }
 
-.page_header .main_nav .tag_search .small_category li{
+.main_nav .tag_search .small_category li{
     display: inline-block;
 }
 
-.page_header .main_nav .tag_search a{
+.main_nav .tag_search a{
     color: white;
 }
 
 .menu_btn{
+    visibility: hidden;
     position: fixed;
-    top: 5px;
-    right: 10px;
+    top: 100px;
+    left: 0px;
     display: flex;
     height: 30px;
     width: 30px;
     justify-content: center;
     align-items: center;
     z-index: 101;
-    background-color: #1e90ff;
-    border-radius: 50%;
+    background-color: rgba(50, 50, 50, 0.8);
+    border-radius: 0 2px 2px 0;
     transition: 0.3s;
     cursor: pointer;
 }
