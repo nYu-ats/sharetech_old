@@ -13,13 +13,14 @@ class BaseModelTemplateAdapter(ABC):
 
 class ConsultWindodwAdapter(BaseModelTemplateAdapter):
     '''
-    DB抽出データをtemplateで展開できる形に変換する
+    DB抽出データをtemplateで展開しやすい形に変換
     '''
     DEFAULT_USER_ICON_PATH = 'default_avater.png'
 
     def __init__(self, consult_window_models: ConsultWindow):
         self.__consult_window_models = consult_window_models
-    
+
+    # staticメソッド化して、引数でmodelもらえばいいかも？
     def convert_to_template_context(self):
         consult_window_list = []
 
@@ -35,5 +36,5 @@ class ConsultWindodwAdapter(BaseModelTemplateAdapter):
                 }
             consult_window_list.append(consult_window_content)
         
-        return consult_window_list
-            
+        return consult_window_list    
+        

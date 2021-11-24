@@ -15,6 +15,21 @@ $(function(){
     });
 });
 
+// ユーザーメニュー開閉
+$(function(){
+    const $user_icon_btn = $('.page_header .user_icon');
+    const $user_menu = $('.page_header .user_menu'); 
+
+    // ユーザーメニュー展開中で、領域外がクリックされた時
+    $(document).on('click', function(e){
+        if(!$user_menu.hasClass('hidden') && !$(e.target).closest($user_menu).length && !$(e.target).closest($user_icon_btn).length){
+            $user_menu.toggleClass('hidden');
+        }else if($(e.target).closest($user_icon_btn).length){
+            $user_menu.toggleClass('hidden');
+        }
+    });
+});
+
 //サイドメニュー
 $(function(){
     var duaration = 300;

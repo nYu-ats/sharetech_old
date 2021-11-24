@@ -10,9 +10,13 @@
 .recommend_article_title,
 .attention_article_title,
 .up_to_date_article_title{
-    margin:64px auto 0 10px;
+    margin:64px auto 0 24px;
     font-size: 2.5em;
     color: #666;
+}
+
+.attention_article_title{
+  margin-top: 0px;
 }
 
 main .up_to_date_article_title{
@@ -23,6 +27,7 @@ main .up_to_date_article_title{
 main .split{
   display: table;
   width: 100%;
+  margin-top: 16px;
 }
 
 main .split .split_item{
@@ -31,12 +36,13 @@ main .split .split_item{
 
 main .split .split_left{
   width: 250px;
+  position: sticky;
+  top: 0px;
 }
 
 main .split .split_left .split_left_inner{
-  /* ヘッダー高さを加味したtop指定が必要 */
   position: sticky;
-  top: 0px;
+  top: 120px;
   overflow-y: auto;
   height: 80vh;
   margin-left: 1em;
