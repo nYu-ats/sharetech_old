@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from sharetech.models import *
 from sharetech.constants import Constants
+from django.db import models
 
 class BaseModelTemplateAdapter(ABC):
     '''
@@ -17,17 +18,14 @@ class ConsultWindodwAdapter(BaseModelTemplateAdapter):
     '''
     DEFAULT_USER_ICON_PATH = 'default_avater.png'
 
-    def __init__(self, consult_window_models: ConsultWindow):
-        self.__consult_window_models = consult_window_models
-
-    # staticメソッド化して、引数でmodelもらえばいいかも？
-    def convert_to_template_context(self):
+    @classmethod
+    def convert_to_template_context(cls, consult_window_models):
         consult_window_list = []
 
-        for index, consult_window_model in enumerate(self.__consult_window_models):
+        for index, consult_window_model in enumerate(consult_window_models):
             consult_window_content = {
                 'number' : str(index + 1),
-                'expert_icon_path' : Constants.get_image_path() + consult_window_model.expert_user_id.icon_path if consult_window_model.expert_user_id.icon_path != None else Constants.get_image_path() + self.DEFAULT_USER_ICON_PATH,
+                'expert_icon_path' : Constants.get_image_path() + consult_window_model.expert_user_id.icon_path if consult_window_model.expert_user_id.icon_path != None else Constants.get_image_path() + cls.DEFAULT_USER_ICON_PATH,
                 'created_at' : consult_window_model.created_at,
                 'title' : consult_window_model.consult_window_title,
                 'applyed_num' : consult_window_model.applyed_num,
@@ -36,5 +34,20 @@ class ConsultWindodwAdapter(BaseModelTemplateAdapter):
                 }
             consult_window_list.append(consult_window_content)
         
-        return consult_window_list    
+        return consult_window_list
+
+class CategoryAdapter(BaseModelTemplateAdapter):
+    '''
+    DB抽出データをtemplateで展開しやすい形に変換
+    '''
+    @classmethod
+    def convert_to_template_context(cls, category_models):
+        category_dict = {}
+        big_cat_set = {big_cat.parent_category_id.category_name for big_cat in category_models}
+
+        for big_cat in sorted(big_cat_set):
+            category_dict[big_cat] = [(category.id, category.category_name) for category in category_models 
+                            if category.parent_category_id.category_name == big_cat]
+
+        return category_dict
         

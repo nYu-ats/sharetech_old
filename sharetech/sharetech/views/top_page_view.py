@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
-from sharetech.utils.model_template_adapter import ConsultWindodwAdapter
+from sharetech.utils.model_template_adapter import (ConsultWindodwAdapter, CategoryAdapter)
 from django.http.response import JsonResponse
 from sharetech.models.consult_window import ConsultWindow
 from sharetech.models.category_mst import CategoryMst
@@ -25,7 +25,7 @@ class TopPageView(LoginRequiredMixin, View):
         selected_obj_array = list()
         
         # カテゴリ取得
-        category_list = list(CategoryMst.objects.filter(category_hierarchy=2))
+        category_list = list(CategoryMst.objects.filter(category_hierarchy=2).order_by('category_hierarchy'))
         # 一度取得した相談窓口は、重複して画面に初期表示しないようにする
         # 記事抽出の優先度は、注目->おすすめ->新着->発見
         # TODO 注目、おすすめ、発見については、フィルタ条件要検討
@@ -49,10 +49,11 @@ class TopPageView(LoginRequiredMixin, View):
             pk__in=selected_obj_array).order_by('-viewed_num')[:self.DisplayNum.LARGE])
         
         selected_article_list = {
-            'latest_article' : ConsultWindodwAdapter(latest_consult_window_object_list).convert_to_template_context(),
-            'attention_article' : ConsultWindodwAdapter(attention_consult_window_object_list).convert_to_template_context(),
-            'discover_article' : ConsultWindodwAdapter(discover_consult_window_object_list).convert_to_template_context(),
-            'reccomend_article' : ConsultWindodwAdapter(reccomend_consult_window_object_list).convert_to_template_context(),
+            'latest_article' : ConsultWindodwAdapter.convert_to_template_context(latest_consult_window_object_list),
+            'attention_article' : ConsultWindodwAdapter.convert_to_template_context(attention_consult_window_object_list),
+            'discover_article' : ConsultWindodwAdapter.convert_to_template_context(discover_consult_window_object_list),
+            'reccomend_article' : ConsultWindodwAdapter.convert_to_template_context(reccomend_consult_window_object_list),
+            'category_dict' : CategoryAdapter.convert_to_template_context(category_list),
             }
 
         return render(request, 'sharetech/top.html', selected_article_list)

@@ -31,72 +31,18 @@
     <div class="tag_search">
       <h2>タグ検索</h2>
       <ul class="category_contena">
+        {% for big_cat, small_cat_list in category_dict.items %}
         <li class="big_category">
-          <input type="button" class="category_network" value="▼ ネットワーク">
+          <input type="button" class="category_network" value={{big_cat}}>
           <div class="small_category">
             <ul>
-              <li><a href="#">5G</a></li>
-              <li><p>/</p></li>
-              <li><a href="#">LAN</a></li>
-              <li><p>/</p></li>
-              <li><a href="#">WAN</a></li>
-              <li><p>/</p></li>
-              <li><a href="#">デバイス</a></li>
-              <li><p>/</p></li>
-              <li><a href="#">サーバ</a></li>
+            {% for small_cat in small_cat_list %}
+              <li><a href={{small_cat.0}}>{{small_cat.1}}</a></li>
+            {% endfor %}
             </ul>
           </div>
         </li>
-        <li class="big_category">
-          <input type="button" class="category_network" value="▼ セキュリティ">
-          <div class="small_category">
-            <ul>
-              <li><a href="#">Webアプリケーション</a></li>
-              <li><p>/</p></li>
-              <li><a href="#">OS</a></li>
-              <li><p>/</p></li>
-              <li><a href="#">NWセキュリティ</a></li>
-              <li><p>/</p></li>
-              <li><a href="#">エンドポイント</a></li>
-              <li><p>/</p></li>
-              <li><a href="#">サービス</a></li>
-            </ul>
-          </div>
-        </li>
-        <li class="big_category">
-          <input type="button" class="category_network" value="▼ クラウド">
-          <div class="small_category">
-            <ul>
-              <li><a href="#">SaaS</a></li>
-              <li><p>/</p></li>
-              <li><a href="#">IaaS</a></li>
-              <li><p>/</p></li>
-              <li><a href="#">PaaS</a></li>
-              <li><p>/</p></li>
-              <li><a href="#">BaaS</a></li>
-              <li><p>/</p></li>
-              <li><a href="#">IPaaS</a></li>
-            </ul>
-          </div>
-        </li>
-        <li class="big_category">
-          <input type="button" class="category_network" value="▼ XR">
-          <div class="small_category">
-            <ul>
-              <li><a href="#">AR</a></li>
-              <li><p>/</p></li>
-              <li><a href="#">VR</a></li>
-            </ul>
-          </div>
-        </li>
-        <li class="big_category">
-          <input type="button" class="category_network" value="▼ その他">
-          <div class="small_category">
-            <ul>
-              <li><a href="#">その他</a></li>
-            </ul>
-          </div>
-        </li>
+        {% endfor %}
       </ul>
     </div>
 
@@ -171,59 +117,19 @@
       <div class="split_item split_left">
         <div class="split_left_inner">
           <ul class="category_contena">
+            {% for big_cat, small_cat_list in category_dict.items %}
             <li class="big_category">
-              <input type="button" class="category_network" value="ネットワーク">
+              <input type="button" class="category_network" value={{big_cat}}>
               <div class="small_category">
                 <ul>
-                  <li><a href="#">5G</a></li>
-                  <li><a href="#">LAN</a></li>
-                  <li><a href="#">WAN</a></li>
-                  <li><a href="#">デバイス</a></li>
-                  <li><a href="#">サーバ</a></li>
+                {% for small_cat in small_cat_list %}
+                <!-- 現在カテゴライズのurl作ってないので、仮値 -->
+                  <li><a href="{% url 'login' %}{{small_cat.0}}">{{small_cat.1}}</a></li>
+                {% endfor %}
                 </ul>
               </div>
             </li>
-            <li class="big_category">
-              <input type="button" class="category_network" value="セキュリティ">
-              <div class="small_category">
-                <ul>
-                  <li><a href="#">Webアプリケーション</a></li>
-                  <li><a href="#">OS</a></li>
-                  <li><a href="#">NWセキュリティ</a></li>
-                  <li><a href="#">エンドポイント</a></li>
-                  <li><a href="#">サービス</a></li>
-                </ul>
-              </div>
-            </li>
-            <li class="big_category">
-              <input type="button" class="category_network" value="クラウド">
-              <div class="small_category">
-                <ul>
-                  <li><a href="#">SaaS</a></li>
-                  <li><a href="#">IaaS</a></li>
-                  <li><a href="#">PaaS</a></li>
-                  <li><a href="#">BaaS</a></li>
-                  <li><a href="#">IPaaS</a></li>
-                </ul>
-              </div>
-            </li>
-            <li class="big_category">
-              <input type="button" class="category_network" value="XR">
-              <div class="small_category">
-                <ul>
-                  <li><a href="#">AR</a></li>
-                  <li><a href="#">VR</a></li>
-                </ul>
-              </div>
-            </li>
-            <li class="big_category">
-              <input type="button" class="category_network" value="その他">
-              <div class="small_category">
-                <ul>
-                  <li><a href="#">その他</a></li>
-                </ul>
-              </div>
-            </li>
+            {% endfor %}
           </ul>
         </div>
 

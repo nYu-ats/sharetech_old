@@ -6,10 +6,10 @@ class Constants:
     IMG_DIR = 'img/'
 
     @classmethod
-    def get_static_file_path(self):
-        return '..' + self.PROJECT_URL
+    def get_static_file_path(cls):
+        return '..' + cls.PROJECT_URL
 
     @classmethod
-    def get_image_path(self):
-        image_path = self.PROJECT_URL + self.IMG_DIR
+    def get_image_path(cls):
+        image_path = cls.PROJECT_URL + cls.IMG_DIR
         return image_path
