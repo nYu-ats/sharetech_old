@@ -22,9 +22,9 @@ class ConsultWindodwAdapter(BaseModelTemplateAdapter):
     def convert_to_template_context(cls, consult_window_models):
         consult_window_list = []
 
-        for index, consult_window_model in enumerate(consult_window_models):
+        for _, consult_window_model in enumerate(consult_window_models):
             consult_window_content = {
-                'number' : str(index + 1),
+                'number' : str(consult_window_model.id),
                 'expert_icon_path' : Constants.get_image_path() + consult_window_model.expert_user_id.icon_path if consult_window_model.expert_user_id.icon_path != None else Constants.get_image_path() + cls.DEFAULT_USER_ICON_PATH,
                 'created_at' : consult_window_model.created_at,
                 'title' : consult_window_model.consult_window_title,

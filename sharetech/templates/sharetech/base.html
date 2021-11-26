@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="discription" content="トップページ">
+    <title>Top</title>
+    <link rel="stylesheet" href="{% static 'sharetech/css/common.css' %}">
+    <link rel="stylesheet" href="{% static 'sharetech/css/top.css' %}">
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.js"></script>
+    <script src="{% static 'sharetech/js/common.js' %}"></script>
+    <script src="{% static 'sharetech/js/top.js' %}"></script>
+</head>
+
+<body>
+  <!-- レスポンシブ用ナビゲーション -->
+  <nav class="main_nav" role="navigation">
+    <div class="my_account">
+      <a href="#">
+        <img src="{% static 'sharetech/img/ogo_login_page.png' %}" alt="">
+      </a>
+    </div>
+
+    <form action="#" class="keyword_search">
+      <input id="search_keyword" class="search_keyword" placeholder="キーワード検索" type="text" name="search_key" required>
+      <input id="search_button" class="search_button" value="検索" type="submit" method="get">
+    </form>
+    <div class="tag_search">
+      <h2>タグ検索</h2>
+      <ul class="category_contena">
+        {% for big_cat, small_cat_list in category_dict.items %}
+        <li class="big_category">
+          <input type="button" class="category_network" value={{big_cat}}>
+          <div class="small_category">
+            <ul>
+            {% for small_cat in small_cat_list %}
+              <li><a href={{small_cat.0}}>{{small_cat.1}}</a></li>
+            {% endfor %}
+            </ul>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <h2>{{ user.username }}</h2>
+    <a href="{% url 'logout' %}">ログアウト</a>
+
+    <div class="about_us">
+      <ul>
+        <li class="about">
+          <img src="image/default_icon.png" alt="">
+          <a href="#"><p>About</p></a>
+        </li>
+        <li class="twitter">
+          <img src="image/Twitter social icons - circle - blue.png" alt="">
+          <a href="#"><p>Twitter</p></a>
+        </li>  
+        <li class="facebook">
+          <img src="image/f_logo_RGB-Blue_1024.png" alt="">
+          <a href="#"><p>Facebook</p></a>
+        </li>      
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ヘッダ -->
+  <header class="page_header" role="banner">
+    <div class="inner">
+      <label class="menu_btn">
+        <span class="top"></span>
+        <span class="middle"></span>
+        <span class="bottom"></span>
+      </label>
+
+      <div class="user_icon">
+        <img src="{% static 'sharetech/img/default_avater.png' %}" alt="">
+      </div>
+
+      <div class="user_menu hidden">
+        <a href=""><p class="to_my_page">マイページ</p></a>
+        <a href=""><p class="logout">ログアウト</p></a>
+      </div>
+
+      <h1 class="site_logo">
+        <a href="{% url 'top' %}">
+          <img src="{% static 'sharetech/img/logo_header.png' %}">
+        </a>
+      </h1>
+    </div>
+
+    <div class="global_nav">
+      <div class="link_other_menu">
+        <a class="link_consult_window selected" href="">
+          <p>専門家に相談する</p>
+        </a>
+        <a class="link_article" href="">
+          <p>テクノロジーを発見する</p>
+        </a>  
+      </div>
+      <div class="search_menu_area">
+        <form action="{% url 'keyword_search' %}" class="keyword_search">
+          <input id="search_keyword" class="search_keyword" placeholder="キーワード検索" type="text" name="search_key" required>
+          <input id="search_button" class="search_button" value="検索" type="submit" method="get">
+        </form>
+      </div>
+    </div>
+  </header>
+
+  <!-- メイン -->
+  <main>
+    <div class="split">
+      <div class="split_item split_left">
+        <div class="split_left_inner">
+          <ul class="category_contena">
+            {% for big_cat, small_cat_list in category_dict.items %}
+            <li class="big_category">
+              <input type="button" class="category_network" value={{big_cat}}>
+              <div class="small_category">
+                <ul>
+                {% for small_cat in small_cat_list %}
+                  <li><a href="{% url 'category_filter' small_cat.0 %}">{{small_cat.1}}</a></li>
+                {% endfor %}
+                </ul>
+              </div>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+
+      </div>
+      <div class="split_item split_right">
+          {% block content %}
+          {% endblock %}
+      </div>
+    </div>
+      
+    <div class="loading_gif is_loading">
+      <img src='{% static "sharetech/img/loading.gif" %}' alt="">
+    </div>
+  </main>
+  <button type="button" class="back_to_top">
+    <span>↑</span>
+  </button>
+</body>

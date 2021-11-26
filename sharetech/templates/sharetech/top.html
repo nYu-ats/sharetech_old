@@ -122,8 +122,7 @@
               <div class="small_category">
                 <ul>
                 {% for small_cat in small_cat_list %}
-                <!-- 現在カテゴライズのurl作ってないので、仮値 -->
-                  <li><a href="{% url 'login' %}{{small_cat.0}}">{{small_cat.1}}</a></li>
+                  <li><a href="{% url 'category_filter' small_cat.0 %}">{{small_cat.1}}</a></li>
                 {% endfor %}
                 </ul>
               </div>
@@ -142,7 +141,7 @@
           <div class="flex_block">
             {% for article in attention_article %}
             <div class="article">
-              <a href="#">
+              <a href="{% url 'login' %}{{article.number}}">
                 <img src='{% static article.expert_icon_path %}' class="contain_img"/>
                 <div class="discription">
                   <h3>{{ article.title }}</h3>
@@ -170,7 +169,7 @@
           <div class="flex_block">
             {% for article in reccomend_article %}
             <div class="article">
-              <a href="#">
+              <a href="{% url 'login' %}{{article.number}}">
                 <img src='{% static article.expert_icon_path %}' class="contain_img"/>
                 <div class="discription">
                   <h3>{{ article.title }}</h3>
@@ -198,7 +197,7 @@
           <div class="flex_block">
             {% for article in latest_article %}
             <div class="article">
-              <a href="#">
+              <a href="{% url 'login' %}{{article.number}}">
                 <img src='{% static article.expert_icon_path %}' class="contain_img"/>
                 <div class="discription">
                   <h3>{{ article.title }}</h3>
@@ -226,7 +225,7 @@
           <div class="flex_block async_load_article_area">
             {% for article in discover_article %}
             <div class="article">
-              <a href="#">
+              <a href="{% url 'login' %}{{article.number}}">
                 <img src='{% static article.expert_icon_path %}' class="contain_img"/>
                 <div class="discription">
                   <h3>{{ article.title }}</h3>
@@ -254,7 +253,35 @@
           <div class="flex_block async_load_article_area">
             {% for article in keyword_filterd %}
             <div class="article">
-              <a href="#">
+              <a href="{% url 'login' %}{{article.number}}">
+                <img src='{% static article.expert_icon_path %}' class="contain_img"/>
+                <div class="discription">
+                  <h3>{{ article.title }}</h3>
+                  <div class="presenter_flex">
+                    <div class="presenter_info">
+                      <p>{{article.expert_companey}}</p>
+                    </div>
+                    <div class="presenter_info">
+                      <p>{{article.expert_name}}</p>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+
+        {% if category_filterd|length > 0 %}
+        <div class="recommend_article">
+          <h2 class="recommend_article_title">
+              {{category_name}}
+          </h2>        
+          <div class="flex_block async_load_article_area">
+            {% for article in category_filterd %}
+            <div class="article">
+              <a href="{% url 'login' %}{{article.number}}">
                 <img src='{% static article.expert_icon_path %}' class="contain_img"/>
                 <div class="discription">
                   <h3>{{ article.title }}</h3>

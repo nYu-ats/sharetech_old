@@ -9,7 +9,7 @@ from enum import IntEnum
 
 User = get_user_model()
 
-class BaseTopPageView(LoginRequiredMixin, View):
+class BasePageCommonView(LoginRequiredMixin, View):
     '''
     トップページ表示の共通処理
     '''
@@ -26,9 +26,16 @@ class BaseTopPageView(LoginRequiredMixin, View):
     _selected_article_dict = {}
 
     # templateへ渡すパラメータにカテゴリデータをセット
-    def set_category_dict():
+    def set_category_dict(self):
+        # dict初期化
+        self._selected_article_dict.clear()
+        
         category_list = list(CategoryMst.objects.filter(category_hierarchy=2).order_by('category_hierarchy'))
-        self._selected_article_dict.update(CategoryAdapter.convert_to_template_context(category_list))
+        self._selected_article_dict.update(
+                {
+                'category_dict' : CategoryAdapter.convert_to_template_context(category_list)
+                }
+            )
 
         return self._selected_article_dict
 

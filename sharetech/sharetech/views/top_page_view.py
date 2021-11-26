@@ -1,33 +1,24 @@
-from django.contrib.auth import get_user_model
 from django.shortcuts import render
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
-from sharetech.utils.model_template_adapter import (ConsultWindodwAdapter, CategoryAdapter)
+from sharetech.utils.model_template_adapter import ConsultWindodwAdapter
 from django.http.response import JsonResponse
 from sharetech.models.consult_window import ConsultWindow
 from sharetech.models.category_mst import CategoryMst
-from enum import IntEnum
+from .base_page_common_view import BasePageCommonView
 
-User = get_user_model()
+class TopPageView(BasePageCommonView):
+    '''
+    デフォルトトップページ
+    '''
 
-class TopPageView(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):  
 
-    class DisplayNum(IntEnum):
-        # 各抽出記事抽出数設定用Enum
-        SMALL = 12
-        STANDARD = 24
-        LARGE = 36
-
-    template_name = 'sharetech/top.html'
-
-    def get(self, request, *args, **kwargs):
-        selected_obj_array = list()
-        
-        # カテゴリ取得
-        category_list = list(CategoryMst.objects.filter(category_hierarchy=2).order_by('category_hierarchy'))
         # 一度取得した相談窓口は、重複して画面に初期表示しないようにする
         # 記事抽出の優先度は、注目->おすすめ->新着->発見
+        selected_obj_array = list()    
+
         # TODO 注目、おすすめ、発見については、フィルタ条件要検討
         # TODO 記事取得のクエリ1本にまとめて(all)ロジック部分で記事の切り出ししたほうがいいかも？
         # 注目窓口抽出
@@ -48,14 +39,15 @@ class TopPageView(LoginRequiredMixin, View):
         discover_consult_window_object_list = list(ConsultWindow.objects.exclude(
             pk__in=selected_obj_array).order_by('-viewed_num')[:self.DisplayNum.SMALL])
         
-        selected_article_list = {
+        self.set_category_dict().update(
+            {
             'latest_article' : ConsultWindodwAdapter.convert_to_template_context(latest_consult_window_object_list),
             'attention_article' : ConsultWindodwAdapter.convert_to_template_context(attention_consult_window_object_list),
             'discover_article' : ConsultWindodwAdapter.convert_to_template_context(discover_consult_window_object_list),
             'reccomend_article' : ConsultWindodwAdapter.convert_to_template_context(reccomend_consult_window_object_list),
-            'category_dict' : CategoryAdapter.convert_to_template_context(category_list),
             }
+        )
 
-        return render(request, 'sharetech/top.html', selected_article_list)
+        return render(request, self._template, self._selected_article_dict)
 
 top_page = TopPageView.as_view()
