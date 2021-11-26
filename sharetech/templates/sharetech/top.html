@@ -86,11 +86,10 @@
       </div>
 
       <h1 class="site_logo">
-        <a href="...">
+        <a href="{% url 'top' %}">
           <img src="{% static 'sharetech/img/logo_header.png' %}">
         </a>
       </h1>
-
     </div>
 
     <div class="global_nav">
@@ -103,7 +102,7 @@
         </a>  
       </div>
       <div class="search_menu_area">
-        <form action="#" class="keyword_search">
+        <form action="{% url 'keyword_search' %}" class="keyword_search">
           <input id="search_keyword" class="search_keyword" placeholder="キーワード検索" type="text" name="search_key" required>
           <input id="search_button" class="search_button" value="検索" type="submit" method="get">
         </form>
@@ -135,6 +134,7 @@
 
       </div>
       <div class="split_item split_right">
+        {% if attention_article|length > 0 %}
         <div class="attention_article">
           <h2 class="attention_article_title">
               注目
@@ -160,7 +160,9 @@
             {% endfor %}
           </div>
         </div>
+        {% endif %}
   
+        {% if reccomend_article|length > 0 %}
         <div class="attention_article">
           <h2 class="attention_article_title">
               おすすめ
@@ -186,7 +188,9 @@
             {% endfor %}
           </div>
         </div>
+        {% endif %}
   
+        {% if latest_article|length > 0 %}
         <div class="recommend_article">
           <h2 class="recommend_article_title">
               新着
@@ -212,6 +216,64 @@
             {% endfor %}
           </div>
         </div>
+        {% endif %}
+
+        {% if discover_article|length > 0 %}
+        <div class="recommend_article">
+          <h2 class="recommend_article_title">
+              発見
+          </h2>        
+          <div class="flex_block async_load_article_area">
+            {% for article in discover_article %}
+            <div class="article">
+              <a href="#">
+                <img src='{% static article.expert_icon_path %}' class="contain_img"/>
+                <div class="discription">
+                  <h3>{{ article.title }}</h3>
+                  <div class="presenter_flex">
+                    <div class="presenter_info">
+                      <p>{{article.expert_companey}}</p>
+                    </div>
+                    <div class="presenter_info">
+                      <p>{{article.expert_name}}</p>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+
+        {% if keyword_filterd|length > 0 %}
+        <div class="recommend_article">
+          <h2 class="recommend_article_title">
+              {{keyword}}
+          </h2>        
+          <div class="flex_block async_load_article_area">
+            {% for article in keyword_filterd %}
+            <div class="article">
+              <a href="#">
+                <img src='{% static article.expert_icon_path %}' class="contain_img"/>
+                <div class="discription">
+                  <h3>{{ article.title }}</h3>
+                  <div class="presenter_flex">
+                    <div class="presenter_info">
+                      <p>{{article.expert_companey}}</p>
+                    </div>
+                    <div class="presenter_info">
+                      <p>{{article.expert_name}}</p>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+
       </div>
     </div>
       

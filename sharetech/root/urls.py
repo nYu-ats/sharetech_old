@@ -3,7 +3,7 @@ from django.urls import include, path
 from django.contrib.auth.views import LogoutView
 from sharetech.views import (
     login_view, top_page_view, user_create_view, user_create_done_view,
-    user_create_complete_view, async_consult_window_view
+    user_create_complete_view, async_consult_window_view, keyword_search_view,
     )
 
 urlpatterns = [
@@ -15,4 +15,5 @@ urlpatterns = [
     path('register/done', user_create_done_view.user_create_done, name='register_done'),
     path('register/complete/<token>/', user_create_complete_view.user_create_complete, name='register_complete'),
     path('asyncLoad/', async_consult_window_view.async_consult_window_load),
+    path('keyword-search/', keyword_search_view.keyword_search, name='keyword_search')
 ]

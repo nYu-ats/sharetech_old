@@ -5,21 +5,14 @@
   <a href="#">
     <img src='{% static article.expert_icon_path %}' class="contain_img"/>
     <div class="discription">
-      <div class="article_info_flex">
-        <p>{{article.created_at|date:"M j, Y"}}</p>
-        <div class="favorite_count">
-          <img src='{% static "favorite_icon.png" %}' class="favorite_icon"/>
-          <p>{{article.applyed_num}}</p>
+      <h3>{{ article.title }}</h3>
+      <div class="presenter_flex">
+        <div class="presenter_info">
+          <p>{{article.expert_companey}}</p>
         </div>
-      </div>
-    </div>
-    <h3>{{ article.title }}</h3>
-    <!-- <p class="tags">test/test/test/test/test/test/test/test/test</p> -->
-    <div class="presenter_flex">
-      <img src="{% static article.contributor_icon_path %}" class="presenter_icon"/>
-      <div class="presenter_info">
-        <p>{{article.expert_companey}}</p>
-        <p>{{article.expert_name}}</p>
+        <div class="presenter_info">
+          <p>{{article.expert_name}}</p>
+        </div>
       </div>
     </div>
   </a>

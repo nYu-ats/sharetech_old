@@ -12,7 +12,7 @@ class AsyncArticleLoadView(LoginRequiredMixin, View):
         # 再読み込み数設定用Enum
         SMALL = 12
         STANDARD = 24
-        LARGE = 30
+        LARGE = 36
 
     def get(self, request):
         if(request.is_ajax()):
@@ -21,7 +21,7 @@ class AsyncArticleLoadView(LoginRequiredMixin, View):
             article_object_list = list(ConsultWindow.objects.order_by('-created_at')[article_start_index:article_end_index])
 
             load_article = {
-                'discover_article' : ConsultWindodwAdapter(article_object_list).convert_to_template_context(),
+                'discover_article' : ConsultWindodwAdapter.convert_to_template_context(article_object_list),
             }
 
             return render(request, 'sharetech/async_load_template.html', load_article)

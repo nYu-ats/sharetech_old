@@ -17,7 +17,7 @@ class TopPageView(LoginRequiredMixin, View):
         # 各抽出記事抽出数設定用Enum
         SMALL = 12
         STANDARD = 24
-        LARGE = 30
+        LARGE = 36
 
     template_name = 'sharetech/top.html'
 
@@ -31,12 +31,12 @@ class TopPageView(LoginRequiredMixin, View):
         # TODO 注目、おすすめ、発見については、フィルタ条件要検討
         # TODO 記事取得のクエリ1本にまとめて(all)ロジック部分で記事の切り出ししたほうがいいかも？
         # 注目窓口抽出
-        attention_consult_window_object_list = list(ConsultWindow.objects.order_by('-viewed_num')[:self.DisplayNum.STANDARD])
+        attention_consult_window_object_list = list(ConsultWindow.objects.order_by('-viewed_num')[:self.DisplayNum.SMALL])
         selected_obj_array.extend([int(consult_window_obj.id) for consult_window_obj in attention_consult_window_object_list])
 
         # おすすめ窓口抽出
         reccomend_consult_window_object_list = list(ConsultWindow.objects.exclude(
-            pk__in=selected_obj_array).order_by('-applyed_num')[:self.DisplayNum.STANDARD])
+            pk__in=selected_obj_array).order_by('-applyed_num')[:self.DisplayNum.SMALL])
         selected_obj_array.extend([int(consult_window_obj.id) for consult_window_obj in reccomend_consult_window_object_list])
 
         # 新着窓口抽出
@@ -46,7 +46,7 @@ class TopPageView(LoginRequiredMixin, View):
 
         # 発見窓口抽出
         discover_consult_window_object_list = list(ConsultWindow.objects.exclude(
-            pk__in=selected_obj_array).order_by('-viewed_num')[:self.DisplayNum.LARGE])
+            pk__in=selected_obj_array).order_by('-viewed_num')[:self.DisplayNum.SMALL])
         
         selected_article_list = {
             'latest_article' : ConsultWindodwAdapter.convert_to_template_context(latest_consult_window_object_list),
