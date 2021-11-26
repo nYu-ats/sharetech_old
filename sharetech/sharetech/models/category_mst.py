@@ -24,9 +24,18 @@ class CategoryMst(models.Model):
     )
 
     # 親カテゴリID
-    parent_category_id = models.PositiveIntegerField(
+    # 自己参照
+    parent_category_id = models.ForeignKey(
+        'self',
         verbose_name = '親カテゴリID',
         null = True,
+        on_delete=models.SET_NULL,
+    )
+
+    # カテゴリ階層
+    category_hierarchy = models.SmallIntegerField(
+        verbose_name = 'カテゴリ階層',
+        default = 1,
     )
 
     # 論理削除フラグ
