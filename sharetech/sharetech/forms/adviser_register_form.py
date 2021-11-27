@@ -21,30 +21,9 @@ class AdviserRegisterForm(ModelForm):
             'archivement', 
             ]
 
-    error_messages = {
-        'invalid_login' : gettext_lazy(
-            "Please enter a correct email and password. Note that both "
-            "fields may be case-sensitive. "
-        ),
-        'is_deleted' : gettext_lazy(
-            "This account is deleted. ",
-        ),
-    }
-
-    def __init__(self, request=None, *args, **kwargs):
-        self.request = request
-        self.user_cache = None
+    def __init__(self, *args, **kwargs):
         kwargs.setdefault('label_suffix', '')
         super().__init__(*args, **kwargs)
-
-        self.email_field = CustomUser._meta.get_field(CustomUser.USERNAME_FIELD)
-        self.fields['email'].max_length = self.email_field.max_length or 254
-        if self.fields['email'].label is None:
-            self.fields['email'].label = capfirst(self.email_field.verbose_name)
-        
-        # TODO 全フォーム要素にセットしたいアトリビュートがあればここでセット
-        # for field in self.fields.values():
-        #     pass
 
     def clean(self):
         name = self.cleaned_data.get('name')
