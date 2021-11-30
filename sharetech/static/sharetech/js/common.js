@@ -15,6 +15,21 @@ $(function(){
     });
 });
 
+// ユーザーメニュー開閉
+$(function(){
+    const $user_icon_btn = $('.page_header .user_icon');
+    const $user_menu = $('.page_header .user_menu'); 
+
+    // ユーザーメニュー展開中で、領域外がクリックされた時
+    $(document).on('click', function(e){
+        if(!$user_menu.hasClass('hidden') && !$(e.target).closest($user_menu).length && !$(e.target).closest($user_icon_btn).length){
+            $user_menu.toggleClass('hidden');
+        }else if($(e.target).closest($user_icon_btn).length){
+            $user_menu.toggleClass('hidden');
+        }
+    });
+});
+
 //サイドメニュー
 $(function(){
     var duaration = 300;
@@ -121,6 +136,9 @@ $(function(){
     var loadingIndex = 1;
     var isLoading = false;
     var baseURL = location.href + 'asyncLoad?page=' + document.title + '&index=';
+    // URLに#(自ページへのリンク)が含まれる可能性があるためトリミング
+    var baseURL = baseURL.replace('#', '');
+
     var $asyncLoadArticleArea = $('.async_load_article_area');
     var $window = $(window);
     var $loadingGif = $('.loading_gif');
@@ -138,6 +156,7 @@ $(function(){
             if(($window.height() + $window.scrollTop() === $(document).height()) && !isLoading){
                 isLoading = true;
                 $loadingGif.addClass('loading_gif is_loading');
+                console.log(baseURL);
                 // データ取得処理
                 $.ajax({
                     url: baseURL + loadingIndex,

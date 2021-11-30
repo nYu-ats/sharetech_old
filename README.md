@@ -5,6 +5,7 @@
 - OS : macOS Big Sur 11.6
 - docker : 20.10.8
 - docker-compose : 1.29.2
+- python : 3.8.2
 - Visual Studio Code : 1.6.12(Universal)
 
 ##### 事前準備

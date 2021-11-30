@@ -16,271 +16,299 @@
 </head>
 
 <body>
+  <!-- レスポンシブ用ナビゲーション -->
+  <nav class="main_nav" role="navigation">
+    <div class="my_account">
+      <a href="#">
+        <img src="{% static 'sharetech/img/ogo_login_page.png' %}" alt="">
+      </a>
+    </div>
+
+    <form action="#" class="keyword_search">
+      <input id="search_keyword" class="search_keyword" placeholder="キーワード検索" type="text" name="search_key" required>
+      <input id="search_button" class="search_button" value="検索" type="submit" method="get">
+    </form>
+    <div class="tag_search">
+      <h2>タグ検索</h2>
+      <ul class="category_contena">
+        {% for big_cat, small_cat_list in category_dict.items %}
+        <li class="big_category">
+          <input type="button" class="category_network" value={{big_cat}}>
+          <div class="small_category">
+            <ul>
+            {% for small_cat in small_cat_list %}
+              <li><a href={{small_cat.0}}>{{small_cat.1}}</a></li>
+            {% endfor %}
+            </ul>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <h2>{{ user.username }}</h2>
+    <a href="{% url 'logout' %}">ログアウト</a>
+
+    <div class="about_us">
+      <ul>
+        <li class="about">
+          <img src="image/default_icon.png" alt="">
+          <a href="#"><p>About</p></a>
+        </li>
+        <li class="twitter">
+          <img src="image/Twitter social icons - circle - blue.png" alt="">
+          <a href="#"><p>Twitter</p></a>
+        </li>  
+        <li class="facebook">
+          <img src="image/f_logo_RGB-Blue_1024.png" alt="">
+          <a href="#"><p>Facebook</p></a>
+        </li>      
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ヘッダ -->
   <header class="page_header" role="banner">
     <div class="inner">
-      <h1 class="site_logo">
-        <a href="...">
-          <img src="image/logo.png">
-        </a>
-      </h1>
-      <nav class="main_nav" role="navigation">
-        <div class="my_account">
-          <a href="#">
-            <img src="image/default_icon.png" alt="">
-        </a>
-        </div>
-  
-        <form action="#" class="keyword_search">
-          <input id="search_keyword" class="search_keyword" placeholder="キーワード検索" type="text" name="search_key" required>
-          <input id="search_button" class="search_button" value="検索" type="submit" method="get">
-        </form>
-        <div class="tag_search">
-          <h2>タグ検索</h2>
-          <ul class="category_contena">
-            <li class="big_category">
-              <input type="button" class="category_network" value="▼ ネットワーク">
-              <div class="small_category">
-                <ul>
-                  <li><a href="#">5G</a></li>
-                  <li><p>/</p></li>
-                  <li><a href="#">LAN</a></li>
-                  <li><p>/</p></li>
-                  <li><a href="#">WAN</a></li>
-                  <li><p>/</p></li>
-                  <li><a href="#">デバイス</a></li>
-                  <li><p>/</p></li>
-                  <li><a href="#">サーバ</a></li>
-                </ul>
-              </div>
-            </li>
-            <li class="big_category">
-              <input type="button" class="category_network" value="▼ セキュリティ">
-              <div class="small_category">
-                <ul>
-                  <li><a href="#">Webアプリケーション</a></li>
-                  <li><p>/</p></li>
-                  <li><a href="#">OS</a></li>
-                  <li><p>/</p></li>
-                  <li><a href="#">NWセキュリティ</a></li>
-                  <li><p>/</p></li>
-                  <li><a href="#">エンドポイント</a></li>
-                  <li><p>/</p></li>
-                  <li><a href="#">サービス</a></li>
-                </ul>
-              </div>
-            </li>
-            <li class="big_category">
-              <input type="button" class="category_network" value="▼ クラウド">
-              <div class="small_category">
-                <ul>
-                  <li><a href="#">SaaS</a></li>
-                  <li><p>/</p></li>
-                  <li><a href="#">IaaS</a></li>
-                  <li><p>/</p></li>
-                  <li><a href="#">PaaS</a></li>
-                  <li><p>/</p></li>
-                  <li><a href="#">BaaS</a></li>
-                  <li><p>/</p></li>
-                  <li><a href="#">IPaaS</a></li>
-                </ul>
-              </div>
-            </li>
-            <li class="big_category">
-              <input type="button" class="category_network" value="▼ XR">
-              <div class="small_category">
-                <ul>
-                  <li><a href="#">AR</a></li>
-                  <li><p>/</p></li>
-                  <li><a href="#">VR</a></li>
-                </ul>
-              </div>
-            </li>
-            <li class="big_category">
-              <input type="button" class="category_network" value="▼ その他">
-              <div class="small_category">
-                <ul>
-                  <li><a href="#">その他</a></li>
-                </ul>
-              </div>
-            </li>
-          </ul>
-        </div>
-
-        <h2>{{ user.username }}</h2>
-        <a href="{% url 'logout' %}">ログアウト</a>
-
-        <div class="about_us">
-          <ul>
-            <li class="about">
-              <img src="image/default_icon.png" alt="">
-              <a href="#"><p>About</p></a>
-            </li>
-            <li class="twitter">
-              <img src="image/Twitter social icons - circle - blue.png" alt="">
-              <a href="#"><p>Twitter</p></a>
-            </li>  
-            <li class="facebook">
-              <img src="image/f_logo_RGB-Blue_1024.png" alt="">
-              <a href="#"><p>Facebook</p></a>
-            </li>      
-          </ul>
-        </div>
-      </nav>
       <label class="menu_btn">
         <span class="top"></span>
         <span class="middle"></span>
         <span class="bottom"></span>
       </label>
+
+      <div class="user_icon">
+        <img src="{% static 'sharetech/img/default_avater.png' %}" alt="">
+      </div>
+
+      <div class="user_menu hidden">
+        <a href=""><p class="to_my_page">マイページ</p></a>
+        <a href=""><p class="logout">ログアウト</p></a>
+      </div>
+
+      <h1 class="site_logo">
+        <a href="{% url 'top' %}">
+          <img src="{% static 'sharetech/img/logo_header.png' %}">
+        </a>
+      </h1>
+    </div>
+
+    <div class="global_nav">
+      <div class="link_other_menu">
+        <a class="link_consult_window selected" href="">
+          <p>専門家に相談する</p>
+        </a>
+        <a class="link_article" href="">
+          <p>テクノロジーを発見する</p>
+        </a>  
+      </div>
+      <div class="search_menu_area">
+        <form action="{% url 'keyword_search' %}" class="keyword_search">
+          <input id="search_keyword" class="search_keyword" placeholder="キーワード検索" type="text" name="search_key" required>
+          <input id="search_button" class="search_button" value="検索" type="submit" method="get">
+        </form>
+      </div>
     </div>
   </header>
-            
-      <main>
-        <div class="up_to_date_article">
-            <h2 class="up_to_date_article_title">
-                新着記事
-            </h2>
-            <div class="slide_show_block">
-              <button type="button" class="go_to_left">＜</button>
-              <button type="button" class="go_to_right">＞</button>
-              <div class="slides">
-                <!-- 新着記事の表示 -->
-                {% for article in latest_article%}
-                <div class="article" value={{article.number}}>
-                  <a href="#">
-                    <div class="slide_mask"></div>
-                    <img src="{% static article.expert_icon_path %}" class="contain_img"/>
-                    <div class="discription">
-                      <p class="created_at">{{article.created_at|date:"M j, Y"}}</p>
-                      <div class="favorite_count">
-                        <img src='{% static "favorite_icon.png" %}' class="favorite_icon"/>
-                        <p>{{article.applyed_num}}</p>
-                      </div>
-                      <h3>{{ article.title }}</h3>
-                      <!-- タグなしでok? -->
-                      <!-- <p class="tags">test/test/test/test/test/test/test/test/test</p> -->
-                      <div class="presenter_flex">
-                        <img src="{% static article.expert_icon_path %}" class="presenter_icon"/>
-                        <div class="presenter_info">
-                          <p>{{article.expert_companey}}</p>
-                          <p>{{article.expert_name}}</p>
-                        </div>
-                      </div>
-                    </div>
-                  </a>
-                </div>
+
+  <!-- メイン -->
+  <main>
+    <div class="split">
+      <div class="split_item split_left">
+        <div class="split_left_inner">
+          <ul class="category_contena">
+            {% for big_cat, small_cat_list in category_dict.items %}
+            <li class="big_category">
+              <input type="button" class="category_network" value={{big_cat}}>
+              <div class="small_category">
+                <ul>
+                {% for small_cat in small_cat_list %}
+                  <li><a href="{% url 'category_filter' small_cat.0 %}">{{small_cat.1}}</a></li>
                 {% endfor %}
-
+                </ul>
               </div>
-            </div>
-          </div>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
 
-          <div class="attention_article">
-            <h2 class="attention_article_title">
-                注目記事
-            </h2>        
-            <div class="flex_block">
-              {% for article in attention_article %}
-              <div class="article">
-                <a href="#">
-                  <img src='{% static article.expert_icon_path %}' class="contain_img"/>
-                  <div class="discription">
-                    <div class="article_info_flex">
-                      <p>{{article.created_at|date:"M j, Y"}}</p>
-                      <div class="favorite_count">
-                        <img src='{% static "favorite_icon.png" %}' class="favorite_icon"/>
-                        <p>{{article.applyed_num}}</p>
-                      </div>
+      </div>
+      <div class="split_item split_right">
+        {% if attention_article|length > 0 %}
+        <div class="attention_article">
+          <h2 class="attention_article_title">
+              注目
+          </h2>        
+          <div class="flex_block">
+            {% for article in attention_article %}
+            <div class="article">
+              <a href="{% url 'login' %}{{article.number}}">
+                <img src='{% static article.expert_icon_path %}' class="contain_img"/>
+                <div class="discription">
+                  <h3>{{ article.title }}</h3>
+                  <div class="presenter_flex">
+                    <div class="presenter_info">
+                      <p>{{article.expert_companey}}</p>
                     </div>
-                    <h3>{{ article.title }}</h3>
-                    <!-- <p class="tags">test/test/test/test/test/test/test/test/test</p> -->
-                    <div class="presenter_flex">
-                      <img src="{% static article.expert_icon_path %}" class="presenter_icon"/>
-                      <div class="presenter_info">
-                        <p>{{article.expert_companey}}</p>
-                        <p>{{article.expert_name}}</p>
-                    </div>
+                    <div class="presenter_info">
+                      <p>{{article.expert_name}}</p>
                     </div>
                   </div>
-                </a>
-              </div>
-              {% endfor %}
+                </div>
+              </a>
             </div>
+            {% endfor %}
           </div>
-
-        <!-- フォローユーザーがいれば記事表示 -->
-        {%if follow_user_article|length > 0 %}
-        <div class="recommend_article">
-            <h2 class="recommend_article_title">
-                フォロー
-            </h2>        
-            <div class="flex_block">
-              {% for article in follow_user_article %}
-              <div class="article">
-                <a href="#">
-                  <img src='{% static article.expert_icon_path %}' class="contain_img"/>
-                  <div class="discription">
-                    <div class="article_info_flex">
-                      <p>{{article.created_at|date:"M j, Y"}}</p>
-                      <div class="favorite_count">
-                        <img src='{% static "favorite_icon.png" %}' class="favorite_icon"/>
-                        <p>{{article.applyed_num}}</p>
-                      </div>
-                    </div>
-                    <h3>{{ article.title }}</h3>
-                    <!-- <p class="tags">test/test/test/test/test/test/test/test/test</p> -->
-                    <div class="presenter_flex">
-                      <img src="{% static article.expert_icon_path %}" class="presenter_icon"/>
-                      <div class="presenter_info">
-                        <p>{{article.expert_companey}}</p>
-                        <p>{{article.expert_name}}</p>
-                    </div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-              {% endfor %}
-            </div>
         </div>
         {% endif %}
-        
-          <div class="article_search">
-            <h2 class="article_search_title">
-                探す
-            </h2>        
-            <div class="flex_block async_load_article_area">
-              {% for article in reccomend_article %}
-              <div class="article">
-                <a href="#">
-                  <img src='{% static article.expert_icon_path %}' class="contain_img"/>
-                  <div class="discription">
-                    <div class="article_info_flex">
-                      <p>{{article.created_at|date:"M j, Y"}}</p>
-                      <div class="favorite_count">
-                        <img src='{% static "favorite_icon.png" %}' class="favorite_icon"/>
-                        <p>{{article.applyed_num}}</p>
-                      </div>
+  
+        {% if reccomend_article|length > 0 %}
+        <div class="attention_article">
+          <h2 class="attention_article_title">
+              おすすめ
+          </h2>        
+          <div class="flex_block">
+            {% for article in reccomend_article %}
+            <div class="article">
+              <a href="{% url 'login' %}{{article.number}}">
+                <img src='{% static article.expert_icon_path %}' class="contain_img"/>
+                <div class="discription">
+                  <h3>{{ article.title }}</h3>
+                  <div class="presenter_flex">
+                    <div class="presenter_info">
+                      <p>{{article.expert_companey}}</p>
                     </div>
-                    <h3>{{ article.title }}</h3>
-                    <!-- <p class="tags">test/test/test/test/test/test/test/test/test</p> -->
-                    <div class="presenter_flex">
-                      <img src="{% static article.expert_icon_path %}" class="presenter_icon"/>
-                      <div class="presenter_info">
-                        <p>{{article.expert_companey}}</p>
-                        <p>{{article.expert_name}}</p>
-                    </div>
+                    <div class="presenter_info">
+                      <p>{{article.expert_name}}</p>
                     </div>
                   </div>
-                </a>
-              </div>
-              {% endfor %}
+                </div>
+              </a>
             </div>
+            {% endfor %}
           </div>
+        </div>
+        {% endif %}
+  
+        {% if latest_article|length > 0 %}
+        <div class="recommend_article">
+          <h2 class="recommend_article_title">
+              新着
+          </h2>        
+          <div class="flex_block">
+            {% for article in latest_article %}
+            <div class="article">
+              <a href="{% url 'login' %}{{article.number}}">
+                <img src='{% static article.expert_icon_path %}' class="contain_img"/>
+                <div class="discription">
+                  <h3>{{ article.title }}</h3>
+                  <div class="presenter_flex">
+                    <div class="presenter_info">
+                      <p>{{article.expert_companey}}</p>
+                    </div>
+                    <div class="presenter_info">
+                      <p>{{article.expert_name}}</p>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
 
-          <div class="loading_gif is_loading">
-            <img src='{% static "sharetech/img/loading.gif" %}' alt="">
+        {% if discover_article|length > 0 %}
+        <div class="recommend_article">
+          <h2 class="recommend_article_title">
+              発見
+          </h2>        
+          <div class="flex_block async_load_article_area">
+            {% for article in discover_article %}
+            <div class="article">
+              <a href="{% url 'login' %}{{article.number}}">
+                <img src='{% static article.expert_icon_path %}' class="contain_img"/>
+                <div class="discription">
+                  <h3>{{ article.title }}</h3>
+                  <div class="presenter_flex">
+                    <div class="presenter_info">
+                      <p>{{article.expert_companey}}</p>
+                    </div>
+                    <div class="presenter_info">
+                      <p>{{article.expert_name}}</p>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+            {% endfor %}
           </div>
-      </main>
-      <button type="button" class="back_to_top">
-        <span>↑</span>
-      </button>
+        </div>
+        {% endif %}
+
+        {% if keyword_filterd|length > 0 %}
+        <div class="recommend_article">
+          <h2 class="recommend_article_title">
+              {{keyword}}
+          </h2>        
+          <div class="flex_block async_load_article_area">
+            {% for article in keyword_filterd %}
+            <div class="article">
+              <a href="{% url 'login' %}{{article.number}}">
+                <img src='{% static article.expert_icon_path %}' class="contain_img"/>
+                <div class="discription">
+                  <h3>{{ article.title }}</h3>
+                  <div class="presenter_flex">
+                    <div class="presenter_info">
+                      <p>{{article.expert_companey}}</p>
+                    </div>
+                    <div class="presenter_info">
+                      <p>{{article.expert_name}}</p>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+
+        {% if category_filterd|length > 0 %}
+        <div class="recommend_article">
+          <h2 class="recommend_article_title">
+              {{category_name}}
+          </h2>        
+          <div class="flex_block async_load_article_area">
+            {% for article in category_filterd %}
+            <div class="article">
+              <a href="{% url 'login' %}{{article.number}}">
+                <img src='{% static article.expert_icon_path %}' class="contain_img"/>
+                <div class="discription">
+                  <h3>{{ article.title }}</h3>
+                  <div class="presenter_flex">
+                    <div class="presenter_info">
+                      <p>{{article.expert_companey}}</p>
+                    </div>
+                    <div class="presenter_info">
+                      <p>{{article.expert_name}}</p>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+
+      </div>
+    </div>
+      
+    <div class="loading_gif is_loading">
+      <img src='{% static "sharetech/img/loading.gif" %}' alt="">
+    </div>
+  </main>
+  <button type="button" class="back_to_top">
+    <span>↑</span>
+  </button>
 </body>
