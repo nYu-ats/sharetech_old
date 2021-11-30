@@ -20,7 +20,7 @@
     <main>
         <!--ログインフォーム-->
         <div class="form_wrapper">
-            <h3>ご登録申請及び、審査項目となります<br>可能な限り項目を埋めていただくことで、審査が通りやすくなります</h3>
+            <h3>相談可能な記事を登録してみましょう</h3>
             <form method="POST">
                 {% csrf_token %}
                 {% for field, error in form.errors.items %}
@@ -40,42 +40,26 @@
                                 <label for="name">{{form.consult_window_overview.label}}</label>
                                 {{form.consult_window_overview}}    
                             </div>
-                        </div>
-                        <!-- <div class="form_item user_name_input">
                             <div class="username">
-                                <label for="name">{{form.family_name_en.label}}</label>
-                                {{form.family_name_en}}    
+                                <label for="name">{{form.consult_price.label}}</label>
+                                {{form.consult_price}}    
                             </div>
                             <div class="username">
-                                <label for="name">{{form.first_name_en.label}}</label>
-                                {{form.first_name_en}}    
+                                <label for="name">{{form.archivement.label}}</label>
+                                {{form.archivement}}    
                             </div>
                         </div>
-                        <div class="form_item role_input">
-                            <label for="role">{{form.role_code.label}}</label>
-                            {{form.role_code}}
-                        </div>
-                        <div class="form_item">
-                            <label for="email">{{form.email.label}}</label>
-                            {{form.email}}
-                        </div>
-                        <div class="form_item">
-                            <label for="password">{{form.password.label}}</label>
-                            {{form.password}}
-                        </div>
-                        <div class="form_item">
-                            <label for="password_confirm">{{form.password_confirm.label}}</label>
-                            {{form.password_confirm}}
-                        </div>
-                        <div class="form_item">
-                            <label for="name">{{form.company.label}}</label>
-                            {{form.company}}                
-                        </div> -->
+                        
                     </div>
 
                     <div class="user_info_wrapper">
                         <h2>▼オプション入力項目</h2>
                         <!-- オプション入力の項目についてはこっちの要素div内に入れる -->
+                        {{ BBB }}
+                        {% for A in AAA %}
+                        <p>{{A.created_at|date:"M j, Y"}}</p>
+                        <p>test</p>
+                        {% endfor %}
                         <!-- <div class="form_item">
                             <label for="name">{{form.industry_id.label}}</label>
                             {{form.industry_id}}                
@@ -92,8 +76,7 @@
                 </div>
 
                 <div class="submit">
-                    <input class="return_btn" type="submit" value="戻る">
-                    <input class="submit_btn" type="submit" value="確認">
+                    <input class="submit_btn" type="submit" name="next" value="確認">
                 </div>
                 
             </form>
