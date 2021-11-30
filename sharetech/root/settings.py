@@ -139,7 +139,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join('static'), Constants.IMG_ACCESS_URL]
+STATICFILES_DIRS = [os.path.join('static'), Constants.get_static_file_path()]
 STATIC_ROOT = ''
 
 # Default primary key field type
