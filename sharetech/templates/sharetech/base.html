@@ -3,16 +3,8 @@
 <html lang="ja">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="discription" content="トップページ">
-    <title>Top</title>
-    <link rel="stylesheet" href="{% static 'sharetech/css/common.css' %}">
-    <link rel="stylesheet" href="{% static 'sharetech/css/top.css' %}">
-    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.js"></script>
-    <script src="{% static 'sharetech/js/common.js' %}"></script>
-    <script src="{% static 'sharetech/js/top.js' %}"></script>
+    {% block head %}
+    {% endblock %}
 </head>
 
 <body>
@@ -115,34 +107,44 @@
     <div class="split">
       <div class="split_item split_left">
         <div class="split_left_inner">
-          <ul class="category_contena">
-            {% for big_cat, small_cat_list in category_dict.items %}
-            <li class="big_category">
-              <input type="button" class="category_network" value={{big_cat}}>
-              <div class="small_category">
-                <ul>
-                {% for small_cat in small_cat_list %}
-                  <li><a href="{% url 'category_filter' small_cat.0 %}">{{small_cat.1}}</a></li>
-                {% endfor %}
-                </ul>
-              </div>
-            </li>
-            {% endfor %}
-          </ul>
+            {% block sidemenu %}
+            {% endblock %}
         </div>
-
       </div>
       <div class="split_item split_right">
           {% block content %}
           {% endblock %}
       </div>
     </div>
-      
-    <div class="loading_gif is_loading">
-      <img src='{% static "sharetech/img/loading.gif" %}' alt="">
-    </div>
+      {% block lodinggif %}
+      {% endblock %}
   </main>
+  {% block footer %}
+  {% endblock %}
   <button type="button" class="back_to_top">
     <span>↑</span>
   </button>
+  <div class="overlay">
+      <div class="apply_declear" value_id='25' value_date='2021-10-10'>
+        <p>「これはテストタイトルです。」の<br>
+            相談お申込の状況を入力してください</p>
+        <div class="apply_status">
+            <label for="cancel">
+                <input id="cancel" type="radio" name="apply_check" value="0" checked>
+                キャンセル
+            </label>
+            <label for="applyed">
+                <input id="applyed" type="radio" name="apply_check" value="2">
+                申込済
+            </label>
+            <label for="complete">
+                <input id="complete" type="radio" name="apply_check" value="3">
+                相談済
+            </label>    
+        </div>
+        <div class="apply_status_submit">
+            <button>送信</button>
+        </div>
+      </div>
+  </div>
 </body>
