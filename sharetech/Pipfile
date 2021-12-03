@@ -8,6 +8,7 @@ django = "*"
 pymysql = "*"
 pillow = "*"
 cryptography = "*"
+requests = "*"
 
 [dev-packages]
 
