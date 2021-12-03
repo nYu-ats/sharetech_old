@@ -1,0 +1,18 @@
+{% extends 'sharetech/base.html' %}
+{% load static %}
+{% block sidemenu %}
+<ul class="category_contena">
+    {% for big_cat, small_cat_list in category_dict.items %}
+    <li class="big_category">
+      <input type="button" class="category_network" value={{big_cat}}>
+      <div class="small_category">
+        <ul>
+        {% for small_cat in small_cat_list %}
+          <li><a href="{% url 'category_filter' small_cat.0 %}">{{small_cat.1}}</a></li>
+        {% endfor %}
+        </ul>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
