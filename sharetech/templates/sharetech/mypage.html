@@ -1,0 +1,74 @@
+{% extends 'sharetech/base_with_sidemenu.html' %}
+{% load static %}
+
+{% block head %}
+<meta charset="UTF-8">
+<meta name="discription" content="相談窓口詳細">
+<title>Detail</title>
+<link rel="stylesheet" href="{% static 'sharetech/css/common.css' %}">
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.js"></script>
+<script src="{% static 'sharetech/js/common.js' %}"></script>
+<script src="{% static 'sharetech/js/top.js' %}"></script>
+<script src="{% static 'sharetech/js/apply_check.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="mypage">
+    <!-- プロフィールブロック -->
+    <div class="profile">
+        <div class="icon">
+
+        </div>
+        <div class="content">
+            <p class="name"></p>
+            <p class="company"></p>
+            <p class="industory"></p>
+            <p class="occupation"></p>
+            <p class="position"></p>
+        </div>
+        <p class="user_id"></p>
+    </div>
+
+    <!-- 関連相談窓口一覧ブロック -->
+    <div class="consult_window">
+        <!-- 表示相談窓口切り替えタブ -->
+        <div class="switch_tab">
+            <div class="applyed">
+
+            </div>
+            <div class="created">
+
+            </div>
+        </div>
+        <!-- 申込済み相談窓口一覧 -->
+        <div class="applyed_consult_window">
+
+        </div>
+        <!-- 作成済み相談窓口一覧 -->
+        <div class="created_consult_window">
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+<footer class="page_footer">
+    <div class="footer_list">
+        <ul>
+            <li>
+                <a href="">シェアテックについて</a>
+            </li>
+            <li>
+                <a href="">利用規約</a>
+            </li>
+            <li>
+                <a href="">お問い合せ</a>
+            </li>
+        </ul>
+    </div>
+    <p class="copy_write">©2021 ShareTech Co., Ltd., All rights reserved</p>
+</footer>
+{% endblock %}
