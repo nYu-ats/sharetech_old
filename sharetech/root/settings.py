@@ -15,9 +15,13 @@ PROJECT_NAME = os.path.basename(BASE_DIR)
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# Elastic Beanstalk 環境で Debug モードを有効/無効にする環境変数(django.config 内で設定)
+if os.getenv('EB_ENV_DEBUG', 'False') == 'True':
+    DEBUG = True
+else:
+    DEBUG = False 
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'sharetec-dev-env.ap-northeast-1.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'sharetec-dev-env.ap-northeast-1.elasticbeanstalk.com', 'share-tech.jp']
 try:
     TOKEN=requests.put('http://169.254.169.254/latest/api/token', headers={'X-aws-ec2-metadata-token-ttl-seconds': '21600'}).text
     headers = {'X-aws-ec2-metadata-token': TOKEN}
