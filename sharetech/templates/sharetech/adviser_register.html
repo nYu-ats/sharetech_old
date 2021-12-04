@@ -7,7 +7,7 @@
     <meta name="discription" content="相談窓口登録ページ">
     <title>Adviser_Register</title>
     <link rel="stylesheet" href="{% static 'sharetech/css/common.css' %}">
-    <link rel="stylesheet" href="{% static 'sharetech/css/register.css' %}">
+    <link rel="stylesheet" href="{% static 'sharetech/css/adviser_register.css' %}">
 </head>
 
 <body>
@@ -29,8 +29,6 @@
                 {% endfor %}
                 <div class="item_container">
                     <div class="user_info_wrapper">
-                        <h2>▼必須入力項目</h2>
-                        <!-- 必須入力の項目についてはこっちの要素div内に入れる -->
                         <div class="form_item user_name_input">
                             <div class="username">
                                 <label for="name">{{form.consult_window_title.label}}</label>
@@ -49,31 +47,27 @@
                                 {{form.archivement}}    
                             </div>
                         </div>
-                        
-                    </div>
-
-                    <div class="user_info_wrapper">
-                        <h2>▼オプション入力項目</h2>
-                        <!-- オプション入力の項目についてはこっちの要素div内に入れる -->
-                        {{ BBB }}
-                        {% for A in AAA %}
-                        <p>{{A.created_at|date:"M j, Y"}}</p>
-                        <p>test</p>
-                        {% endfor %}
-                        <!-- <div class="form_item">
-                            <label for="name">{{form.industry_id.label}}</label>
-                            {{form.industry_id}}                
-                        </div>
-                        <div class="form_item">
-                            <label for="name">{{form.occupation_id.label}}</label>
-                            {{form.occupation_id}}                
-                        </div>
-                        <div class="form_item">
-                            <label for="name">{{form.position_id.label}}</label>
-                            {{form.position_id}}                
-                        </div> -->
-                    </div>    
-                </div>
+                        <ul class="category_contena">
+                            {% for big_cat, small_cat_list in category_dict.items %}
+                            <li>
+                                {% for small_cat in small_cat_list %}
+                                    {% if big_cat == small_cat.1 %} <!-- 大カテゴリのみ先頭に出力 -->
+                                    <div class="big_category">
+                                        <input type="checkbox" name="cat" value={{small_cat.0}}>{{small_cat.1}}</input>
+                                    </div>
+                                    {% else %}
+                                    <div class="small_category">
+                                    <ul>
+                                    <input type="checkbox" name="cat" value={{small_cat.0}}>{{small_cat.1}}</input>
+                                    {% endif %}
+                                {% endfor %}
+                                </ul>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>   
+                </div> 
 
                 <div class="submit">
                     <input class="submit_btn" type="submit" name="next" value="確認">
