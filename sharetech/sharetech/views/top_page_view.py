@@ -41,10 +41,10 @@ class TopPageView(BasePageCommonView):
         
         self.set_category_dict().update(
             {
-            'latest_article' : ConsultWindodwAdapter.convert_to_template_context(latest_consult_window_object_list),
-            'attention_article' : ConsultWindodwAdapter.convert_to_template_context(attention_consult_window_object_list),
-            'discover_article' : ConsultWindodwAdapter.convert_to_template_context(discover_consult_window_object_list),
-            'reccomend_article' : ConsultWindodwAdapter.convert_to_template_context(reccomend_consult_window_object_list),
+            'latest_article' : self.create_consult_window_list(latest_consult_window_object_list),
+            'attention_article' : self.create_consult_window_list(attention_consult_window_object_list),
+            'discover_article' : self.create_consult_window_list(discover_consult_window_object_list),
+            'reccomend_article' : self.create_consult_window_list(reccomend_consult_window_object_list),
             }
         )
 
