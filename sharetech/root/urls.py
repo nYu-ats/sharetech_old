@@ -5,7 +5,7 @@ from sharetech.views import (
     login_view, top_page_view, user_create_view, user_create_done_view,
     user_create_complete_view, async_consult_window_view, keyword_search_view,
     category_filter_view, consult_window_detail_view, apply_check_view,
-    apply_status_view, profile_view
+    apply_status_view, profile_view, profile_edit_view
     )
 
 urlpatterns = [
@@ -22,5 +22,6 @@ urlpatterns = [
     path('detail/<str:consult_window_id>', consult_window_detail_view.consult_window_detail, name='consult_window_detail'),
     path('detail/<str:consult_window_id>/applyCheck/', apply_check_view.apply_check, name='apply_check'),
     path('applyStatus/', apply_status_view.apply_status, name='apply_status'),
-    path('profile/', profile_view.profile, name='profile')
+    path('profile/', profile_view.profile, name='profile'),
+    path('profile/edit', profile_edit_view.profile_edit, name='profile_edit'),
 ]
