@@ -1,45 +1,55 @@
 {% extends 'sharetech/base.html' %}
 {% load static %}
-{% block sidemenu %}
-<ul class="category_contena">
-    {% for big_cat, small_cat_list in category_dict.items %}
-    <li class="big_category">
-      <input type="button" class="category_network" value={{big_cat}}>
-      <div class="small_category">
-        <ul>
-        {% for small_cat in small_cat_list %}
-          <li><a href="{% url 'category_filter' small_cat.0 %}">{{small_cat.1}}</a></li>
-        {% endfor %}
-        </ul>
-      </div>
-    </li>
-    <!-- 以下テスト用 -->
-    <li class="big_category">
-      <input type="button" class="category_network" value="テストーー">
-      <div class="small_category">
-        <ul>
-          <li><a href="#">テストー</a></li>
-        </ul>
-      </div>
-    </li>
-    <li class="big_category">
-      <input type="button" class="category_network" value="テストーー">
-      <div class="small_category">
-        <ul>
-          <li><a href="#">テストー</a></li>
-        </ul>
-      </div>
-    </li>
-    <li class="big_category">
-      <input type="button" class="category_network" value="テストーー">
-      <div class="small_category">
-        <ul>
-          <li><a href="#">テストー</a></li>
-        </ul>
-      </div>
-    </li>
+{% block main %}
+<div class="split">
+  <div class="split_item split_left">
+    <div class="split_left_inner">
+      <ul class="category_contena">
+          {% for big_cat, small_cat_list in category_dict.items %}
+          <li class="big_category">
+            <input type="button" class="category_network" value={{big_cat}}>
+            <div class="small_category">
+              <ul>
+              {% for small_cat in small_cat_list %}
+                <li><a href="{% url 'category_filter' small_cat.0 %}">{{small_cat.1}}</a></li>
+              {% endfor %}
+              </ul>
+            </div>
+          </li>
+          <!-- 以下テスト用 -->
+          <li class="big_category">
+            <input type="button" class="category_network" value="テストーー">
+            <div class="small_category">
+              <ul>
+                <li><a href="#">テストー</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="big_category">
+            <input type="button" class="category_network" value="テストーー">
+            <div class="small_category">
+              <ul>
+                <li><a href="#">テストー</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="big_category">
+            <input type="button" class="category_network" value="テストーー">
+            <div class="small_category">
+              <ul>
+                <li><a href="#">テストー</a></li>
+              </ul>
+            </div>
+          </li>
 
-    <!-- 以上テスト用 -->
-    {% endfor %}
-  </ul>
+          <!-- 以上テスト用 -->
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    <div class="split_item split_right">
+      {% block content %}
+      {% endblock %}
+  </div>
+</div>
 {% endblock %}

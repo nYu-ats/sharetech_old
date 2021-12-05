@@ -104,20 +104,10 @@
 
   <!-- メイン -->
   <main>
-    <div class="split">
-      <div class="split_item split_left">
-        <div class="split_left_inner">
-            {% block sidemenu %}
-            {% endblock %}
-        </div>
-      </div>
-      <div class="split_item split_right">
-          {% block content %}
-          {% endblock %}
-      </div>
-    </div>
-      {% block lodinggif %}
-      {% endblock %}
+    {% block main %}
+    {% endblock %}
+    {% block lodinggif %}
+    {% endblock %}
   </main>
   {% block footer %}
   {% endblock %}
