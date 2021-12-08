@@ -16,10 +16,10 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # Elastic Beanstalk 環境で Debug モードを有効/無効にする環境変数(django.config 内で設定)
-if os.getenv('EB_ENV_DEBUG', 'False') == 'True':
+if os.getenv('EB_ENV_DEBUG', None) == 'True' or os.getenv('EB_ENV_DEBUG', None) is None:
     DEBUG = True
 else:
-    DEBUG = False 
+    DEBUG = False
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'sharetec-dev-env.ap-northeast-1.elasticbeanstalk.com', 'share-tech.jp']
 try:
