@@ -14,7 +14,7 @@ class BaseModelTemplateAdapter(ABC):
 
 class ConsultWindodwAdapter(BaseModelTemplateAdapter):
     '''
-    DB抽出データをtemplateで展開しやすい形に変換
+    相談窓口一覧ページ
     '''
     DEFAULT_USER_ICON_PATH = 'default_avater.png'
 
@@ -38,7 +38,7 @@ class ConsultWindodwAdapter(BaseModelTemplateAdapter):
 
 class CategoryAdapter(BaseModelTemplateAdapter):
     '''
-    DB抽出データをtemplateで展開しやすい形に変換
+    カテゴリ取得
     '''
     @classmethod
     def convert_to_template_context(cls, category_models):

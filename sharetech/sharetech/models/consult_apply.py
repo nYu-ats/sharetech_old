@@ -1,19 +1,19 @@
 from django.utils import timezone
 from django.db import models
 from .consult_window import ConsultWindow
-from .category_mst import CategoryMst
+from .user import CustomUser
 
-class CategoryConsultWindowMapping(models.Model):
+class ConsultApply(models.Model):
     '''
-    カテゴリと相談窓口のマッピング
+    申込履歴
     '''
 
     class Meta:
-        db_table = 'category_consult_window_mapping'
+        db_table = 'consult_apply'
         constraints = [
             models.UniqueConstraint(
-                fields = ['category_id', 'consult_window_id'],
-                name = 'mapping_unique'
+                fields = ['consult_window_id', 'user_id', 'apply_date'],
+                name = 'apply_unique'
             )
         ]
 
@@ -22,24 +22,35 @@ class CategoryConsultWindowMapping(models.Model):
 
     default値
     null -> false
-    blank -> false
+    blank -> false            
     '''
-
-    # カテゴリID
-    category_id = models.ForeignKey(
-        'CategoryMst',
-        verbose_name = 'カテゴリID',
-        on_delete = models.CASCADE,
-        default = 99,
-    )
 
     # 相談窓口ID
     consult_window_id = models.ForeignKey(
         'ConsultWindow',
         verbose_name = '相談窓口ID',
-        on_delete = models.CASCADE,
+        on_delete = models.PROTECT,
     )
-    
+
+    # ユーザーID
+    user_id = models.ForeignKey(
+        'CustomUser',
+        verbose_name = '申込者ID',
+        on_delete = models.PROTECT,
+    )
+
+    # 申込ステータス
+    apply_status = models.PositiveSmallIntegerField(
+        verbose_name = '申込ステータス',
+        default = 1,
+    )
+
+    # 申込日
+    apply_date = models.DateTimeField(
+        verbose_name = '申込日',
+        default = timezone.now,
+    )
+
     # 論理削除フラグ
     id_deleted = models.BooleanField(
         verbose_name = 'Is Deleted',
