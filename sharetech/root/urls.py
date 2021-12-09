@@ -12,7 +12,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', login_view.auth_login, name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
-    path('landing/', landing_page_view.landing_page, name='landing'),
+    path('', landing_page_view.landing_page, name='landing'),
     path('top/', top_page_view.top_page, name='top'),
     path('register/', user_create_view.user_create, name='register'),
     path('register/done', user_create_done_view.user_create_done, name='register_done'),
