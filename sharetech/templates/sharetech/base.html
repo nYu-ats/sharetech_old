@@ -69,12 +69,12 @@
       </label>
 
       <div class="user_icon">
-        <img src="{% static 'sharetech/img/default_avater.png' %}" alt="">
+        <img src="{% static login_user_icon %}" alt="">
       </div>
 
       <div class="user_menu hidden">
-        <a href=""><p class="to_my_page">マイページ</p></a>
-        <a href=""><p class="logout">ログアウト</p></a>
+        <a href="{% url 'profile' %}"><p class="to_my_page">マイページ</p></a>
+        <a href="{% url 'logout' %}"><p class="logout">ログアウト</p></a>
       </div>
 
       <h1 class="site_logo">
@@ -104,47 +104,39 @@
 
   <!-- メイン -->
   <main>
-    <div class="split">
-      <div class="split_item split_left">
-        <div class="split_left_inner">
-            {% block sidemenu %}
-            {% endblock %}
-        </div>
-      </div>
-      <div class="split_item split_right">
-          {% block content %}
-          {% endblock %}
-      </div>
-    </div>
-      {% block lodinggif %}
-      {% endblock %}
+    {% block main %}
+    {% endblock %}
+    {% block lodinggif %}
+    {% endblock %}
   </main>
   {% block footer %}
   {% endblock %}
   <button type="button" class="back_to_top">
     <span>↑</span>
   </button>
+  {% if applying_flg != '0' %}
   <div class="overlay">
-      <div class="apply_declear" value_id='25' value_date='2021-10-10'>
-        <p>「これはテストタイトルです。」の<br>
-            相談お申込の状況を入力してください</p>
-        <div class="apply_status">
-            <label for="cancel">
-                <input id="cancel" type="radio" name="apply_check" value="0" checked>
-                キャンセル
-            </label>
-            <label for="applyed">
-                <input id="applyed" type="radio" name="apply_check" value="2">
-                申込済
-            </label>
-            <label for="complete">
-                <input id="complete" type="radio" name="apply_check" value="3">
-                相談済
-            </label>    
-        </div>
-        <div class="apply_status_submit">
-            <button>送信</button>
-        </div>
+    <div class="apply_declear" value_id={{consult_window_id}} value_date='2021-10-10'>
+      <p>「これはテストタイトルです。」の<br>
+          相談お申込の状況を入力してください</p>
+      <div class="apply_status">
+          <label for="cancel">
+              <input id="cancel" type="radio" name="apply_check" value="0" checked>
+              キャンセル
+          </label>
+          <label for="applyed">
+              <input id="applyed" type="radio" name="apply_check" value="2">
+              申込済
+          </label>
+          <label for="complete">
+              <input id="complete" type="radio" name="apply_check" value="3">
+              相談済
+          </label>    
       </div>
+      <div class="apply_status_submit">
+          <button>送信</button>
+      </div>
+    </div>
   </div>
+  {% endif %}
 </body>

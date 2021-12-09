@@ -29,7 +29,8 @@ services:
         - ./mysql_cnf/my.cnf:/etc/my.cnf
         # mysqlサーバー起動時に下記フォルダ内のsqlを自動実行することで、sharetechスキーマを事前に作成する
         - ./initdb.d:/docker-entrypoint-initdb.d
-
+      ports:
+        - 3306:3306
       environment:
             - MYSQL_ROOT_PASSWORD=root123A!
             - MYSQL_USER=django
