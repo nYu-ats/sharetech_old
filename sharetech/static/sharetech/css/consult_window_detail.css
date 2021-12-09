@@ -1,0 +1,174 @@
+.consult_window{
+    width: 100%;
+    margin-bottom: 5em;
+}
+
+.consult_window h2, 
+.consult_window p{
+    color: #666;
+}
+
+.consult_window .content{
+    width: 80%;
+    border-radius: .5em;
+    background-color: white;
+    overflow: hidden;
+}
+
+.consult_window .consult_window_info,
+.consult_window .expert_info{
+    width: 90%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 2em;
+}
+
+.consult_window .consult_window_info .created_at,
+.consult_window .consult_window_info .expert,
+.consult_window .consult_window_info .apply_count{
+    text-align: right;
+}
+
+.consult_window .consult_window_info .categories{
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+}
+
+.consult_window .consult_window_info .categories .category{
+    line-height: 1.2em;
+    border-radius: 0.6em;
+    background-color: #1e90ff;
+    color: white;
+    font-weight: bold;
+    padding: 0 .5em;
+    margin-right: .2em;
+    margin-top: .1em;
+}
+
+.consult_window .consult_window_info .overview{
+    font-size: 1.2em;
+}
+
+.consult_window .consult_window_info .overview,
+.consult_window .consult_window_info .categories{
+    margin-top: 1em;
+}
+
+.consult_window .consult_window_info .apply_count{
+    margin-top: 2em;
+    border-radius: .5em;
+}
+
+.consult_window .consult_window_info .apply_count p{
+    font-size: 0.9em;
+    line-height: 1.2em;
+}
+
+.consult_window .consult_window_info .apply_count p span{
+    font-weight: bold;
+    color: rgb(255, 134, 112);
+}
+
+.consult_window .expert_info{
+    background-color: rgb(235, 245, 252);
+    overflow: hidden;
+    margin-bottom: 2em;
+}
+
+.consult_window .expert_info .title{
+    margin-top: 1em;
+    margin-left: 1em;
+}
+
+.consult_window .expert_info .expert_flex{
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+    margin-top: 2em;
+}
+
+.consult_window .expert_info .expert_flex .expert_icon{
+    width: 200px;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+.consult_window .expert_info .expert_flex .expert_detail{
+    width: 50%;
+    min-width: 200px;
+    margin-left: 1em;
+    margin-right: 1em;
+    margin-top: 1em;
+    overflow-y: auto;
+}
+
+.consult_window .expert_info .expert_flex .expert_icon img{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 1px solid #1e90ff;
+}
+
+.consult_window .expert_info .expert_flex .expert_detail .company,
+.consult_window .expert_info .expert_flex .expert_detail .name,
+.consult_window .expert_info .expert_flex .expert_detail .occupation
+{
+    font-weight: bold;
+}
+
+.consult_window .expert_info .expert_flex .expert_detail .introduction,
+.consult_window .expert_info .expert_history p{
+    overflow-wrap: normal;
+    line-height: 1.2em;
+    margin-top: .5em;
+}
+
+.consult_window .expert_info .expert_history{
+    width: 90%;
+    margin: 2em auto;
+}
+
+.consult_window .expert_info .expert_history h3{
+    border-bottom: 1px solid #1e90ff;
+    margin-left: 0;
+}
+
+.consult_window .content .apply_btn{
+    margin: 2em auto;
+    width: 33%; 
+    min-width: 200px;
+}
+
+.consult_window .content .apply_btn .button{
+    background-color: #2699FB;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    cursor: pointer;
+    height: 40px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.2em;
+    letter-spacing: 0.05em;
+    text-align: center;
+    text-transform: uppercase;
+    transition: .3s;
+    width: 100%;   
+}
+
+.consult_window .content .apply_btn .button:hover{
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.consult_window .content .apply_btn .waiting{
+    cursor:default;
+    background-color: gray;
+}
+
+.consult_window .content .apply_btn .disabled{
+    visibility: hidden;
+}
+
+.consult_window .content .apply_btn .waiting:hover{
+    box-shadow: none;
+}

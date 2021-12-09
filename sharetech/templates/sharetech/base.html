@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ja">
+
+<head>
+    {% block head %}
+    {% endblock %}
+</head>
+
+<body>
+  <!-- レスポンシブ用ナビゲーション -->
+  <nav class="main_nav" role="navigation">
+    <div class="my_account">
+      <a href="#">
+        <img src="{% static 'sharetech/img/ogo_login_page.png' %}" alt="">
+      </a>
+    </div>
+
+    <form action="#" class="keyword_search">
+      <input id="search_keyword" class="search_keyword" placeholder="キーワード検索" type="text" name="search_key" required>
+      <input id="search_button" class="search_button" value="検索" type="submit" method="get">
+    </form>
+    <div class="tag_search">
+      <h2>タグ検索</h2>
+      <ul class="category_contena">
+        {% for big_cat, small_cat_list in category_dict.items %}
+        <li class="big_category">
+          <input type="button" class="category_network" value={{big_cat}}>
+          <div class="small_category">
+            <ul>
+            {% for small_cat in small_cat_list %}
+              <li><a href={{small_cat.0}}>{{small_cat.1}}</a></li>
+            {% endfor %}
+            </ul>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <h2>{{ user.username }}</h2>
+    <a href="{% url 'logout' %}">ログアウト</a>
+
+    <div class="about_us">
+      <ul>
+        <li class="about">
+          <img src="image/default_icon.png" alt="">
+          <a href="#"><p>About</p></a>
+        </li>
+        <li class="twitter">
+          <img src="image/Twitter social icons - circle - blue.png" alt="">
+          <a href="#"><p>Twitter</p></a>
+        </li>  
+        <li class="facebook">
+          <img src="image/f_logo_RGB-Blue_1024.png" alt="">
+          <a href="#"><p>Facebook</p></a>
+        </li>      
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ヘッダ -->
+  <header class="page_header" role="banner">
+    <div class="inner">
+      <label class="menu_btn">
+        <span class="top"></span>
+        <span class="middle"></span>
+        <span class="bottom"></span>
+      </label>
+
+      <div class="user_icon">
+        <img src="{% static login_user_icon %}" alt="">
+      </div>
+
+      <div class="user_menu hidden">
+        <a href="{% url 'profile' %}"><p class="to_my_page">マイページ</p></a>
+        <a href="{% url 'logout' %}"><p class="logout">ログアウト</p></a>
+      </div>
+
+      <h1 class="site_logo">
+        <a href="{% url 'top' %}">
+          <img src="{% static 'sharetech/img/logo_header.png' %}">
+        </a>
+      </h1>
+    </div>
+
+    <div class="global_nav">
+      <div class="link_other_menu">
+        <a class="link_consult_window selected" href="">
+          <p>専門家に相談する</p>
+        </a>
+        <a class="link_article" href="">
+          <p>テクノロジーを発見する</p>
+        </a>  
+      </div>
+      <div class="search_menu_area">
+        <form action="{% url 'keyword_search' %}" class="keyword_search">
+          <input id="search_keyword" class="search_keyword" placeholder="キーワード検索" type="text" name="search_key" required>
+          <input id="search_button" class="search_button" value="検索" type="submit" method="get">
+        </form>
+      </div>
+    </div>
+  </header>
+
+  <!-- メイン -->
+  <main>
+    {% block main %}
+    {% endblock %}
+    {% block lodinggif %}
+    {% endblock %}
+  </main>
+  {% block footer %}
+  {% endblock %}
+  <button type="button" class="back_to_top">
+    <span>↑</span>
+  </button>
+  {% if applying_flg != '0' %}
+  <div class="overlay">
+    <div class="apply_declear" value_id={{consult_window_id}} value_date='2021-10-10'>
+      <p>「これはテストタイトルです。」の<br>
+          相談お申込の状況を入力してください</p>
+      <div class="apply_status">
+          <label for="cancel">
+              <input id="cancel" type="radio" name="apply_check" value="0" checked>
+              キャンセル
+          </label>
+          <label for="applyed">
+              <input id="applyed" type="radio" name="apply_check" value="2">
+              申込済
+          </label>
+          <label for="complete">
+              <input id="complete" type="radio" name="apply_check" value="3">
+              相談済
+          </label>    
+      </div>
+      <div class="apply_status_submit">
+          <button>送信</button>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+</body>

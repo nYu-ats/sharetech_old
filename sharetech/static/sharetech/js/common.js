@@ -15,6 +15,21 @@ $(function(){
     });
 });
 
+// ユーザーメニュー開閉
+$(function(){
+    const $user_icon_btn = $('.page_header .user_icon');
+    const $user_menu = $('.page_header .user_menu'); 
+
+    // ユーザーメニュー展開中で、領域外がクリックされた時
+    $(document).on('click', function(e){
+        if(!$user_menu.hasClass('hidden') && !$(e.target).closest($user_menu).length && !$(e.target).closest($user_icon_btn).length){
+            $user_menu.toggleClass('hidden');
+        }else if($(e.target).closest($user_icon_btn).length){
+            $user_menu.toggleClass('hidden');
+        }
+    });
+});
+
 //サイドメニュー
 $(function(){
     var duaration = 300;
@@ -121,6 +136,9 @@ $(function(){
     var loadingIndex = 1;
     var isLoading = false;
     var baseURL = location.href + 'asyncLoad?page=' + document.title + '&index=';
+    // URLに#(自ページへのリンク)が含まれる可能性があるためトリミング
+    var baseURL = baseURL.replace('#', '');
+
     var $asyncLoadArticleArea = $('.async_load_article_area');
     var $window = $(window);
     var $loadingGif = $('.loading_gif');
@@ -138,6 +156,7 @@ $(function(){
             if(($window.height() + $window.scrollTop() === $(document).height()) && !isLoading){
                 isLoading = true;
                 $loadingGif.addClass('loading_gif is_loading');
+                console.log(baseURL);
                 // データ取得処理
                 $.ajax({
                     url: baseURL + loadingIndex,
@@ -158,3 +177,70 @@ $(function(){
     });
     }
 });
+
+// 申込状況確認フォーム
+$(function(){
+    let requestURL = 'http://' + location.host + '/applyStatus/';
+    let $applyStatus = $('.overlay .apply_declear');
+    let windowId = $applyStatus.attr('value_id');
+    let date = $applyStatus.attr('value_date');
+    let $overlay = $('.overlay');
+
+    let $submitBtn = $applyStatus.find('.apply_status_submit button');
+
+    // 送信ボタン
+    $submitBtn.on('click', function(){
+        let csrf_token = getCookie('csrftoken');
+        let status = $applyStatus.find('input[name="apply_check"]:checked').val();
+
+        $.ajax({
+            url: requestURL,
+            type: 'POST',
+            contentType: 'application/json',
+            dataType: 'json',
+            data: JSON.stringify(
+                {'windowId': windowId,
+                'applyStatus': status,
+                'applyDate': date,
+            }),
+            timeout: 5000,
+            beforeSend: function(xhr, settings){
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrf_token);
+                }
+            }
+        }).done(function(data){
+            if(data['result'] == 'success'){
+                // 成功時の処理
+                $applyStatus.empty();
+                $applyStatus.append('<h3>ご協力ありがとうございます</h3>');
+                setTimeout(function(){
+                    $overlay.remove();
+                }, 1500);
+            }
+        });
+
+    });
+});
+
+// ajaxでPOST投げるのにcsrfトークンが必要なので、その取得関数
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+// csrfトークンがのチェック
+function csrfSafeMethod(method) {
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}

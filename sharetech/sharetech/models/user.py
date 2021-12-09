@@ -145,6 +145,13 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         unique = True,
     )
 
+    # メールアドレス変更用一時格納場所
+    tmp_email = models.EmailField(
+        verbose_name = 'Tmp Email',
+        max_length = 256,
+        null = True,
+    )
+
     # 業種ID
     industry_id = models.ForeignKey(
         'IndustryMst',
@@ -196,7 +203,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     )
 
     # 論理削除フラグ
-    id_deleted = models.BooleanField(
+    is_deleted = models.BooleanField(
         verbose_name = 'Is Deleted',
         default = False,
     )

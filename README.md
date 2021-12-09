@@ -5,6 +5,7 @@
 - OS : macOS Big Sur 11.6
 - docker : 20.10.8
 - docker-compose : 1.29.2
+- python : 3.8.2
 - Visual Studio Code : 1.6.12(Universal)
 
 ##### 事前準備
@@ -54,7 +55,7 @@ services:
     init: true
 
     volumes:
-      - .:/usr/src/sharetech:cached
+      - .:/workspace:cached
       - /var/run/docker.sock:/var/run/docker.sock
 
     command: /bin/sh -c "while sleep 1000; do :; done"
@@ -66,6 +67,7 @@ services:
 1. Visual Studio Codeでターミナルを開き、下記コマンド実行
 ```
 $ pipenv shell
+$ python3 manage.py migrate
 $ python3 manage.py runserver 0.0.0.0:8000
 ```
 2. ブラウザで http://127.0.0.1:8000 にアクセス

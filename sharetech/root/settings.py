@@ -14,8 +14,11 @@ PROJECT_NAME = os.path.basename(BASE_DIR)
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# Elastic Beanstalk 環境で Debug モードを有効/無効にする環境変数(django.config 内で設定)
+if os.getenv('EB_ENV_DEBUG', None) == 'True' or os.getenv('EB_ENV_DEBUG', None) is None:
+    DEBUG = True
+else:
+    DEBUG = False
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
@@ -139,7 +142,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join('static'), Constants.IMG_ACCESS_URL]
+STATICFILES_DIRS = [os.path.join('static'), Constants.get_static_file_path()]
 STATIC_ROOT = ''
 
 # Default primary key field type

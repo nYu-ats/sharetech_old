@@ -11,6 +11,8 @@ class IndustryMst(models.Model):
     
     '''
     カラム定義
+
+    default値
     null -> false
     blank -> false
     '''

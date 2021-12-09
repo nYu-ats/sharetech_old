@@ -29,34 +29,64 @@
                 {% endfor %}
                 <div class="item_container">
                     <div class="user_info_wrapper">
+                        <h2>▼必須入力項目</h2>
                         <!-- 必須入力の項目についてはこっちの要素div内に入れる -->
                         <div class="form_item user_name_input">
-                            <label for="name">{{form.username.label}}※</label>
-                            {{form.username}}
+                            <div class="username">
+                                <label for="name">{{form.family_name_jp.label}}</label>
+                                {{form.family_name_jp}}    
+                            </div>
+                            <div class="username">
+                                <label for="name">{{form.first_name_jp.label}}</label>
+                                {{form.first_name_jp}}    
+                            </div>
+                        </div>
+                        <div class="form_item user_name_input">
+                            <div class="username">
+                                <label for="name">{{form.family_name_en.label}}</label>
+                                {{form.family_name_en}}    
+                            </div>
+                            <div class="username">
+                                <label for="name">{{form.first_name_en.label}}</label>
+                                {{form.first_name_en}}    
+                            </div>
                         </div>
                         <div class="form_item role_input">
-                            <label for="role">{{form.role_code.label}}※</label>
+                            <label for="role">{{form.role_code.label}}</label>
                             {{form.role_code}}
                         </div>
                         <div class="form_item">
-                            <label for="email">{{form.email.label}}※</label>
+                            <label for="email">{{form.email.label}}</label>
                             {{form.email}}
                         </div>
                         <div class="form_item">
-                            <label for="password">{{form.password1.label}}※</label>
-                            {{form.password1}}
+                            <label for="password">{{form.password.label}}</label>
+                            {{form.password}}
                         </div>
                         <div class="form_item">
-                            <label for="password">{{form.password1.label}} confirm※</label>
-                            {{form.password1}}
+                            <label for="password_confirm">{{form.password_confirm.label}}</label>
+                            {{form.password_confirm}}
+                        </div>
+                        <div class="form_item">
+                            <label for="name">{{form.company.label}}</label>
+                            {{form.company}}                
                         </div>
                     </div>
 
                     <div class="user_info_wrapper">
+                        <h2>▼オプション入力項目</h2>
                         <!-- オプション入力の項目についてはこっちの要素div内に入れる -->
-                        <div class="form_item company_input">
-                            <label for="name">{{form.company.label}}</label>
-                            {{form.company}}                
+                        <div class="form_item">
+                            <label for="name">{{form.industry_id.label}}</label>
+                            {{form.industry_id}}                
+                        </div>
+                        <div class="form_item">
+                            <label for="name">{{form.occupation_id.label}}</label>
+                            {{form.occupation_id}}                
+                        </div>
+                        <div class="form_item">
+                            <label for="name">{{form.position_id.label}}</label>
+                            {{form.position_id}}                
                         </div>
                     </div>    
                 </div>
