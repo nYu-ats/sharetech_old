@@ -8,6 +8,8 @@ class EmailChangeDoneView(generic.TemplateView):
         context = super().get_context_data()
         # TODO メッセージは1ファイルで管理するようにする
         context['message'] = '新しいメールアドレスに認証URLを送信しました。<br>ご確認の上、添付のURLにアクセスしてください。'
+        # ログアウト状態を示すフラグ
+        context['logout'] = True
         return context
 
 email_change_done = EmailChangeDoneView.as_view()

@@ -46,6 +46,10 @@ class ProfileEditForm(ModelForm):
     def __init__(self, *args, **kwargs):
         kwargs.setdefault('label_suffix', '')
         super().__init__(*args, **kwargs)
+        # 以下必須でない入力項目
+        self.fields['industry_name'].required = False
+        self.fields['occupation_name'].required = False
+        self.fields['position_name'].required = False
 
     def clean(self):
         super().clean() 

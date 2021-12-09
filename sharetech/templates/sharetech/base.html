@@ -68,9 +68,11 @@
         <span class="bottom"></span>
       </label>
 
+      {% if not logout %}
       <div class="user_icon">
         <img src="{% static login_user_icon %}" alt="">
       </div>
+      {% endif %}
 
       <div class="user_menu hidden">
         <a href="{% url 'profile' %}"><p class="to_my_page">マイページ</p></a>
@@ -114,7 +116,7 @@
   <button type="button" class="back_to_top">
     <span>↑</span>
   </button>
-  {% if applying_flg != '0' %}
+  {% if applying_flg == '1' %}
   <div class="overlay">
     <div class="apply_declear" value_id={{consult_window_id}} value_date='2021-10-10'>
       <p>「これはテストタイトルです。」の<br>
