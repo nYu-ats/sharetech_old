@@ -3,6 +3,7 @@ $(function(){
     let baseURL = location.href.replace('#', '');
     let requestURL = baseURL + '/applyCheck/';
     let $applyBtn = $('.apply_btn .button');
+
     const redirectURL = 'https://www.wrike.com/form/eyJhY2NvdW50SWQiOjQzMzUzNjEsInRhc2tGb3JtSWQiOjU5OTYyNn0JNDc5MTY3NzYzNjk4Ngk3NjAxZDQyZTNlMDUwNmJmNTgwMzFlMWM5ZDVhODkyNThhNmEzYjlhMWM5MjlmMGNkN2E1YWVhNWE2MWYxNDgy';
 
     $applyBtn.on('click', function(){

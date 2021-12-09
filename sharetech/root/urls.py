@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import include, path
 from django.contrib.auth.views import LogoutView
 from sharetech.views import (
-    login_view, top_page_view, user_create_view, user_create_done_view,
+    login_view, top_page_view, landing_page_view, user_create_view, user_create_done_view,
     user_create_complete_view, async_consult_window_view, keyword_search_view,
     category_filter_view, consult_window_detail_view, apply_check_view,
     apply_status_view, profile_view, profile_edit_view, profile_edit_complete_view,
@@ -14,6 +14,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', login_view.auth_login, name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
+    path('', landing_page_view.landing_page, name='landing'),
     path('top/', top_page_view.top_page, name='top'),
     path('register/', user_create_view.user_create, name='register'),
     path('register/done', user_create_done_view.user_create_done, name='register_done'),
