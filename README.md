@@ -71,3 +71,73 @@ $ python3 manage.py migrate
 $ python3 manage.py runserver 0.0.0.0:8000
 ```
 2. ブラウザで http://127.0.0.1:8000 にアクセス
+
+### AWS Elastic Beanstalk デプロイ手順
+1. EB CLI インストール  
+新しいターミナルウィンドウで下記を実行
+
+``` sh
+pipenv shell
+mkdir /var/lib/ebcli
+cd /var/lib/ebcli
+
+# Install
+git clone https://github.com/aws/aws-elastic-beanstalk-cli-setup.git
+./aws-elastic-beanstalk-cli-setup/scripts/bundled_installer
+
+# Path
+echo 'export PATH="/root/.ebcli-virtual-env/executables:$PATH"' >> ~/.bash_profile && source ~/.bash_profile
+echo 'export PATH=/root/.pyenv/versions/3.7.2/bin:$PATH' >> /root/.bash_profile && source /root/.bash_profile
+
+# Setup
+cd /usr/src/sharetec
+eb init
+
+# >>
+# Select a default region
+# 1) us-east-1 : US East (N. Virginia)
+# 2) us-west-1 : US West (N. California)
+# 3) us-west-2 : US West (Oregon)
+# 4) eu-west-1 : EU (Ireland)
+# 5) eu-central-1 : EU (Frankfurt)
+# 6) ap-south-1 : Asia Pacific (Mumbai)
+# 7) ap-southeast-1 : Asia Pacific (Singapore)
+# 8) ap-southeast-2 : Asia Pacific (Sydney)
+# 9) ap-northeast-1 : Asia Pacific (Tokyo)
+# 10) ap-northeast-2 : Asia Pacific (Seoul)
+# 11) sa-east-1 : South America (Sao Paulo)
+# 12) cn-north-1 : China (Beijing)
+# 13) cn-northwest-1 : China (Ningxia)
+# 14) us-east-2 : US East (Ohio)
+# 15) ca-central-1 : Canada (Central)
+# 16) eu-west-2 : EU (London)
+# 17) eu-west-3 : EU (Paris)
+# 18) eu-north-1 : EU (Stockholm)
+# 19) eu-south-1 : EU (Milano)
+# 20) ap-east-1 : Asia Pacific (Hong Kong)
+# 21) me-south-1 : Middle East (Bahrain)
+# 22) af-south-1 : Africa (Cape Town)
+(default is 3): 9
+
+# You have not yet set up your credentials or your credentials are incorrect 
+# You must provide your credentials.
+(aws-access-id): {your access-key}
+(aws-secret-key): {your secret-key}
+
+# Select an application to use
+# 1) sharetec
+# 2) [ Create new Application ]
+(default is 2): 1
+
+```
+
+2. デプロイ
+
+``` sh
+pwd
+# >>
+# /usr/src/sharetech
+
+eb deploy
+```
+
