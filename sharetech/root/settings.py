@@ -14,7 +14,6 @@ PROJECT_NAME = os.path.basename(BASE_DIR)
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
-# SECURITY WARNING: don't run with debug turned on in production!
 # Elastic Beanstalk 環境で Debug モードを有効/無効にする環境変数(django.config 内で設定)
 if os.getenv('EB_ENV_DEBUG', None) == 'True' or os.getenv('EB_ENV_DEBUG', None) is None:
     DEBUG = True
