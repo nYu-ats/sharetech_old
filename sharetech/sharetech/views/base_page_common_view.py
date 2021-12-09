@@ -4,8 +4,8 @@ from django.views import View
 from sharetech.constants import Constants
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
-from sharetech.utils.model_template_adapter import CategoryAdapter
 from sharetech.models.category_mst import CategoryMst
+from sharetech.models.consult_apply import ConsultApply
 from enum import IntEnum
 
 User = get_user_model()
@@ -26,10 +26,34 @@ class BasePageCommonView(LoginRequiredMixin, View):
     # templateへ渡す相談窓口dict
     _selected_article_dict = {}
 
+    # ログイン状態の場合の共通表示制御
+    def dispatch(self, request, *args, **kwargs):
+        login_user = self.request.user
+        login_user_id = User.objects.get(email = login_user)
+        # 申込中の相談があるか否か判定
+        # TODO 申込ステータスEnum定義
+        # TODO 複数申込中があった場合の対応(templateと合わせて対応の必要あり)
+        applying = list(ConsultApply.objects.filter(user_id = login_user_id, apply_status = 1))
+        if not applying:
+            applying_flg = str(0)
+            consult_window_id = ''
+        else:
+            applying_flg = str(1)
+            consult_window_id = applying[0].consult_window_id.id
+
+        self._selected_article_dict = {
+            'applying_flg': applying_flg,
+            'consult_window_id': consult_window_id,
+        }
+
+        return super(BasePageCommonView, self).dispatch(request, *args, **kwargs)
+
     # templateへ渡すパラメータにカテゴリデータをセット
     def set_category_dict(self):
-        # dict初期化
-        self._selected_article_dict.clear()
+        # すでにカテゴリ取得済みの場合は処理をスキップ
+        if 'category_dict' in self._selected_article_dict:
+            return self._selected_article_dict
+
         category_dict = {}
         
         category_list = list(CategoryMst.objects.filter(category_hierarchy=2).order_by('category_hierarchy'))
