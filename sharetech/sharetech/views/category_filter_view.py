@@ -25,14 +25,14 @@ class CategoryFilterView(BasePageCommonView):
                 pk__in = CategoryConsultWindowMapping.objects.filter(category_id = select_category_id)
                 ).order_by('created_at')[:self.DisplayNum.SMALL]
             )
-
-        self.set_category_dict().update(
+        
+        self.prepare().set_category_dict().update(
             {
             'category_name' : category_name,
             'category_filterd' : ConsultWindodwAdapter.convert_to_template_context(consult_window_list)
             }
         )
 
-        return render(request, self._template, self._selected_article_dict)
+        return render(request, self._template, self._base_context_dict)
 
 category_filter = CategoryFilterView.as_view()

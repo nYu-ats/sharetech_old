@@ -3,12 +3,32 @@ from django.core.exceptions import ValidationError
 from ..models.user import CustomUser
 from django.forms import ModelForm
 from django import forms
-from django.contrib.auth.hashers import make_password
+from sharetech.utils import ConvertChoiceFieldDisplay
+from sharetech.models.user import (
+    CustomUser,
+    IndustryMst,
+    OccupationMst,
+    PositionMst,
+)
 
 class ProfileEditForm(ModelForm):
     '''
     プロフィール編集フォーム
     '''
+
+    # ドロップダウンリストに書くモデル名称が表示されるよう変換
+    industry_name = ConvertChoiceFieldDisplay(
+        queryset = IndustryMst.objects.all(),
+        empty_label='業種を選択してください'
+        )
+    occupation_name = ConvertChoiceFieldDisplay(
+        queryset = OccupationMst.objects.all(),
+        empty_label='職種を選択してください'
+        )
+    position_name = ConvertChoiceFieldDisplay(
+        queryset = PositionMst.objects.all(),
+        empty_label='役職を選択してください'
+        )
 
     class Meta:
         model = CustomUser
@@ -18,9 +38,9 @@ class ProfileEditForm(ModelForm):
             'family_name_jp', 
             'first_name_en', 
             'family_name_en', 
-            'industry_id', 
-            'occupation_id', 
-            'position_id',
+            'industry_name', 
+            'occupation_name', 
+            'position_name',
         }
 
     def __init__(self, *args, **kwargs):

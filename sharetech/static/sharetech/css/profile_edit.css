@@ -55,10 +55,6 @@
     padding: .5em;
 }
 
-.profile_edit .form_container .form_item select{
-  color: #2699FB;
-}
-
 .profile_edit .form_container .form_item input:focus,
 .profile_edit .form_container .form_item select:focus{
     border: 4px solid #2699FB;

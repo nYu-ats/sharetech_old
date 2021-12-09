@@ -26,7 +26,7 @@ class ProfileView(BasePageCommonView):
         )
         create_consult_window = list(ConsultWindow.objects.filter(expert_user_id = user_info.id))
 
-        self.set_category_dict().update(
+        self.prepare().set_category_dict().update(
             {
                 'user_info': user_info,
                 'applyed_consult_window': self.create_consult_window_list(applyed_consult_window),
@@ -34,6 +34,6 @@ class ProfileView(BasePageCommonView):
             }
         )
 
-        return render(request, self._template, self._selected_article_dict)
+        return render(request, self._template, self._base_context_dict)
 
 profile = ProfileView.as_view()

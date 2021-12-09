@@ -24,13 +24,13 @@ class KeyWordSearchView(BasePageCommonView):
             Q(archivement__icontains = keyword)
         ).order_by('created_at')[:self.DisplayNum.SMALL])
 
-        self.set_category_dict().update(
+        self.prepare().set_category_dict().update(
             {
             'keyword' : keyword,
             'keyword_filterd' : ConsultWindodwAdapter.convert_to_template_context(article_window_list),
             }
         )
 
-        return render(request, self._template, self._selected_article_dict)
+        return render(request, self._template, self._base_context_dict)
 
 keyword_search = KeyWordSearchView.as_view()

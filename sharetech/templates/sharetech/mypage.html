@@ -30,9 +30,9 @@
             <p class="name">{{user_info.username_kana}}</p>
             <p class="user_id">User ID : {{user_info.id}}</p>
             <p class="company">{{user_info.company}}</p>
-            <p class="industory">{{user_info.industry_id.industry_name}}</p>
-            <p class="occupation">{{user_info.occupation_id.occupation_name}}</p>
-            <p class="position">{{user_info.position_id.position_name}}</p>
+            <p class="industory">{{user_info.industry_id.name}}</p>
+            <p class="occupation">{{user_info.occupation_id.name}}</p>
+            <p class="position">{{user_info.position_id.name}}</p>
         </div>
         <div class="edit_profile">
             <a href="{% url 'profile_edit' user_info.id%}">プロフィール編集</a>

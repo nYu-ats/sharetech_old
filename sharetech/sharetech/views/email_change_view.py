@@ -10,13 +10,13 @@ from django.template.loader import render_to_string
 from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
 from django.contrib.auth.hashers import make_password
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import logout
 from sharetech.forms.email_change_form import EmailChangeForm
+from .base_page_common_view import BasePageCommonView
 
 User = get_user_model()
 
-class EmailChangeView(LoginRequiredMixin, generic.UpdateView):
+class EmailChangeView(BasePageCommonView, generic.UpdateView):
     '''
     メールアドレス変更
     '''
@@ -32,6 +32,8 @@ class EmailChangeView(LoginRequiredMixin, generic.UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
         context['current_email'] = User.objects.get(email = self.request.user).email
+        # ユーザーアイコン及び申込状況の設定
+        context.update(self.prepare()._base_context_dict)
         return context
 
     def form_valid(self, form):
