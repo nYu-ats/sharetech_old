@@ -21,50 +21,25 @@
     <h2>プロフィール編集</h2>
 
     <div class="form_container">
-        <div class="chane_email_link">
-            <a  href="{% url 'email_change' user_id %}">メールアドレス変更　>></a>
-        </div>
         <form method="POST">
             {% csrf_token %}
             {% for field, error in form.errors.items %}
             <h1>{{error|striptags}}</h1>
             <h2>{{field}}</h2>
             {% endfor %}
-            <div class="form_item user_name_input">
-                <div class="username">
-                    <label for="name">{{form.family_name_jp.label}}</label>
-                    {{form.family_name_jp}}
-                </div>
-                <div class="username">
-                    <label for="name">{{form.first_name_jp.label}}</label>
-                    {{form.first_name_jp}}    
-                </div>
+
+            <div class="current_email">
+                <p>現在のメールアドレス</p>
+                <p>{{current_email}}</p>
             </div>
-            <div class="form_item user_name_input">
-                <div class="username">
-                    <label for="name">{{form.family_name_en.label}}</label>
-                    {{form.family_name_en}}
-                </div>
-                <div class="username">
-                    <label for="name">{{form.first_name_en.label}}</label>
-                    {{form.first_name_en}}
-                </div>
+
+            <div class="form_item">
+                <label for="name">{{form.tmp_email.label}}</label>
+                {{form.tmp_email}}
             </div>
             <div class="form_item">
-                <label for="name">{{form.company.label}}</label>
-                {{form.company}}
-            </div>
-            <div class="form_item">
-                <label for="name">{{form.occupation_id.label}}</label>
-                {{form.occupation_id}}
-            </div>
-            <div class="form_item">
-                <label for="name">{{form.industry_id.label}}</label>
-                {{form.industry_id}}
-            </div>
-            <div class="form_item">
-                <label for="name">{{form.position_id.label}}</label>
-                {{form.position_id}}
+                <label for="name">{{form.email_confirm.label}}</label>
+                {{form.email_confirm}}
             </div>
 
             <div class="btn_area">

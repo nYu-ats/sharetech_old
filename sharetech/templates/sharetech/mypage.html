@@ -18,7 +18,7 @@
 
 {% block content %}
 <div class="create_btn">
-    <a href="#">記事作成</a>
+    <a href="#">相談窓口を作る</a>
 </div>
 <div class="mypage">
     <!-- プロフィールブロック -->
@@ -35,8 +35,8 @@
             <p class="position">{{user_info.position_id.position_name}}</p>
         </div>
         <div class="edit_profile">
-            <a href="#">プロフィール編集</a>
-            <a href="#">パスワード変更</a>
+            <a href="{% url 'profile_edit' user_info.id%}">プロフィール編集</a>
+            <a href="{% url 'password_change' user_info.id%}">パスワード変更</a>
         </div>
     </div>
 

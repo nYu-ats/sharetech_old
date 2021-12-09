@@ -10,19 +10,35 @@ from django.template.loader import render_to_string
 from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth import logout
+from sharetech.forms.email_change_form import EmailChangeForm
 
-# ユーザーモデル(カスタム)取得
 User = get_user_model()
 
-class UserCreateView(generic.CreateView):
-    form_class = UserCreateForm
-    template_name = 'sharetech/register.html'
+class EmailChangeView(LoginRequiredMixin, generic.UpdateView):
+    '''
+    メールアドレス変更
+    '''
+    model = User
+    form_class = EmailChangeForm
+    template_name = 'sharetech/email_change.html'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(email = self.request.user)
+
+    # エラー時にformを引数で受け取るため、**kwawrgsが必要
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        context['current_email'] = User.objects.get(email = self.request.user).email
+        return context
 
     def form_valid(self, form):
         user = form.save(commit=False)
-        # パスワードハッシュ化
-        user.password = make_password(form.cleaned_data.get('password'))
-        user.email_verified_at = None
+        # 新規メールアドレスに認証メール送信のため
+        new_email = form.cleaned_data.get('tmp_email')
+        user.tmp_email = new_email
         user.save()
 
         # TODO メール送信util化
@@ -37,12 +53,15 @@ class UserCreateView(generic.CreateView):
         }
 
         subject = render_to_string('sharetech/mail_template/create/subject_register_done.txt', context)
-        message = render_to_string('sharetech/mail_template/create/register_done.txt', context)
+        message = render_to_string('sharetech/mail_template/mail_change/mail_change_done.txt', context)
         from_email = settings.EMAIL_HOST_USER
-        to = [user.email]
+        to = [new_email]
         # TODO メール送信処理実行(未定義なので、utilあたりにメール送信処理を作る)
         send_mail(subject, message, from_email, to)
 
-        return redirect('register_done')
+        # 新規メールアドレス確認のためログアウトさせる
+        logout(self.request)
 
-user_create = UserCreateView.as_view()
+        return redirect('email_change_done')
+
+email_change = EmailChangeView.as_view()
