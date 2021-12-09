@@ -38,7 +38,7 @@ class ConsultWindowDetailView(BasePageCommonView):
                 CategoryConsultWindowMapping.objects.filter(consult_window_id = consult_window_id)
                 )]
 
-        self.set_category_dict().update(
+        self.prepare().set_category_dict().update(
             {
                 'login_user_flg' : login_user_flg,
                 'title' : consult_window_detail.consult_window_title,
@@ -50,13 +50,13 @@ class ConsultWindowDetailView(BasePageCommonView):
                 'icon_path' : consult_window_detail.expert_user_id.icon_path,
                 'company' : consult_window_detail.expert_user_id.company,
                 'username' : consult_window_detail.expert_user_id.username_kana,
-                'occupation' : consult_window_detail.expert_user_id.occupation_id.occupation_name,
+                'occupation' : consult_window_detail.expert_user_id.occupation_id.name,
                 'introduction' : consult_window_detail.expert_user_id.introduction,
                 'categories' : category_list,
             }
         )
 
         # TODO スーパークラスの作りそどうするか、topとの棲み分けを考える必要あり
-        return render(request, 'sharetech/consult_window_detail.html', self._selected_article_dict)
+        return render(request, 'sharetech/consult_window_detail.html', self._base_context_dict)
 
 consult_window_detail = ConsultWindowDetailView.as_view()

@@ -15,7 +15,7 @@ class PositionMst(models.Model):
     '''
 
     # 役職名
-    position_name = models.CharField(
+    name = models.CharField(
         verbose_name = 'Position Name',
         max_length = 64,
     )

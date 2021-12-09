@@ -8,17 +8,16 @@ from sharetech.models.consult_window import ConsultWindow
 from sharetech.models.category_mst import CategoryMst
 from sharetech.models.user import CustomUser
 from sharetech.models.consult_apply import ConsultApply
-from .base_page_common_view import BasePageCommonView
 from django.views import generic
 from sharetech.forms.profile_edit_form import ProfileEditForm
 from django.urls import reverse
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import get_user_model
 from django.utils import timezone
+from .base_page_common_view import BasePageCommonView
 
 User = get_user_model()
 
-class ProfileEditView(LoginRequiredMixin, generic.UpdateView):
+class ProfileEditView(BasePageCommonView, generic.UpdateView):
     '''
     プロフィール編集画面
     '''
@@ -36,6 +35,8 @@ class ProfileEditView(LoginRequiredMixin, generic.UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
         context['user_id'] = User.objects.get(email=self.request.user).id
+        # ユーザーアイコン及び申込状況の設定
+        context.update(self.prepare()._base_context_dict)
         return context
 
     def form_valid(self, form):

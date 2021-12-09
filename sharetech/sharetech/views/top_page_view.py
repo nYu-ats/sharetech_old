@@ -39,7 +39,7 @@ class TopPageView(BasePageCommonView):
         discover_consult_window_object_list = list(ConsultWindow.objects.exclude(
             pk__in=selected_obj_array).order_by('-viewed_num')[:self.DisplayNum.SMALL])
         
-        self.set_category_dict().update(
+        self.prepare().set_category_dict().update(
             {
             'latest_article' : self.create_consult_window_list(latest_consult_window_object_list),
             'attention_article' : self.create_consult_window_list(attention_consult_window_object_list),
@@ -48,6 +48,6 @@ class TopPageView(BasePageCommonView):
             }
         )
 
-        return render(request, self._template, self._selected_article_dict)
+        return render(request, self._template, self._base_context_dict)
 
 top_page = TopPageView.as_view()

@@ -116,6 +116,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         verbose_name = 'Account Role',
         max_length = 1,
         choices = roleChoices,
+        default = 2,
     )
     
     # アイコン画像

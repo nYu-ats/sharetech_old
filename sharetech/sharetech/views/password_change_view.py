@@ -10,13 +10,13 @@ from django.template.loader import render_to_string
 from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
 from django.contrib.auth.hashers import make_password
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import logout
 from django.contrib.auth.hashers import make_password
+from .base_page_common_view import BasePageCommonView
 
 User = get_user_model()
 
-class PasswordChangeView(LoginRequiredMixin, generic.UpdateView):
+class PasswordChangeView(BasePageCommonView, generic.UpdateView):
     '''
     パスワード変更
     '''
@@ -30,6 +30,8 @@ class PasswordChangeView(LoginRequiredMixin, generic.UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
+        # ユーザーアイコン及び申込状況の設定
+        context.update(self.prepare()._base_context_dict)
         return context
     
     def form_valid(self, form):
