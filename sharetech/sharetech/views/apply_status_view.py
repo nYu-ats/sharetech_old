@@ -15,7 +15,10 @@ class ApplyStatusView(BasePageCommonView):
     def post(self, request, *args, **kwargs):
         apply_data = json.loads(request.body)
         # 申込履歴の存在チェック
-        consult_apply = ConsultApply.objects.get(consult_window_id = int(apply_data.get('windowId')))
+        consult_apply = ConsultApply.objects.get(
+            consult_window_id = int(apply_data.get('windowId')),
+            user_id = CustomUser.objects.get(email = self.request.user).id,
+            )
         # 申込ステータス更新
         consult_apply.apply_status = int(apply_data.get('applyStatus'))
         consult_apply.save()

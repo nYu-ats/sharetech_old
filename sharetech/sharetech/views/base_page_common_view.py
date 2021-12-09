@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from sharetech.models.category_mst import CategoryMst
 from sharetech.models.consult_apply import ConsultApply
 from enum import IntEnum
+from sharetech.constants import ImageConstants
 
 User = get_user_model()
 
@@ -28,24 +29,16 @@ class BasePageCommonView(LoginRequiredMixin, View):
 
     # ログイン状態の場合の共通表示制御
     def dispatch(self, request, *args, **kwargs):
+        # ログインユーザー情報取得
         login_user = self.request.user
         login_user_id = User.objects.get(email = login_user)
+        self._selected_article_dict.update(
+            {
+                'login_user_icon': ImageConstants.get_image_path() + login_user_id.icon_path if login_user_id.icon_path != None else ImageConstants.get_default_icon_path(),
+            }
+        )
         # 申込中の相談があるか否か判定
-        # TODO 申込ステータスEnum定義
-        # TODO 複数申込中があった場合の対応(templateと合わせて対応の必要あり)
-        applying = list(ConsultApply.objects.filter(user_id = login_user_id, apply_status = 1))
-        if not applying:
-            applying_flg = str(0)
-            consult_window_id = ''
-        else:
-            applying_flg = str(1)
-            consult_window_id = applying[0].consult_window_id.id
-
-        self._selected_article_dict = {
-            'applying_flg': applying_flg,
-            'consult_window_id': consult_window_id,
-        }
-
+        self.__set_apply_status(login_user_id)
         return super(BasePageCommonView, self).dispatch(request, *args, **kwargs)
 
     # templateへ渡すパラメータにカテゴリデータをセット
@@ -89,7 +82,21 @@ class BasePageCommonView(LoginRequiredMixin, View):
         
         return consult_window_list
 
+    # 申込中の相談があるか否か判定
+    def __set_apply_status(self, login_user_id):
+        # TODO 申込ステータスEnum定義
+        # TODO 複数申込中があった場合の対応(templateと合わせて対応の必要あり)
+        # TODO 申込済みについても、画面制御が必要
+        applying = list(ConsultApply.objects.filter(user_id = login_user_id, apply_status = 1))
+        if not applying:
+            applying_flg = str(0)
+            consult_window_id = ''
+        else:
+            applying_flg = str(1)
+            consult_window_id = applying[0].consult_window_id.id
 
-    # templateへ渡すパラメータにログインユーザー情報をセット
-    # def set_login_user_info_dict():
+        self._selected_article_dict.update({
+            'applying_flg': applying_flg,
+            'consult_window_id': consult_window_id,
+        })
 
