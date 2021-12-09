@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
+import os
 from sharetech.constants.constants import Constants
-import requests
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -15,22 +15,9 @@ PROJECT_NAME = os.path.basename(BASE_DIR)
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# Elastic Beanstalk 環境で Debug モードを有効/無効にする環境変数(django.config 内で設定)
-if os.getenv('EB_ENV_DEBUG', 'False') == 'True':
-    DEBUG = True
-else:
-    DEBUG = False 
+DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'sharetec-dev-env.ap-northeast-1.elasticbeanstalk.com', 'share-tech.jp']
-try:
-    TOKEN=requests.put('http://169.254.169.254/latest/api/token', headers={'X-aws-ec2-metadata-token-ttl-seconds': '21600'}).text
-    headers = {'X-aws-ec2-metadata-token': TOKEN}
-    EC2_PRIVATE_IP = requests.get('http://169.254.169.254/latest/meta-data/local-ipv4', timeout = 0.01, headers = headers).text
-    ALLOWED_HOSTS.append(EC2_PRIVATE_IP)
-    print(ALLOWED_HOSTS)
-except requests.exceptions.RequestException as e:
-    print("Failed to get Private IP -- When you execute in Local, you can ignore this Error.")
-    print(e)
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
@@ -99,33 +86,20 @@ ACTIVATION_TIMEOUT_SECONDS = 60 * 30
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-if 'RDS_HOSTNAME' in os.environ:
-    # AWS 上 RDS 用パラメータ
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': os.environ['RDS_DB_NAME'],
-            'USER': os.environ['RDS_USERNAME'],
-            'PASSWORD': os.environ['RDS_PASSWORD'],
-            'HOST': os.environ['RDS_HOSTNAME'],
-            'PORT': os.environ['RDS_PORT'],
+
+DATABASES = {
+    'default': {
+        'ENGINE': os.environ.get('DATABASE_ENGINE'),
+        'NAME': os.environ.get('DATABASE_NAME'),
+        'USER' : os.environ.get('DATABASE_USER'),
+        'PASSWORD' : os.environ.get('DATABASE_PASSWORD'),
+        'HOST' : os.environ.get('DATABASE_HOST'),
+        'PORT' : os.environ.get('DATABASE_PORT'),
+        'OPTIONS' : {
+            'charset' : 'utf8mb4',
         }
     }
-else:
-    # Local 実行用 DB パラメータ
-    DATABASES = {
-        'default': {
-            'ENGINE': os.environ.get('DATABASE_ENGINE'),
-            'NAME': os.environ.get('DATABASE_NAME'),
-            'USER' : os.environ.get('DATABASE_USER'),
-            'PASSWORD' : os.environ.get('DATABASE_PASSWORD'),
-            'HOST' : os.environ.get('DATABASE_HOST'),
-            'PORT' : os.environ.get('DATABASE_PORT'),
-            'OPTIONS' : {
-                'charset' : 'utf8mb4',
-            }
-        }
-    }
+}
 
 
 # Password validation
