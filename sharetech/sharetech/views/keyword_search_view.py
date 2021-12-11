@@ -27,7 +27,7 @@ class KeyWordSearchView(BasePageCommonView):
         self.prepare().set_category_dict().update(
             {
             'keyword' : keyword,
-            'keyword_filterd' : ConsultWindodwAdapter.convert_to_template_context(article_window_list),
+            'keyword_filterd' : self.create_consult_window_list(article_window_list),
             }
         )
 

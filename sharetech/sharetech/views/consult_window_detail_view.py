@@ -6,6 +6,7 @@ from sharetech.models.consult_apply import ConsultApply
 from sharetech.models.consult_window import ConsultWindow
 from sharetech.models.category_consult_window_mapping import CategoryConsultWindowMapping
 from enum import IntEnum
+from sharetech.constants import ImageConstants, Constants
 
 class ConsultWindowDetailView(BasePageCommonView):
     '''
@@ -47,7 +48,7 @@ class ConsultWindowDetailView(BasePageCommonView):
                 'created_at' : consult_window_detail.created_at,
                 'archivement' : consult_window_detail.archivement,
                 'expert_user_id' : consult_window_detail.expert_user_id.id,
-                'icon_path' : consult_window_detail.expert_user_id.icon_path,
+                'icon_path' : Constants.get_image_path() + consult_window_detail.expert_user_id.icon_path if consult_window_detail.expert_user_id.icon_path != None else ImageConstants.get_default_icon_path(),
                 'company' : consult_window_detail.expert_user_id.company,
                 'username' : consult_window_detail.expert_user_id.username_kana,
                 'occupation' : consult_window_detail.expert_user_id.occupation_id.name,

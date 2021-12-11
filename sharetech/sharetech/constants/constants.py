@@ -20,7 +20,12 @@ class ImageConstants(Constants):
     '''
 
     DEFAULT_USER_ICON_PATH = 'img/default_avater.png'
+    USER_ICON_ROOT_PATH = '/media/'
 
     @classmethod
     def get_default_icon_path(cls):
         return cls.get_image_path() + cls.DEFAULT_USER_ICON_PATH
+
+    @classmethod
+    def get_user_icon_path(cls):
+        return cls.USER_ICON_ROOT_PATH

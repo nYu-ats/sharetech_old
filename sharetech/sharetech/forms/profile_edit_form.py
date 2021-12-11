@@ -57,8 +57,6 @@ class ProfileEditForm(ModelForm):
         self.fields['icon_path'].widget.attrs['id'] = 'file'
         self.fields['icon_path'].widget.initial_text = ''
         self.fields['icon_path'].widget.input_text = ''
-        print(vars(self.fields['icon_path'].widget))
-
 
     def clean(self):
         super().clean() 
