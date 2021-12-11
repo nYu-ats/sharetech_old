@@ -1,16 +1,39 @@
 //スティッキーヘッダー
 $(function(){
-    $('.page_header').each(function(){
+    const AnimDuaration = 50;
+    const HeaderHeight = 100;
+    let $window = $(window);
+    let $header = $('.page_header.clone');
+    let $originalHeader = $('.page_header');
+
+$window.on('scroll', function(){
+    let $window = $(window);
+    let headerOffsetTop = $originalHeader.offset().top + HeaderHeight;
+
+    if($window.scrollTop() > headerOffsetTop){
+        $header.stop().animate({
+            top: 0
+        }, AnimDuaration, 'linear');
+    }
+    else{
+        $header.stop().animate({
+            top: -100
+        }, AnimDuaration, 'linear');            }
+});
+    $('.page_header.clone').each(function(){
         var $window = $(window),
             $header = $(this),
             headerOffsetTop = $header.offset().top;
         $window.on('scroll', function(){
             if($window.scrollTop() > headerOffsetTop){
-                $header.addClass('sticky');
+                $(this).animate({
+                    top: 0
+                }, AnimDuaration, 'linear');
             }
             else{
-                $header.removeClass('sticky');
-            }
+                $(this).animate({
+                    top: -100
+                }, AnimDuaration, 'linear');            }
         });
     });
 });

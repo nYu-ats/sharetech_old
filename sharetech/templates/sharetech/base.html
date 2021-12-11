@@ -60,49 +60,7 @@
   </nav>
 
   <!-- ヘッダ -->
-  <header class="page_header" role="banner">
-    <div class="inner">
-      <label class="menu_btn">
-        <span class="top"></span>
-        <span class="middle"></span>
-        <span class="bottom"></span>
-      </label>
-
-      {% if not logout %}
-      <div class="user_icon">
-        <img src="{% static login_user_icon %}" alt="">
-      </div>
-      {% endif %}
-
-      <div class="user_menu hidden">
-        <a href="{% url 'profile' %}"><p class="to_my_page">マイページ</p></a>
-        <a href="{% url 'logout' %}"><p class="logout">ログアウト</p></a>
-      </div>
-
-      <h1 class="site_logo">
-        <a href="{% url 'top' %}">
-          <img src="{% static 'sharetech/img/logo_header.png' %}">
-        </a>
-      </h1>
-    </div>
-
-    <div class="global_nav">
-      <div class="link_other_menu">
-        <a class="link_consult_window selected" href="">
-          <p>専門家に相談する</p>
-        </a>
-        <a class="link_article" href="">
-          <p>テクノロジーを発見する</p>
-        </a>  
-      </div>
-      <div class="search_menu_area">
-        <form action="{% url 'keyword_search' %}" class="keyword_search">
-          <input id="search_keyword" class="search_keyword" placeholder="キーワード検索" type="text" name="search_key" required>
-          <input id="search_button" class="search_button" value="検索" type="submit" method="get">
-        </form>
-      </div>
-    </div>
-  </header>
+{% include 'sharetech/_header.html' %}
 
   <!-- メイン -->
   <main>

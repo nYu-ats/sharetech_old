@@ -42,7 +42,6 @@ main .split .split_left .split_left_inner{
   position: -webkit-sticky;
   position: sticky;
   top: 120px;
-  bottom: 60px;
   overflow-y: auto;
   height: 70vh;
   margin-left: 1em;
