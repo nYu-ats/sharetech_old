@@ -14,6 +14,9 @@ class PasswordChangeForm(ModelForm):
         fields = {
             'password',
         }
+        labels = {
+            'password': '現在のパスワード',
+        }
 
     new_password = forms.CharField(
         label = '新しいパスワード',
