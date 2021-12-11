@@ -42,6 +42,9 @@ class ProfileEditView(BasePageCommonView, generic.UpdateView):
     def form_valid(self, form):
         user = form.save(commit=False)
         user.updated_at = timezone.now()
+        if 'icon_path' in self.request.FILES:
+            user.icon_path = self.request.FILES['icon_path']
+
         user.save()
 
         return redirect('profile_edit_complete')

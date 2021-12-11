@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.urls import include, path
 from django.contrib.auth.views import LogoutView
+from django.conf.urls.static import static
+from . import settings
 from sharetech.views import (
     login_view, top_page_view, landing_page_view, user_create_view, user_create_done_view,
     user_create_complete_view, async_consult_window_view, keyword_search_view,
@@ -34,3 +36,6 @@ urlpatterns = [
     path('password-change/<int:pk>/', password_change_view.password_change, name='password_change'),   
     path('password-change/complete/', password_change_complete_view.password_change_complete, name='password_change_complete'),
 ]
+
+# 画像保存先パス
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

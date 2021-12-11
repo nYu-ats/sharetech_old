@@ -9,6 +9,7 @@ from django.db import models
 from .industry_mst import IndustryMst
 from .position_mst import PositionMst
 from .occupation_mst import OccupationMst
+from sharetech.utils.set_image_name import SetImageName
 
 # ユーザーマネージャカスタム
 class CustomUserManager(BaseUserManager):
@@ -120,9 +121,9 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     )
     
     # アイコン画像
-    icon_path = models.CharField(
+    icon_path = models.ImageField(
         verbose_name = 'Icon Image Path',
-        max_length = 512,
+        upload_to = SetImageName.set_icon_name,
         null = True,
     )
 
