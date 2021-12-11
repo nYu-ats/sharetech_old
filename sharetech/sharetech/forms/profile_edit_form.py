@@ -41,6 +41,7 @@ class ProfileEditForm(ModelForm):
             'industry_name', 
             'occupation_name', 
             'position_name',
+            'icon_path',
         }
 
     def __init__(self, *args, **kwargs):
@@ -50,6 +51,14 @@ class ProfileEditForm(ModelForm):
         self.fields['industry_name'].required = False
         self.fields['occupation_name'].required = False
         self.fields['position_name'].required = False
+        self.fields['icon_path'].required = False
+
+        # 画面で画像アップロードのスタイル変更
+        self.fields['icon_path'].widget.attrs['id'] = 'file'
+        self.fields['icon_path'].widget.initial_text = ''
+        self.fields['icon_path'].widget.input_text = ''
+        print(vars(self.fields['icon_path'].widget))
+
 
     def clean(self):
         super().clean() 

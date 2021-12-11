@@ -2,8 +2,8 @@ class Constants:
     # アプリケーション内での固定値を保持する
 
     # ローカル環境での記事画像データ保存先
-    PROJECT_URL = '/sharetech/'
-    IMG_DIR = 'img/'
+    PROJECT_URL = '/sharetech'
+    IMG_DIR = '/'
 
     @classmethod
     def get_static_file_path(cls):
@@ -19,7 +19,7 @@ class ImageConstants(Constants):
     画像関連固定値
     '''
 
-    DEFAULT_USER_ICON_PATH = 'default_avater.png'
+    DEFAULT_USER_ICON_PATH = 'img/default_avater.png'
 
     @classmethod
     def get_default_icon_path(cls):

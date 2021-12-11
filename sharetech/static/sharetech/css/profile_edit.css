@@ -61,6 +61,47 @@
     outline: none;
 }
 
+.profile_edit .form_container .form_item.icon_image input{
+    border: none;
+}
+
+.icon_image .image_container{
+    border-radius: 50%;
+    overflow: hidden;
+    height: 175px;
+    width: 175px;
+    margin:1em auto;
+    position: relative;
+}
+
+.icon_image .image_container canvas{
+    text-align: center;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.icon_image label{
+    display: inline-block;
+    position: relative;
+    background-color: #1877F2;
+    color: #fff;
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: all 0.5s;
+}
+
+.icon_image label:hover{
+    cursor: pointer;
+}
+
+.icon_image input{
+    display: none;
+  }
+
 .btn_area{
     text-align: center;
 }
