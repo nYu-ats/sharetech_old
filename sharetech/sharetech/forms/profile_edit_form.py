@@ -19,15 +19,18 @@ class ProfileEditForm(ModelForm):
     # ドロップダウンリストに書くモデル名称が表示されるよう変換
     industry_name = ConvertChoiceFieldDisplay(
         queryset = IndustryMst.objects.all(),
-        empty_label='業種を選択してください'
+        empty_label='業種を選択してください',
+        label = '業種'
         )
     occupation_name = ConvertChoiceFieldDisplay(
         queryset = OccupationMst.objects.all(),
-        empty_label='職種を選択してください'
+        empty_label='職種を選択してください',
+        label = '職種'
         )
     position_name = ConvertChoiceFieldDisplay(
         queryset = PositionMst.objects.all(),
-        empty_label='役職を選択してください'
+        empty_label='役職を選択してください',
+        label = '役職'
         )
 
     class Meta:
@@ -42,6 +45,14 @@ class ProfileEditForm(ModelForm):
             'occupation_name', 
             'position_name',
             'icon_path',
+        }
+        labels = {
+            'company': '会社名', 
+            'first_name_jp': '名字', 
+            'family_name_jp': '氏名', 
+            'first_name_en': '名字(ローマ字)', 
+            'family_name_en': '氏名(ローマ字)', 
+            'icon_path': 'アイコン画像選択',
         }
 
     def __init__(self, *args, **kwargs):

@@ -11,10 +11,14 @@ class LoginForm(Form):
     ログインフォーム
     '''
     email = EmailField(
-        widget = forms.EmailInput(attrs={'placeholder':'Email', 'autofocus' : True,})
+        widget = forms.EmailInput(
+            attrs={'placeholder':'Email', 'autofocus' : True,}),
+            label = 'メールアドレス',
     )
     password = forms.CharField(
-        widget = forms.PasswordInput(attrs={'placeholder':'Password',})
+        widget = forms.PasswordInput(
+            attrs={'placeholder':'Password',}),
+            label = 'パスワード',
     )
 
     error_messages = {

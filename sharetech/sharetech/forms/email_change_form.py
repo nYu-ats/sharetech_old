@@ -15,6 +15,9 @@ class EmailChangeForm(ModelForm):
         fields = {
             'tmp_email',
         }
+        labels = {
+            'tmp_email': '新しいメールアドレス',
+        }
     
     email_confirm = forms.CharField(
         label = 'メールアドレス再入力',
