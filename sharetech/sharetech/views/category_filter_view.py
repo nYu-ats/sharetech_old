@@ -29,7 +29,7 @@ class CategoryFilterView(BasePageCommonView):
         self.prepare().set_category_dict().update(
             {
             'category_name' : category_name,
-            'category_filterd' : ConsultWindodwAdapter.convert_to_template_context(consult_window_list)
+            'category_filterd' : self.create_consult_window_list(consult_window_list),
             }
         )
 

@@ -34,7 +34,7 @@ class BasePageCommonView(LoginRequiredMixin, View):
         login_user_id = User.objects.get(email = login_user)
         self._base_context_dict.update(
             {
-                'login_user_icon': ImageConstants.get_image_path() + login_user_id.icon_path.name if login_user_id.icon_path != None else ImageConstants.get_default_icon_path(),
+                'login_user_icon': ImageConstants.get_user_icon_path() + login_user_id.icon_path.name if login_user_id.icon_path.name != None else ImageConstants.get_default_icon_path(),
             }
         )
         # 申込中の相談があるか否か判定
@@ -72,7 +72,7 @@ class BasePageCommonView(LoginRequiredMixin, View):
         for _, consult_window_model in enumerate(consult_window_models):
             consult_window_content = {
                 'number' : str(consult_window_model.id),
-                'expert_icon_path' : Constants.get_image_path() + consult_window_model.expert_user_id.icon_path if consult_window_model.expert_user_id.icon_path != None else Constants.get_image_path() + self.DEFAULT_USER_ICON_PATH,
+                'expert_icon_path' : Constants.get_image_path() + consult_window_model.expert_user_id.icon_path if consult_window_model.expert_user_id.icon_path != None else ImageConstants.get_default_icon_path(),
                 'created_at' : consult_window_model.created_at,
                 'title' : consult_window_model.consult_window_title,
                 'applyed_num' : consult_window_model.applyed_num,
