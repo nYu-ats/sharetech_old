@@ -2,9 +2,9 @@ from django.contrib import admin
 from django.urls import include, path
 from django.contrib.auth.views import LogoutView
 from sharetech.views import (
-    login_view, top_page_view, user_create_view, user_create_done_view,
+    consult_window_register_view, login_view, top_page_view, user_create_view, user_create_done_view,
     user_create_complete_view, async_consult_window_view, keyword_search_view,
-    category_filter_view,adviser_register_view,
+    category_filter_view,
     )
 
 urlpatterns = [
@@ -18,5 +18,5 @@ urlpatterns = [
     path('asyncLoad/', async_consult_window_view.async_consult_window_load),
     path('keyword-search/', keyword_search_view.keyword_search, name='keyword_search'),
     path('category-filter/<str:category_id>/', category_filter_view.category_filter, name='category_filter'),
-    path('adviser_register/', adviser_register_view.adiviser_register, name='adiviser_register')
+    path('consult_window_register/', consult_window_register_view.consult_window_register, name='consult_window_register')
 ]

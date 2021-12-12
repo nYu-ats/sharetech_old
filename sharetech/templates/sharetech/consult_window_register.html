@@ -5,9 +5,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="discription" content="相談窓口登録ページ">
-    <title>Adviser_Register</title>
+    <title>Consult_Window_Register</title>
     <link rel="stylesheet" href="{% static 'sharetech/css/common.css' %}">
-    <link rel="stylesheet" href="{% static 'sharetech/css/adviser_register.css' %}">
+    <link rel="stylesheet" href="{% static 'sharetech/css/consult_window_register.css' %}">
 </head>
 
 <body>
@@ -53,16 +53,16 @@
                                 {% for small_cat in small_cat_list %}
                                     {% if big_cat == small_cat.1 %} <!-- 大カテゴリのみ先頭に出力 -->
                                     <div class="big_category">
-                                        <input type="checkbox" name="cat" value={{small_cat.0}}>{{small_cat.1}}</input>
+                                        <label for="checkbox"><input type="checkbox" name="cat" value={{small_cat.0}}>{{small_cat.1}}</input></label>
                                     </div>
+                                    <ul class="small_category_wrap">
                                     {% else %}
                                     <div class="small_category">
-                                    <ul>
-                                    <input type="checkbox" name="cat" value={{small_cat.0}}>{{small_cat.1}}</input>
+                                        <label for={{small_cat.0}}><input type="checkbox" name="cat" id={{small_cat.0}} value={{small_cat.0}}>{{small_cat.1}}</input></label>
+                                    </div>
                                     {% endif %}
                                 {% endfor %}
                                 </ul>
-                                </div>
                             </li>
                             {% endfor %}
                         </ul>
