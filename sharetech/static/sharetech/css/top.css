@@ -36,22 +36,20 @@ main .split .split_item{
 
 main .split .split_left{
   width: 250px;
-  position: sticky;
-  top: 0px;
 }
 
 main .split .split_left .split_left_inner{
+  position: -webkit-sticky;
   position: sticky;
   top: 120px;
   overflow-y: auto;
-  height: 80vh;
+  height: 70vh;
   margin-left: 1em;
 }
 
 main .split .split_right{
   width: auto;
 }
-
 
 /* 記事カード */
 .flex_block{
@@ -61,13 +59,11 @@ main .split .split_right{
   margin: 0px 10px 60px 10px;
 }
 
-.flex_block .discription h3,
-.slide_show_block .discription h3{
+.flex_block .discription h3{
   font-size: 18px;
 }
 
-.flex_block h3, .flex_block p,
-.slide_show_block h3, .slide_show_block p{
+.flex_block h3, .flex_block p{
     color: #666;
 }
 
@@ -96,10 +92,8 @@ main .split .split_right{
 }
 
 .flex_block .article .contain_img{
-    width: 70%;
-    height: 70%;
-    min-width: 150px;
-    min-height: 150px;
+    width: 175px;
+    height: 175px;
     margin-top: 10px;
     margin-bottom: 10px;
     display: block;
@@ -107,26 +101,6 @@ main .split .split_right{
     margin-right: auto;
     border-radius: 50%;
     border: 3px solid #2699FB;
-}
-
-.flex_block .article .tags,
-.slide_show_block .article .tags{
-  line-height: 1em;
-}
-
-.flex_block .article .article_info_flex{
-  display: flex;
-  justify-content: space-between;
-}
-
-.flex_block .article .favorite_count{
-  display: flex;
-}
-
-.flex_block .article .favorite_count .favorite_icon{
-  width: 16px;
-  height: 16px;
-  margin: 0 4px 0 0 ;
 }
 
 .flex_block .article .article_info_flex p,

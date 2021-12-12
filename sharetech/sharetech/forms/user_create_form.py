@@ -1,14 +1,45 @@
 import django
 from django.core.exceptions import ValidationError
-from ..models.user import CustomUser
 from django.forms import ModelForm
 from django import forms
 from django.contrib.auth.hashers import make_password
+from sharetech.utils import ConvertChoiceFieldDisplay
+from sharetech.models.user import (
+    CustomUser,
+    IndustryMst,
+    OccupationMst,
+    PositionMst,
+)
 
 class UserCreateForm(ModelForm):
     '''
     ユーザー新規登録用フォーム
     '''
+    
+    # 確認用パスワードフィールド
+    password_confirm = forms.CharField(
+        label = 'パスワード再入力',
+        required = True,
+        strip = False,
+        widget = forms.PasswordInput(attrs={'type':'password'}),
+    )
+
+    # ドロップダウンリストに書くモデル名称が表示されるよう変換
+    industry_name = ConvertChoiceFieldDisplay(
+        queryset = IndustryMst.objects.all(),
+        empty_label='業種を選択してください',
+        label = '業種'
+        )
+    occupation_name = ConvertChoiceFieldDisplay(
+        queryset = OccupationMst.objects.all(),
+        empty_label='職種を選択してください',
+        label = '職種'
+        )
+    position_name = ConvertChoiceFieldDisplay(
+        queryset = PositionMst.objects.all(),
+        empty_label='役職を選択してください',
+        label = '役職'
+        )
 
     class Meta:
         model = CustomUser
@@ -20,23 +51,30 @@ class UserCreateForm(ModelForm):
             'family_name_en', 
             'email', 
             'role_code', 
-            'industry_id', 
-            'occupation_id', 
-            'position_id',
+            'industry_name', 
+            'occupation_name', 
+            'position_name',
             'password', 
             ]
-
-    password_confirm = forms.CharField(
-        label = '確認用パスワード',
-        required = True,
-        strip = False,
-        widget = forms.PasswordInput(attrs={'type':'password'}),
-    )
+        labels = {
+            'company': '会社名', 
+            'first_name_jp': '名字', 
+            'family_name_jp': '氏名', 
+            'first_name_en': '名字(ローマ字)', 
+            'family_name_en': '氏名(ローマ字)', 
+            'email': 'メールアドレス', 
+            'role_code': 'ロール選択', 
+            'password': 'パスワード', 
+        }
 
     def __init__(self, *args, **kwargs):
         kwargs.setdefault('label_suffix', '')
         super().__init__(*args, **kwargs)
         self.fields['password'].widget = forms.PasswordInput(attrs={'type':'password'})
+        # 以下必須でない入力項目
+        self.fields['industry_name'].required = False
+        self.fields['occupation_name'].required = False
+        self.fields['position_name'].required = False
 
     def clean(self):
         super().clean()

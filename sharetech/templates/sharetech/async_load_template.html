@@ -2,7 +2,7 @@
 
 {% for article in discover_article %}
 <div class="article">
-  <a href="{% url 'login' %}{{article.number}}">
+  <a href="{% url 'consult_window_detail' article.number %}">
     <img src='{% static article.expert_icon_path %}' class="contain_img"/>
     <div class="discription">
       <h3>{{ article.title }}</h3>

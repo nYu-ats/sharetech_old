@@ -39,6 +39,7 @@ class CategoryConsultWindowMapping(models.Model):
         verbose_name = '相談窓口ID',
         on_delete = models.CASCADE,
     )
+    
     # 論理削除フラグ
     id_deleted = models.BooleanField(
         verbose_name = 'Is Deleted',

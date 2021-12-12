@@ -1,4 +1,3 @@
-
 from sharetech.forms.user_create_form import UserCreateForm
 from root import settings
 from django.views.generic.edit import FormView
@@ -21,11 +20,12 @@ class UserCreateView(generic.CreateView):
 
     def form_valid(self, form):
         user = form.save(commit=False)
-        # パスワードハッシュか
+        # パスワードハッシュ化
         user.password = make_password(form.cleaned_data.get('password'))
         user.email_verified_at = None
         user.save()
 
+        # TODO メール送信util化
         # アクティベーションurl送付
         current_site = get_current_site(self.request)
         domain = current_site.domain
