@@ -14,8 +14,11 @@ PROJECT_NAME = os.path.basename(BASE_DIR)
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# Elastic Beanstalk 環境で Debug モードを有効/無効にする環境変数(django.config 内で設定)
+if os.getenv('EB_ENV_DEBUG', None) == 'True' or os.getenv('EB_ENV_DEBUG', None) is None:
+    DEBUG = True
+else:
+    DEBUG = False
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
@@ -74,12 +77,12 @@ TEMPLATES = [
 WSGI_APPLICATION = 'root.wsgi.application'
 
 # Mail
-# 仮でコンソール出力しているので、アプリケーション送信のため修正が必要
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# TODO メール認証情報は環境変数うに埋め込む必要あり
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'nyu7931555@gmail.com'
-EMAIL_HOST_PASSWORD = 'mdcmg777'
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_APP_PASS')
 EMAIL_USE_TLS = True
 # メールアクティベーショントークン有効期限 : 30分
 ACTIVATION_TIMEOUT_SECONDS = 60 * 30
@@ -141,6 +144,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join('static'), Constants.get_static_file_path()]
 STATIC_ROOT = ''
+MEDIA_ROOT = os.path.join(STATIC_URL, 'media')
+MEDIA_URL = '/img/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

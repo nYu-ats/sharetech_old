@@ -39,15 +39,15 @@ class TopPageView(BasePageCommonView):
         discover_consult_window_object_list = list(ConsultWindow.objects.exclude(
             pk__in=selected_obj_array).order_by('-viewed_num')[:self.DisplayNum.SMALL])
         
-        self.set_category_dict().update(
+        self.prepare().set_category_dict().update(
             {
-            'latest_article' : ConsultWindodwAdapter.convert_to_template_context(latest_consult_window_object_list),
-            'attention_article' : ConsultWindodwAdapter.convert_to_template_context(attention_consult_window_object_list),
-            'discover_article' : ConsultWindodwAdapter.convert_to_template_context(discover_consult_window_object_list),
-            'reccomend_article' : ConsultWindodwAdapter.convert_to_template_context(reccomend_consult_window_object_list),
+            'latest_article' : self.create_consult_window_list(latest_consult_window_object_list),
+            'attention_article' : self.create_consult_window_list(attention_consult_window_object_list),
+            'discover_article' : self.create_consult_window_list(discover_consult_window_object_list),
+            'reccomend_article' : self.create_consult_window_list(reccomend_consult_window_object_list),
             }
         )
 
-        return render(request, self._template, self._selected_article_dict)
+        return render(request, self._template, self._base_context_dict)
 
 top_page = TopPageView.as_view()
