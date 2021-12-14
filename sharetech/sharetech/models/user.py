@@ -47,7 +47,6 @@ class CustomUserManager(BaseUserManager):
         extra_fields.setdefault('role_id', **extra_fields.get('role_id'))
         return self._create_user(username, email, password, **extra_fields)
 
-
 # ユーザーモデルカスタマイズ
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     """
@@ -239,6 +238,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     # ユーザーを一意に特定する値
     USERNAME_FIELD = 'email'
 
-    def clean(self):
-        super().clean()
-        self.email = self.__class__.objects.normalize_email(self.email)
+    # def clean(self):
+    #     super().clean()
+    #     self.email = self.__class__.objects.normalize_email(self.email)
