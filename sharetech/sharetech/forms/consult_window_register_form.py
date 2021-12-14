@@ -16,7 +16,9 @@ class ConsultWindowRegisterForm(ModelForm):
             'archivement',
             ]
         widgets = {
-            'consult_window_overview': forms.Textarea(),
+            'consult_window_overview': forms.Textarea(), # 相談窓口概要
+            'consult_price': forms.TextInput(attrs={'readonly':'readonly'}), # アルファ版のみ相談料金をreadonly
+            'archivement': forms.Textarea(), # 実績
         }
 
     def __init__(self, *args, **kwargs):

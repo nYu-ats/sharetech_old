@@ -76,24 +76,6 @@ width: 100%;
 padding: .5em;
 }
 
-.big_category label {
-  font-size: 2em;
-  color: #2699FB;
-  font-weight: bold;
-}
-
-/* .small_category label {
-  font-size: 1.2em;
-  color: #2699FB;
-  font-weight: bold;
-} */
-
-.small_category_wrap{
-  display: flex;
-  justify-content: start;
-  flex-wrap: wrap;
-}
-
 .form_wrapper .form_item input:-webkit-autofill,
 .form_wrapper .form_item textarea:-webkit-autofill{
   box-shadow: 0 0 0 1000px white inset;
@@ -103,52 +85,33 @@ padding: .5em;
   color: #2699FB;
 }
 
-.form_wrapper .form_item input:focus,
-.form_wrapper .form_item textarea:focus,
-.form_wrapper .form_item select:focus{
-border: 4px solid #2699FB;
-outline: none;
+/* カテゴリデザイン */
+.big_category label {
+  font-size: 1.2em;
+  color: #2699FB;
+  font-weight: bold;
 }
 
-*, *::before, *::after {
-  box-sizing: border-box;
+.small_category_wrap{
+  display: flex;
+  justify-content: start;
+  flex-wrap: wrap;
 }
 
 .small_category label {
   display: block;
   position: relative;
-  margin: 20px;
-  padding: 15px 30px 15px 62px;
-  border: 3px solid #fff;
+  margin: 6px;
+  padding: 7.5px 15px 7.5px 15px;
+  border: 3px solid #2699FB;
   border-radius: 100px;
-  color: #fff;
-  background-color: #2699FB;
-  box-shadow: 0 0 20px rgba(0, 0, 0, .2);
+  font-weight: bold;
+  color: #666;
+  background-color: #fff;
   white-space: nowrap;
   cursor: pointer;
   user-select: none;
   transition: background-color .2s, box-shadow .2s;
-}
-
-.small_category label::before {
-  content: '';
-  display: block;
-  position: absolute;
-  top: 10px;
-  bottom: 10px;
-  left: 10px;
-  width: 32px;
-  border: 3px solid #fff;
-  border-radius: 100px;
-  transition: background-color .2s;
-}
-
-.small_category label:first-of-type {
-  transform: translateX(-40px);
-}
-
-.small_category label:last-of-type {
-  transform: translateX(40px);
 }
 
 .small_category label:hover, 
@@ -162,11 +125,8 @@ outline: none;
 }
 
 .small_category input:checked + label {
-  background-color: #ab576c;
-}
-
-.small_category input:checked + label::before {
-  background-color: #fff;
+  color: #fff;
+  background-color: #2699FB;
 }
 
 .submit{
