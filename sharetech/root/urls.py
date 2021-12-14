@@ -9,7 +9,7 @@ from sharetech.views import (
     category_filter_view, consult_window_detail_view, apply_check_view,
     apply_status_view, profile_view, profile_edit_view, profile_edit_complete_view,
     email_change_view, email_change_done_view, email_change_complete_view,
-    password_change_view, password_change_complete_view,consult_window_register_view, 
+    password_change_view, password_change_complete_view,
     )
 
 urlpatterns = [
@@ -35,7 +35,6 @@ urlpatterns = [
     path('email-change/complete/<token>', email_change_complete_view.email_change_complete, name='email_change_complete'),
     path('password-change/<int:pk>/', password_change_view.password_change, name='password_change'),   
     path('password-change/complete/', password_change_complete_view.password_change_complete, name='password_change_complete'),
-    path('consult_window_register/', consult_window_register_view.consult_window_register, name='consult_window_register')
 ]
 
 # 画像保存先パス
