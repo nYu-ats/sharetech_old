@@ -5,13 +5,9 @@ from sharetech.models.user import CustomUser
 from django.contrib.auth import (get_user_model, authenticate)
 from django.utils.translation import gettext_lazy
 from django.utils.text import capfirst
-from sharetech.constants.messages import ErrorMessage, RePatterns
+from sharetech.constants.messages import ErrorMessage
+from sharetech.validators.custom_validator import email_validate
 import re
-
-# メールアドレス用のvalidator
-def check_email(email):
-    if not re.match(RePatterns().email_pattern, email):
-        raise forms.ValidationError(ErrorMessage().failuer_mail_format)
 
 class LoginForm(Form):
     '''
@@ -38,7 +34,7 @@ class LoginForm(Form):
         self.email_field = CustomUser._meta.get_field(CustomUser.USERNAME_FIELD)
         self.fields['email'].max_length = self.email_field.max_length or 254
         # エラーメッセージ変更のため、defaultのvalidatorを上書き
-        self.fields['email'].validators = [check_email]
+        self.fields['email'].validators = [email_validate]
         if self.fields['email'].label is None:
             self.fields['email'].label = capfirst(self.email_field.verbose_name)
         
