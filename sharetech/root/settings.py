@@ -90,7 +90,8 @@ WSGI_APPLICATION = 'root.wsgi.application'
 
 # Mail
 # TODO メール認証情報は環境変数うに埋め込む必要あり
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST')

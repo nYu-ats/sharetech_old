@@ -28,8 +28,7 @@
             {% if form.errors %}
             <div class="error_msg">
                 {% for field, error in form.errors.items %}
-                <h1>{{error|striptags}}</h1>
-                <h2>{{field}}</h2>
+                <p>{{error|striptags}}</p>
                 {% endfor %}
             </div>
             {% else %}
@@ -48,11 +47,12 @@
                 </div>
             </form>
 
-            <h2>別のアカウントを使う</h2>
+            <!-- SSO未実装のため一時コメントアウト -->
+            <!-- <h2>別のアカウントを使う</h2>
             <div class="oauth_link facebook">
                 <img src="{% static 'sharetech/img/facebook_logo-Blue_58.png' %}" alt="facebook account">
                 <p><a href="#">Sign in with Facebook</a></p>                
-            </div>
+            </div> -->
             <div class="form_footer">
                 <p><a href="{% url 'register' %}">Create an account</a></p>
                 <p><a href="#">Forget password?</a></p>

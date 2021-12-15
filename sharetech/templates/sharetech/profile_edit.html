@@ -3,11 +3,10 @@
 
 {% block head %}
 <meta charset="UTF-8">
-<meta name="discription" content="マイページ">
+<meta name="discription" content="プロフィール編集">
 <title>Mypage</title>
 <link rel="stylesheet" href="{% static 'sharetech/css/common.css' %}">
 <link rel="stylesheet" href="{% static 'sharetech/css/top.css' %}">
-<link rel="stylesheet" href="{% static 'sharetech/css/profile_edit.css' %}">
 <link rel="stylesheet" href="{% static 'sharetech/css/profile_edit.css' %}">
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
@@ -26,16 +25,23 @@
         </div>
         <form action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-            {% for field, error in form.errors.items %}
-            <h1>{{error|striptags}}</h1>
-            <h2>{{field}}</h2>
-            {% endfor %}
-            <div class="form_item icon_image">
+            {% if form.errors %}
+            <div class="error_msg">
+                {% for field, error in form.errors.items %}
+                <p>{{error|striptags}}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+        <div class="form_item icon_image">
                 <label for="file">{{form.icon_path.label}}</label>
                 {{form.icon_path}}
                 <div class="image_container">
                     <canvas width="" height=""></canvas>
                 </div>
+            </div>
+            <div class="form_item role_input">
+                <label for="username">{{form.username.label}}</label>
+                {{form.username}}
             </div>
             <div class="form_item user_name_input">
                 <div class="username">

@@ -20,7 +20,7 @@
 <div class="profile_edit">
     <div class="profile_edit">
         <div class="container">
-            <h2 class="profile_edit_complet_msg">{{ message }}</h2>
+            <h2 class="profile_edit_complet_msg">{{ message | linebreaksbr }}</h2>
             <div class="return_to_mypage">
                 <a href="{% url 'profile' %}">マイページへ戻る</a>
             </div>        
