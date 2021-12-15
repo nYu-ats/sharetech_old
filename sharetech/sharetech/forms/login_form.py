@@ -7,7 +7,6 @@ from django.utils.translation import gettext_lazy
 from django.utils.text import capfirst
 from sharetech.constants.messages import ErrorMessage
 from sharetech.validators.custom_validator import email_validate
-import re
 
 class LoginForm(Form):
     '''

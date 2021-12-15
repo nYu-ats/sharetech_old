@@ -85,6 +85,24 @@ class RePatterns:
 
     __EMAIL_PATTERN = '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
 
+    __PASSWORD_PATTERN = '\A(?=.*?[a-z])(?=.*?\d)[a-z\d]{8,20}\Z(?i)'
+
+    __KANA_PATTERN = '[\u30A1-\u30F4]+'
+    
+    __ROMA_PATTERN = '^[a-zA-Z]+$'
+
     @property
     def email_pattern(self):
         return self.__EMAIL_PATTERN
+
+    @property
+    def password_pattern(self):
+        return self.__PASSWORD_PATTERN
+
+    @property
+    def kana_pattern(self):
+        return self.__KANA_PATTERN
+
+    @property
+    def roma_pattern(self):
+        return self.__ROMA_PATTERN
