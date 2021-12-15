@@ -1,14 +1,13 @@
 //スティッキーヘッダー
 $(function(){
     const AnimDuaration = 50;
-    const HeaderHeight = 100;
     let $window = $(window);
     let $header = $('.page_header.clone');
     let $originalHeader = $('.page_header');
 
 $window.on('scroll', function(){
     let $window = $(window);
-    let headerOffsetTop = $originalHeader.offset().top + HeaderHeight;
+    let headerOffsetTop = $originalHeader.offset().top;
 
     if($window.scrollTop() > headerOffsetTop){
         $header.stop().animate({
@@ -17,7 +16,7 @@ $window.on('scroll', function(){
     }
     else{
         $header.stop().animate({
-            top: -100
+            top: -105
         }, AnimDuaration, 'linear');            }
 });
     $('.page_header.clone').each(function(){
