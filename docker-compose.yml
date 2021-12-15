@@ -10,6 +10,7 @@ services:
         environment:
             - DEBUG=1
             - SECRET_KEY=django-insecure-an)d383q66a%4doo4(t1_iut-xcapi87m+rph*na-v@un=d3uu
+            - EXECUTION_ENVIRONMENT=dev
             - DATABASE_ENGINE=django.db.backends.mysql
             - DATABASE_NAME=sharetech
             - DATABASE_USER=django

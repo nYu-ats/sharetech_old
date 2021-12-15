@@ -20,7 +20,19 @@ if os.getenv('EB_ENV_DEBUG', None) == 'True' or os.getenv('EB_ENV_DEBUG', None) 
 else:
     DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'sharetec-dev-env.ap-northeast-1.elasticbeanstalk.com', 'share-tech.jp']
+
+# AWS 環境で実行する場合、EC2 ホスト名を追加する必要がある
+if os.getenv('EXECUTION_ENVIRONMENT', 'dev') == 'prd':
+    try:
+        TOKEN=requests.put('http://169.254.169.254/latest/api/token', headers={'X-aws-ec2-metadata-token-ttl-seconds': '21600'}).text
+        headers = {'X-aws-ec2-metadata-token': TOKEN}
+        EC2_PRIVATE_IP = requests.get('http://169.254.169.254/latest/meta-data/local-ipv4', timeout = 0.01, headers = headers).text
+        ALLOWED_HOSTS.append(EC2_PRIVATE_IP)
+        print(ALLOWED_HOSTS)
+    except requests.exceptions.RequestException as e:
+        print("Failed to get Private IP -- When you execute in Local, you can ignore this Error.")
+        print(e)
 
 
 # Application definition
