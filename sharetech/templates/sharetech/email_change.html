@@ -22,11 +22,14 @@
 
     <div class="form_container">
         <form method="POST">
-            {% csrf_token %}
+        {% csrf_token %}
+        {% if form.errors %}
+        <div class="error_msg">
             {% for field, error in form.errors.items %}
-            <h1>{{error|striptags}}</h1>
-            <h2>{{field}}</h2>
+            <p>{{error|striptags}}</p>
             {% endfor %}
+        </div>
+        {% endif %}
 
             <div class="current_email">
                 <p>現在のメールアドレス</p>

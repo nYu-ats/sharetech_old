@@ -49,6 +49,10 @@ class ErrorMessage:
 
     __FAILURE_USER_NOT_EXIST = "メールアドレスの形式が誤っています"
 
+    __FAILURE_CURRENT_PASSWORD_NOT_EXIST = "現在のパスワードが一致しません"
+
+    __FAILURE_EMAIL_MATCH = "確認用メールアドレスが一致しません"
+
     @property
     def failuer_login_auth(self):
         return self.__FAILURE_LOGIN_AUTH
@@ -80,6 +84,14 @@ class ErrorMessage:
     @property
     def failuer_user_not_exist(self):
         return self.__FAILURE_USER_NOT_EXIST
+
+    @property
+    def failuer_current_password_not_exist(self):
+        return self.__FAILURE_CURRENT_PASSWORD_NOT_EXIST
+
+    @property
+    def failuer_email_match(self):
+        return self.__FAILURE_EMAIL_MATCH
 
 class RePatterns:
 

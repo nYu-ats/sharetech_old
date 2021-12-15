@@ -11,7 +11,6 @@ from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import logout
-from django.contrib.auth.hashers import make_password
 from .base_page_common_view import BasePageCommonView
 
 User = get_user_model()

@@ -461,13 +461,15 @@ a{
 }
 
 /* エラーメッセージ */
-.form_wrapper .error_msg{
+.form_wrapper .error_msg,
+.form_container .error_msg{
     text-align: center;
     padding: 3em 0;
-  }
+}
   
-  .form_wrapper .error_msg p{
+.form_wrapper .error_msg p,
+.form_container .error_msg p{
     color: red;
     font-weight: bold;
-  }
+}
   
