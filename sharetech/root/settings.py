@@ -166,7 +166,7 @@ MEDIA_URL = '/img/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Logging
-LOG_BASE_DIR = os.path.join("/var", "log", "django_app", "sharetech")
+LOG_BASE_DIR = os.path.join("/var", "log", "app", "sharetech")
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,

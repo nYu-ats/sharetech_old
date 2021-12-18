@@ -7,6 +7,7 @@ from sharetech.models.consult_window import ConsultWindow
 from sharetech.models.category_mst import CategoryMst
 from sharetech.models.user import CustomUser
 from sharetech.models.consult_apply import ConsultApply
+from sharetech.models.user_specialize import UserSpecialize
 from django.views import generic
 from sharetech.forms.profile_edit_form import ProfileEditForm
 from django.urls import reverse
@@ -36,6 +37,8 @@ class ProfileEditView(BasePageCommonView, generic.UpdateView):
         context['user_id'] = User.objects.get(email=self.request.user).id
         # ユーザーアイコン及び申込状況の設定
         context.update(self.prepare()._base_context_dict)
+        self.set_speciarize(context)
+
         return context
 
     def form_valid(self, form):
@@ -46,6 +49,38 @@ class ProfileEditView(BasePageCommonView, generic.UpdateView):
 
         user.save()
 
+        # 専門分野のレコードを更新
+        specialize_list = self.request.POST.getlist('specialize')
+        # 削除処理
+        user_specialize_list = list(UserSpecialize.objects.filter(user_id=user))
+        for targetModel in user_specialize_list:
+            if targetModel.specialize not in specialize_list:
+                targetModel.is_deleted = True
+                targetModel.save()
+        # 新規登録、再登録処理
+        for specialize in specialize_list:
+            targetModel, result = UserSpecialize.objects.get_or_create(user_id=user, specialize=specialize)
+            if not result:
+                targetModel.is_deleted = False
+                targetModel.save()
+
         return redirect('profile_edit_complete')
+    
+    def set_speciarize(self, context):
+        user = self.request.user
+        specialize_list = list(UserSpecialize.objects.filter(user_id = user, is_deleted=False))
+        index = 1
+        context['specialize'] = {}
+        context['specialize_title'] = '専門分野'
+
+        if len(specialize_list) != 0:
+            for specialize_model in specialize_list:
+                specialize_id = 'specialize_' + str(index)
+                context['specialize'][specialize_id] = specialize_model.specialize
+                index += 1
+        else:
+            # 専門分野を1件も登録していなかった場合は空のinput fieldをセットする
+            specialize_id = 'specialize_' + str(index)
+            context['specialize'][specialize_id] = ''
 
 profile_edit = ProfileEditView.as_view()

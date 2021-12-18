@@ -1,4 +1,5 @@
 from sharetech.forms.user_create_form import UserCreateForm
+from sharetech.models.user_specialize import UserSpecialize
 from root import settings
 from django.shortcuts import render, redirect
 from django.views import generic
@@ -18,6 +19,16 @@ class UserCreateView(generic.CreateView):
         user.password = make_password(form.cleaned_data.get('password'))
         user.email_verified_at = None
         user.save()
+
+        # 専門分野のレコードを作成
+        # 入力値が無くても必ず1件(空文字)は取得される
+        specialize_list = self.request.POST.getlist('specialize')
+        specialize_model_list = [
+            UserSpecialize(user_id = user, specialize = value)
+            for value in specialize_list 
+            if value and len(value) <= UserSpecialize._meta.get_field('specialize').max_length
+        ]
+        UserSpecialize.objects.bulk_create(specialize_model_list)
 
         # アクティベーションurl送付
         current_site = get_current_site(self.request)

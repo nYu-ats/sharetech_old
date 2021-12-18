@@ -128,6 +128,13 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         null = True,
     )
 
+    # 実績
+    archivement = models.CharField(
+        verbose_name = 'Archivement',
+        max_length = 512,
+        null = True,
+    )
+
     # 会社名
     company = models.CharField(
         verbose_name = 'Company',

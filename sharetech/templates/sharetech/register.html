@@ -8,6 +8,10 @@
     <title>Register</title>
     <link rel="stylesheet" href="{% static 'sharetech/css/common.css' %}">
     <link rel="stylesheet" href="{% static 'sharetech/css/register.css' %}">
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.js"></script>
+    <script src="{% static 'sharetech/js/user_register.js' %}"></script>    
 </head>
 
 <body>
@@ -94,6 +98,14 @@
                         <div class="form_item">
                             <label for="name">{{form.position_name.label}}</label>
                             {{form.position_name}}                
+                        </div>
+                        <div class="form_item specialize_input_area">
+                            <label for="name">{{form.specialize.label}}</label>
+                            <div class="specialize_input">
+                                {{form.specialize}}
+                                <button type="button" class="specialize_delete_btn">ー</button>              
+                            </div>
+                            <button type="button" class="specialize_add_btn">＋追加</button>              
                         </div>
                     </div>    
                 </div>
