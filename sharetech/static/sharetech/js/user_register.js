@@ -2,7 +2,7 @@
 $(function(){
     const $parent = $('.specialize_input_area');
     const $addBtn = $('.specialize_add_btn');
-    const $baseInputArea = $parent.find('.specialize_input');
+    const $baseInputArea = $parent.find('.specialize_input').first();
     let elementIncrementer = 1;
     const baseIdStr = $baseInputArea.find('input').attr('id');
     const maxInputAreaCount = 5;
@@ -31,7 +31,8 @@ $(function(){
                 }
             })
             .end();
-    
+
+            $targetInputArea.find('input').val('');
             $targetInputArea.insertBefore($addBtn);
     
             elementIncrementer++;

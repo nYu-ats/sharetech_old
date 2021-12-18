@@ -8,6 +8,12 @@ class UserSpecialize(models.Model):
     '''
     class Meta:
         db_table = 'user_specialize'
+        constraints = [
+            models.UniqueConstraint(
+                fields = ['user_id', 'specialize'],
+                name = 'specialize_unique'
+            )
+        ]
     
     '''
     カラム定義
@@ -29,7 +35,7 @@ class UserSpecialize(models.Model):
     )
 
     # 論理削除フラグ
-    id_deleted = models.BooleanField(
+    is_deleted = models.BooleanField(
         verbose_name = 'Is Deleted',
         default = False,
     )
