@@ -32,7 +32,7 @@ class UserCreateForm(ModelForm):
         max_length = __MAX_PASSWORD_LENGTH,
     )
 
-    # 専門分野入力フィールド(初期では1フィールド)
+    # 専門分野入力フィールド
     specialize = forms.CharField(
         label = '専門分野',
         required = False,
