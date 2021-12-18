@@ -21,7 +21,7 @@ $(function(){
                 window.open(redirectURL, '_blank');
             }
         }).fail(function(){
-            console.log('error');
+            
         });
     });
 });

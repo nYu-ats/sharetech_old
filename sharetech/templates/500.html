@@ -1,0 +1,47 @@
+{% extends 'sharetech/base.html' %}
+{% load static %}
+
+{% block head %}
+<meta charset="UTF-8">
+<meta name="discription" content="マイページ">
+<title>システムエラー</title>
+<link rel="stylesheet" href="{% static 'sharetech/css/common.css' %}">
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.js"></script>
+<script src="{% static 'sharetech/js/common.js' %}"></script>
+{% endblock %}
+
+{% block main %}
+<div class="container">
+    <div class="system_error">
+        <h1>システムエラー</h2>
+        <p>
+            システム内でエラーが発生しました。<br>
+            お手数ですが、再度操作を実行し直してください。
+        </p>    
+    </div>
+    <div class="return_to_toppage">
+        <a href="{% url 'top' %}">トップへ戻る</a>
+    </div>        
+</div>
+{% endblock %}
+
+{% block footer %}
+<footer class="page_footer">
+    <div class="footer_list">
+        <ul>
+            <li>
+                <a href="">シェアテックについて</a>
+            </li>
+            <li>
+                <a href="">利用規約</a>
+            </li>
+            <li>
+                <a href="">お問い合せ</a>
+            </li>
+        </ul>
+    </div>
+    <p class="copy_write">©2021 ShareTech Co., Ltd., All rights reserved</p>
+</footer>
+{% endblock %}

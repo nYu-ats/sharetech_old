@@ -1,0 +1,38 @@
+.container{
+   text-align: center;
+   height: 70vh;
+}
+
+.container .system_error h1,
+.container .system_error  p{
+    color: #666;
+}
+
+.container .system_error{
+    margin-top: 20vh;
+}
+
+.container .system_error  p{
+    font-size: 1.25em;
+    font-weight: bold;
+}
+
+.return_to_toppage{
+    text-align: center;
+}
+
+.return_to_toppage a{
+    font-weight: bold;
+    min-width: 250px;
+    display: inline-block;
+    border-radius: .5em;
+    background-color: #2699FB;
+    border: 2px solid #2699FB;
+    text-align: center;
+    padding: .5em 1em;
+    margin: 3em 1em;
+    font-size: 1.2em;
+    cursor: pointer;
+    color: white;
+    transition: .5s;
+}
