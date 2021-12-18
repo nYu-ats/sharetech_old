@@ -7,11 +7,12 @@ from sharetech.constants.messages import ErrorMessage, RePatterns
 from sharetech.utils import ConvertChoiceFieldDisplay
 from sharetech.validators.custom_validator import email_validate
 import re
-from sharetech.models.user import (
+from sharetech.models import (
     CustomUser,
     IndustryMst,
     OccupationMst,
     PositionMst,
+    UserSpecialize,
 )
 
 class UserCreateForm(ModelForm):
@@ -19,12 +20,24 @@ class UserCreateForm(ModelForm):
     ユーザー新規登録用フォーム
     '''
     
+    # パスワードはハッシュかしてDB保存のため、Modelの絡むサイズと画面入力文字数が一致しない
+    __MAX_PASSWORD_LENGTH = 20
+    
     # 確認用パスワードフィールド
     password_confirm = forms.CharField(
         label = 'パスワード再入力',
         required = True,
         strip = False,
         widget = forms.PasswordInput(attrs={'type':'password'}),
+        max_length = __MAX_PASSWORD_LENGTH,
+    )
+
+    # 専門分野入力フィールド(初期では1フィールド)
+    specialize = forms.CharField(
+        label = '専門分野',
+        required = False,
+        strip = False,
+        max_length = UserSpecialize._meta.get_field('specialize').max_length,
     )
 
     # ドロップダウンリストに書くモデル名称が表示されるよう変換
@@ -59,6 +72,7 @@ class UserCreateForm(ModelForm):
             'occupation_name', 
             'position_name',
             'password', 
+            'specialize',
             ]
         labels = {
             'username': '名前',
@@ -70,6 +84,7 @@ class UserCreateForm(ModelForm):
             'email': 'メールアドレス', 
             'role_code': 'ロール選択', 
             'password': 'パスワード', 
+            'specialize': '専門分野',
         }
 
     def __init__(self, *args, **kwargs):
@@ -78,6 +93,8 @@ class UserCreateForm(ModelForm):
         # エラーメッセージ変更のため、defaultのvalidatorを上書き
         self.fields['email'].validators = [email_validate]
         self.fields['password'].widget = forms.PasswordInput(attrs={'type':'password'})
+        # 最大入力文字数設定
+        self.fields['password'].widget.attrs['maxlength'] = self.__MAX_PASSWORD_LENGTH
         # 以下必須でない入力項目
         self.fields['industry_name'].required = False
         self.fields['occupation_name'].required = False
