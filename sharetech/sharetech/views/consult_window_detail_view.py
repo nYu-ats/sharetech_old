@@ -14,9 +14,9 @@ class ConsultWindowDetailView(BasePageCommonView):
     '''
     class UserCheck(IntEnum):
         # 記事詳細ページにアクセスしてきたユーザーの判別に使用
-        other_user = 0
-        create_user = 1
-        applying_user = 2
+        other_user = "0"
+        create_user = "1"
+        applying_user = "2"
 
     def get(self, request, *args, **kwargs):
         login_user = self.request.user
