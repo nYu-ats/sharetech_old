@@ -61,7 +61,7 @@ $(function(){
             }
             targetImage.src = e.target.result;
         }
-        console.log(file);
+
         reader.readAsDataURL(file);
     });
 

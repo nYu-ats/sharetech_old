@@ -8,6 +8,10 @@
     <title>Register</title>
     <link rel="stylesheet" href="{% static 'sharetech/css/common.css' %}">
     <link rel="stylesheet" href="{% static 'sharetech/css/register.css' %}">
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.js"></script>
+    <script src="{% static 'sharetech/js/user_register.js' %}"></script>    
 </head>
 
 <body>
@@ -23,14 +27,21 @@
             <h3>ご登録申請及び、審査項目となります<br>可能な限り項目を埋めていただくことで、審査が通りやすくなります</h3>
             <form method="POST">
                 {% csrf_token %}
-                {% for field, error in form.errors.items %}
-                <h1>{{error|striptags}}</h1>
-                <h2>{{field}}</h2>
-                {% endfor %}
+                {% if form.errors %}
+                <div class="error_msg">
+                    {% for field, error in form.errors.items %}
+                    <p>{{error|striptags}}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
                 <div class="item_container">
                     <div class="user_info_wrapper">
                         <h2>▼必須入力項目</h2>
                         <!-- 必須入力の項目についてはこっちの要素div内に入れる -->
+                        <div class="form_item role_input">
+                            <label for="username">{{form.username.label}}</label>
+                            {{form.username}}
+                        </div>
                         <div class="form_item user_name_input">
                             <div class="username">
                                 <label for="name">{{form.family_name_jp.label}}</label>
@@ -77,16 +88,24 @@
                         <h2>▼オプション入力項目</h2>
                         <!-- オプション入力の項目についてはこっちの要素div内に入れる -->
                         <div class="form_item">
-                            <label for="name">{{form.industry_id.label}}</label>
+                            <label for="name">{{form.industry_name.label}}</label>
                             {{form.industry_name}}                
                         </div>
                         <div class="form_item">
-                            <label for="name">{{form.occupation_id.label}}</label>
+                            <label for="name">{{form.occupation_name.label}}</label>
                             {{form.occupation_name}}                
                         </div>
                         <div class="form_item">
-                            <label for="name">{{form.position_id.label}}</label>
+                            <label for="name">{{form.position_name.label}}</label>
                             {{form.position_name}}                
+                        </div>
+                        <div class="form_item specialize_input_area">
+                            <label for="name">{{form.specialize.label}}</label>
+                            <div class="specialize_input">
+                                {{form.specialize}}
+                                <button type="button" class="specialize_delete_btn">ー</button>              
+                            </div>
+                            <button type="button" class="specialize_add_btn">＋追加</button>              
                         </div>
                     </div>    
                 </div>

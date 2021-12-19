@@ -6,9 +6,10 @@ from .consult_window import ConsultWindow
 from .category_mst import CategoryMst
 from .category_consult_window_mapping import CategoryConsultWindowMapping
 from .consult_apply import ConsultApply
+from .user_specialize import UserSpecialize
 
 """
 Modelファイル分割のためサブディレクトリを作成
-settingsで認識できるようにするための__init__.pyファイル
+makemigrationsで認識できるようにするための__init__.pyファイル
 分割した各モデルのimport必須
 """

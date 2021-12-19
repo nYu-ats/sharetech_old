@@ -1,18 +1,13 @@
 from sharetech.forms.user_create_form import UserCreateForm
+from sharetech.models.user_specialize import UserSpecialize
 from root import settings
-from django.views.generic.edit import FormView
-from django.urls import reverse_lazy
 from django.shortcuts import render, redirect
 from django.views import generic
 from django.contrib.sites.shortcuts import get_current_site
-from django.core.signing import BadSignature, SignatureExpired , loads, dumps
+from django.core.signing import dumps
 from django.template.loader import render_to_string
-from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
 from django.contrib.auth.hashers import make_password
-
-# ユーザーモデル(カスタム)取得
-User = get_user_model()
 
 class UserCreateView(generic.CreateView):
     form_class = UserCreateForm
@@ -25,7 +20,16 @@ class UserCreateView(generic.CreateView):
         user.email_verified_at = None
         user.save()
 
-        # TODO メール送信util化
+        # 専門分野のレコードを作成
+        # 入力値が無くても必ず1件(空文字)は取得される
+        specialize_list = self.request.POST.getlist('specialize')
+        specialize_model_list = [
+            UserSpecialize(user_id = user, specialize = value)
+            for value in specialize_list 
+            if value and len(value) <= UserSpecialize._meta.get_field('specialize').max_length
+        ]
+        UserSpecialize.objects.bulk_create(specialize_model_list)
+
         # アクティベーションurl送付
         current_site = get_current_site(self.request)
         domain = current_site.domain
@@ -40,9 +44,7 @@ class UserCreateView(generic.CreateView):
         message = render_to_string('sharetech/mail_template/create/register_done.txt', context)
         from_email = settings.EMAIL_HOST_USER
         to = [user.email]
-        # TODO メール送信処理実行(未定義なので、utilあたりにメール送信処理を作る)
         send_mail(subject, message, from_email, to)
-
         return redirect('register_done')
 
 user_create = UserCreateView.as_view()

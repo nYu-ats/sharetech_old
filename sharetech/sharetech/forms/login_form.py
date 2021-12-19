@@ -5,6 +5,8 @@ from sharetech.models.user import CustomUser
 from django.contrib.auth import (get_user_model, authenticate)
 from django.utils.translation import gettext_lazy
 from django.utils.text import capfirst
+from sharetech.constants.messages import ErrorMessage
+from sharetech.validators.custom_validator import email_validate
 
 class LoginForm(Form):
     '''
@@ -13,23 +15,14 @@ class LoginForm(Form):
     email = EmailField(
         widget = forms.EmailInput(
             attrs={'placeholder':'Email', 'autofocus' : True,}),
-            label = 'メールアドレス',
+        label = 'メールアドレス',
     )
+
     password = forms.CharField(
         widget = forms.PasswordInput(
             attrs={'placeholder':'Password',}),
             label = 'パスワード',
     )
-
-    error_messages = {
-        'invalid_login' : gettext_lazy(
-            "Please enter a correct email and password. Note that both "
-            "fields may be case-sensitive. "
-        ),
-        'is_deleted' : gettext_lazy(
-            "This account is deleted. ",
-        ),
-    }
 
     def __init__(self, request=None, *args, **kwargs):
         self.request = request
@@ -39,37 +32,34 @@ class LoginForm(Form):
 
         self.email_field = CustomUser._meta.get_field(CustomUser.USERNAME_FIELD)
         self.fields['email'].max_length = self.email_field.max_length or 254
+        # エラーメッセージ変更のため、defaultのvalidatorを上書き
+        self.fields['email'].validators = [email_validate]
         if self.fields['email'].label is None:
             self.fields['email'].label = capfirst(self.email_field.verbose_name)
         
-        # TODO 全フォーム要素にセットしたいアトリビュートがあればここでセット
-        # for field in self.fields.values():
-        #     pass
-
     def clean(self):
+        # ログインチェック
         email = self.cleaned_data.get('email')
         password = self.cleaned_data.get('password')
 
         if email is not None and password:
             self.user_cache = authenticate(self.request, email=email, password=password)
             if self.user_cache is None:
-                raise self.get_invalid_login_error()
+                raise forms.ValidationError(ErrorMessage().failuer_login_auth)
             else:
-                self.confirm_login_allowed(self.user_cache)
-    
-    def confirm_login_allowed(self, user):
-        if user.is_deleted:
-            raise forms.ValidationError(
-                self.error_messages['is_deleted'],
-                code = 'deleted',
-            )
+                if self.user_cache.is_deleted:
+                    raise forms.ValidationError(ErrorMessage().failuer_user_not_exist)
+
+    def clean_password(self):
+        # パスワードバリデーションチェック
+        password = self.cleaned_data.get('password')
+        if len(password) < 8:
+            raise forms.ValidationError(ErrorMessage().failuer_password_length)
+        elif len(password) > 20:
+            raise forms.ValidationError(ErrorMessage().failuer_password_length)
+
+        return password
     
     def get_user(self):
+        # 認証済みのユーザーを返す
         return self.user_cache
-    
-    def get_invalid_login_error(self):
-        return forms.ValidationError(
-            self.error_messages['invalid_login'],
-            code = 'invalid_login',
-            params = {'username' : gettext_lazy('Email')},
-        )

@@ -20,7 +20,19 @@ if os.getenv('EB_ENV_DEBUG', None) == 'True' or os.getenv('EB_ENV_DEBUG', None) 
 else:
     DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'sharetec-dev-env.ap-northeast-1.elasticbeanstalk.com', 'share-tech.jp']
+
+# AWS 環境で実行する場合、EC2 ホスト名を追加する必要がある
+if os.getenv('EXECUTION_ENVIRONMENT', 'dev') == 'prd':
+    try:
+        TOKEN=requests.put('http://169.254.169.254/latest/api/token', headers={'X-aws-ec2-metadata-token-ttl-seconds': '21600'}).text
+        headers = {'X-aws-ec2-metadata-token': TOKEN}
+        EC2_PRIVATE_IP = requests.get('http://169.254.169.254/latest/meta-data/local-ipv4', timeout = 0.01, headers = headers).text
+        ALLOWED_HOSTS.append(EC2_PRIVATE_IP)
+        print(ALLOWED_HOSTS)
+    except requests.exceptions.RequestException as e:
+        print("Failed to get Private IP -- When you execute in Local, you can ignore this Error.")
+        print(e)
 
 
 # Application definition
@@ -78,7 +90,8 @@ WSGI_APPLICATION = 'root.wsgi.application'
 
 # Mail
 # TODO メール認証情報は環境変数うに埋め込む必要あり
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST')
@@ -151,3 +164,35 @@ MEDIA_URL = '/img/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Logging
+LOG_BASE_DIR = os.path.join("/var", "log", "app", "sharetech")
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {"simple": {"format": "%(asctime)s [%(levelname)s] %(message)s"}},
+    "handlers": {
+        "info": {
+            "level": "INFO",
+            "class": "logging.FileHandler",
+            "filename": os.path.join(LOG_BASE_DIR, "info.log"),
+            "formatter": "simple",
+        },
+        "warning": {
+            "level": "WARNING",
+            "class": "logging.FileHandler",
+            "filename": os.path.join(LOG_BASE_DIR, "warning.log"),
+            "formatter": "simple",
+        },
+        "error": {
+            "level": "ERROR",
+            "class": "logging.FileHandler",
+            "filename": os.path.join(LOG_BASE_DIR, "error.log"),
+            "formatter": "simple",
+        },
+    },
+    "root": {
+        "handlers": ["info", "warning", "error"],
+        "level": "INFO",
+    },
+}
