@@ -1,10 +1,12 @@
-from django.views import View
+from django.views import View,generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, render
 from django.contrib.auth import get_user_model
 from ..forms.consult_window_register_form import ConsultWindowRegisterForm
 from sharetech.utils.model_template_adapter import *
 from sharetech.models import *
+from .base_page_common_view import BasePageCommonView
+
 
 # ユーザーモデル(カスタム)取得
 User = get_user_model()

@@ -1,86 +1,97 @@
-<!DOCTYPE html>
+{% extends 'sharetech/base.html' %}
 {% load static %}
-<html lang="ja">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="discription" content="相談窓口登録ページ">
-    <title>Consult_Window_Register</title>
-    <link rel="stylesheet" href="{% static 'sharetech/css/common.css' %}">
-    <link rel="stylesheet" href="{% static 'sharetech/css/consult_window_register.css' %}">
-</head>
+{% block head %}
+<meta charset="UTF-8">
+<meta name="discription" content="相談窓口登録ページ">
+<title>Consult_Window_Register</title>
+<link rel="stylesheet" href="{% static 'sharetech/css/common.css' %}">
+<link rel="stylesheet" href="{% static 'sharetech/css/consult_window_register.css' %}">
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.js"></script>
+<script src="{% static 'sharetech/js/common.js' %}"></script>
+{% endblock %}
 
-<body>
-    <header class="register_header">
-        <h1>
-            Welcome to <span>SHARE TECH</span>!
-        </h1>
-    </header>
-
-    <main>
-        <!--ログインフォーム-->
-        <div class="consult_window_register">
-            <h2>相談窓口作成</h2>
-            <form method="POST">
-                {% csrf_token %}
-                {% for field, error in form.errors.items %}
-                <h1>{{error|striptags}}</h1>
-                <h2>{{field}}</h2>
-                {% endfor %}
-                <div class="form_container">
-                    <div class="form_item">
-                        <div class="text_input">
-                            <label for="name">{{form.consult_window_title.label}}</label>
-                            {{form.consult_window_title}}    
-                        </div>
-                        <div class="text_input">
-                            <label for="name">{{form.consult_window_overview.label}}</label>
-                            {{form.consult_window_overview}}    
-                        </div>
-                        <div class="text_input">
-                            <label for="name">{{form.consult_price.label}}</label>
-                            <h4>※アルファ版では変更できません。</h4>
-                            {{form.consult_price}}    
-                        </div>
-                        <div class="text_input">
-                            <label for="name">{{form.archivement.label}}</label>
-                            {{form.archivement}}    
-                        </div>
-                        <div class="text_input">
-                            <label for="name">{{form.timerex_url.label}}</label>
-                            {{form.timerex_url}}    
-                        </div>
-                        <div class="text_input">
-                            <label for="name">カテゴリ</label>
-                        </div>   
-                        <ul class="category_input">
-                            {% for big_cat, small_cat_list in category_dict.items %}
-                                {% for small_cat in small_cat_list %}
-                                    {% if big_cat == small_cat.1 %} <!-- 大カテゴリのみ先頭に出力 -->
-                                    <div class="big_category">
-                                        <label for={{small_cat.0}}>{{small_cat.1}}</label>
-                                    </div>
-                                    <ul class="small_category_wrap">
-                                    {% else %}
-                                    <div class="small_category">
-                                        <input type="checkbox" name="cat" id={{small_cat.0}} value={{small_cat.0}}>
-                                        <label for={{small_cat.0}}>{{small_cat.1}}</label>
-                                    </div>
-                                    {% endif %}
-                                {% endfor %}
-                                </ul>
+{% block main %}
+<div class="consult_window_register">
+    <h2>相談窓口作成</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {% for field, error in form.errors.items %}
+        <h1>{{error|striptags}}</h1>
+        <h2>{{field}}</h2>
+        {% endfor %}
+        <div class="form_container">
+            <div class="form_item">
+                <!--テキスト入力フォーム-->
+                <div class="text_input">
+                    <label for="name">{{form.consult_window_title.label}}</label>
+                    {{form.consult_window_title}}    
+                </div>
+                <div class="text_input">
+                    <label for="name">{{form.consult_window_overview.label}}</label>
+                    {{form.consult_window_overview}}    
+                </div>
+                <div class="text_input">
+                    <label for="name">{{form.consult_price.label}}</label>
+                    <h4>※アルファ版では変更できません。</h4>
+                    {{form.consult_price}}    
+                </div>
+                <div class="text_input">
+                    <label for="name">{{form.archivement.label}}</label>
+                    {{form.archivement}}    
+                </div>
+                <div class="text_input">
+                    <label for="name">{{form.timerex_url.label}}</label>
+                    {{form.timerex_url}}    
+                </div>
+                <div class="text_input">
+                    <label for="name">カテゴリ</label>
+                </div>   
+                <!--カテゴリ選択フォーム-->
+                <ul class="category_input">
+                    {% for big_cat, small_cat_list in category_dict.items %}
+                    {% for small_cat in small_cat_list %}
+                                {% if big_cat == small_cat.1 %} <!-- 大カテゴリのみ先頭に出力 -->
+                                <div class="big_category">
+                                    <label for={{small_cat.0}}>{{small_cat.1}}</label>
+                                </div>
+                                <ul class="small_category_wrap">
+                                {% else %}
+                                <div class="small_category">
+                                    <input type="checkbox" name="cat" id={{small_cat.0}} value={{small_cat.0}}>
+                                    <label for={{small_cat.0}}>{{small_cat.1}}</label>
+                                </div>
+                                {% endif %}
                             {% endfor %}
-                        </ul>
-                    </div>   
-                    <div class="submit">
-                        <input class="submit_btn" type="submit" value="登録">
-                    </div>
-                </div> 
-            </form>
-        </div>
-    </main>
-
-    <footer>
-        <div class="login_page_copyright"><p>©2021 ShareTech Co., Ltd., All rights reserved</p></div>
-    </footer>
-</body>
+                            </ul>
+                        {% endfor %}
+                    </ul>
+                </div>   
+                <div class="submit">
+                    <input class="submit_btn" type="submit" value="登録">
+                </div>
+            </div> 
+        </form>
+    </div>
+{% endblock %}
+   
+{% block footer %}
+<footer class="page_footer">
+    <div class="footer_list">
+        <ul>
+            <li>
+                <a href="">シェアテックについて</a>
+            </li>
+            <li>
+                <a href="">利用規約</a>
+            </li>
+            <li>
+                <a href="">お問い合せ</a>
+            </li>
+        </ul>
+    </div>
+    <p class="copy_write">©2021 ShareTech Co., Ltd., All rights reserved</p>
+</footer>
+{% endblock %}
