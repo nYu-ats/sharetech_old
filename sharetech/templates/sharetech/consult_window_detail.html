@@ -35,7 +35,7 @@
                 {% endfor %}
             </div>
             <p class="overview">
-                {{overview}}
+                {{overview | linebreaksbr}}
             </p>
             <div class="apply_count">
                 <p>これまで<span>{{applyed_num}}</span>人から相談を受けました</p>
@@ -52,14 +52,14 @@
                     <p class="name">{{username}}</p>
                     <p class="occupation">{{occupation}}</p>
                     <p class="introduction">
-                        {{introduction}}
+                        {{introduction | linebreaksbr}}
                     </p>
                 </div>
             </div>
             <div class="expert_history">
                 <h3 class="title">実績</h3>
                 <p>
-                    {{archivement}}
+                    {{archivement | linebreaksbr}}
                 </p>
             </div>
         </div>

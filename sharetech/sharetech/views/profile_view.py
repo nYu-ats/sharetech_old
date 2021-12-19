@@ -9,6 +9,7 @@ from sharetech.models.user import CustomUser
 from sharetech.models.consult_apply import ConsultApply
 from .base_page_common_view import BasePageCommonView
 from sharetech.constants import ImageConstants, Constants
+from sharetech.models.user_specialize import UserSpecialize
 
 class ProfileView(BasePageCommonView):
     '''
@@ -25,6 +26,7 @@ class ProfileView(BasePageCommonView):
             )
         )
         create_consult_window = list(ConsultWindow.objects.filter(expert_user_id = user_info.id))
+        specialize_list = list(UserSpecialize.objects.filter(user_id=user_info.id))
 
         self.prepare().set_category_dict().update(
             {
@@ -32,6 +34,7 @@ class ProfileView(BasePageCommonView):
                 'icon_img': ImageConstants.get_user_icon_path() + user_info.icon_path.name if user_info.icon_path.name != None else ImageConstants.get_default_icon_path(),
                 'applyed_consult_window': self.create_consult_window_list(applyed_consult_window),
                 'create_consult_window': self.create_consult_window_list(create_consult_window),
+                'specialize': specialize_list,
             }
         )
 

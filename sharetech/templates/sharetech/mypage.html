@@ -12,7 +12,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.js"></script>
 <script src="{% static 'sharetech/js/common.js' %}"></script>
-<script src="{% static 'sharetech/js/top.js' %}"></script>
 <script src="{% static 'sharetech/js/mypage.js' %}"></script>
 {% endblock %}
 
@@ -27,7 +26,7 @@
             <img src="{% static icon_img %}" alt="">
         </div>
         <div class="content">
-            <p class="name">{{user_info.username_kana}}</p>
+            <p class="name">{{user_info.username}}</p>
             <p class="user_id">User ID : {{user_info.id}}</p>
             <p class="company">{{user_info.company}}</p>
             <p class="industory">{{user_info.industry_id.name}}</p>
@@ -44,9 +43,9 @@
     <div class="specialized_field">
         <h3>専門分野</h3>
         <div class="tag_flex">
-            <p>脳科学</p>
-            <p>脳科学</p>
-            <p>脳科学</p>    
+            {% for item in specialize %}
+            <p>{{item.specialize}}</p>
+            {% endfor %}
         </div>
     </div>
 
@@ -54,7 +53,7 @@
     <div class="introduction">
         <h3>自己紹介</h3>
         <p>
-            {{user_info.introduction}}
+            {{user_info.introduction | linebreaksbr}}
         </p>
     </div>
 
@@ -62,9 +61,7 @@
     <div class="archivement">
         <h3>実績</h3>
         <p>
-            実績実績実績実績実績実績実績実績実績実績実績実績実績<br>
-            実績実績実績実績実績実績実績実績実績実績実績実績実績<br>
-            実績実績実績実績実績実績実績実績実績実績実績実績実績<br>
+            {{user_info.archivement | linebreaksbr}}
         </p>
     </div>
 
