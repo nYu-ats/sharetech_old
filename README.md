@@ -82,7 +82,6 @@ $ python3 manage.py runserver 0.0.0.0:8000
 新しいターミナルウィンドウで下記を実行
 
 ``` sh
-pipenv shell
 mkdir /var/lib/ebcli
 cd /var/lib/ebcli
 
@@ -91,11 +90,12 @@ git clone https://github.com/aws/aws-elastic-beanstalk-cli-setup.git
 ./aws-elastic-beanstalk-cli-setup/scripts/bundled_installer
 
 # Path
+pipenv shell
 echo 'export PATH="/root/.ebcli-virtual-env/executables:$PATH"' >> ~/.bash_profile && source ~/.bash_profile
 echo 'export PATH=/root/.pyenv/versions/3.7.2/bin:$PATH' >> /root/.bash_profile && source /root/.bash_profile
 
 # Setup
-cd /usr/src/sharetec
+cd /usr/src/sharetech
 eb init
 
 # >>
