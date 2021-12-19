@@ -12,7 +12,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.js"></script>
 <script src="{% static 'sharetech/js/common.js' %}"></script>
-<script src="{% static 'sharetech/js/top.js' %}"></script>
 <script src="{% static 'sharetech/js/apply_check.js' %}"></script>
 {% endblock %}
 
@@ -63,13 +62,13 @@
                 </p>
             </div>
         </div>
-        {% if  login_user_flg == "1" %}
+        {% if  login_user_flg == 1 %}
         <div class="apply_btn">
-            <button class="button disabled"></button>
+            <button class="button disabled" disabled></button>
         </div>
-        {% elif login_user_flg == "2" %}
+        {% elif login_user_flg == 2 %}
         <div class="apply_btn">
-            <button class="button waiting">申込中</button>
+            <button class="button waiting" disabled>申込中</button>
         </div>
         {% else %}
         <div class="apply_btn">
