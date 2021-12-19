@@ -56,6 +56,7 @@ class ConsultWindowDetailView(BasePageCommonView):
                 'occupation' : consult_window_detail.expert_user_id.occupation_id.name,
                 'introduction' : consult_window_detail.expert_user_id.introduction,
                 'categories' : category_list,
+                'timerexUrl': consult_window_detail.timerex_url
             }
         )
 
