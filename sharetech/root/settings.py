@@ -15,7 +15,7 @@ PROJECT_NAME = os.path.basename(BASE_DIR)
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # Elastic Beanstalk 環境で Debug モードを有効/無効にする環境変数(django.config 内で設定)
-if os.getenv('EB_ENV_DEBUG', None) == 'True' or os.getenv('EB_ENV_DEBUG', None) is None:
+if (os.getenv('EB_ENV_DEBUG', None) == 'True') or (os.getenv('EB_ENV_DEBUG', None) is None):
     DEBUG = True
 else:
     DEBUG = False
@@ -25,6 +25,7 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'sharetec-dev-env.ap-northeast-1.elas
 # AWS 環境で実行する場合、EC2 ホスト名を追加する必要がある
 if os.getenv('EXECUTION_ENVIRONMENT', 'dev') == 'prd':
     try:
+        import requests
         TOKEN=requests.put('http://169.254.169.254/latest/api/token', headers={'X-aws-ec2-metadata-token-ttl-seconds': '21600'}).text
         headers = {'X-aws-ec2-metadata-token': TOKEN}
         EC2_PRIVATE_IP = requests.get('http://169.254.169.254/latest/meta-data/local-ipv4', timeout = 0.01, headers = headers).text
@@ -45,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'sharetech',
+    'storages',
     ]
 
 MIDDLEWARE = [
@@ -102,20 +104,33 @@ ACTIVATION_TIMEOUT_SECONDS = 60 * 30
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': os.environ.get('DATABASE_ENGINE'),
-        'NAME': os.environ.get('DATABASE_NAME'),
-        'USER' : os.environ.get('DATABASE_USER'),
-        'PASSWORD' : os.environ.get('DATABASE_PASSWORD'),
-        'HOST' : os.environ.get('DATABASE_HOST'),
-        'PORT' : os.environ.get('DATABASE_PORT'),
-        'OPTIONS' : {
-            'charset' : 'utf8mb4',
+if 'RDS_HOSTNAME' in os.environ:
+    # AWS 上 RDS 用パラメータ
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': os.environ['RDS_DB_NAME'],
+            'USER': os.environ['RDS_USERNAME'],
+            'PASSWORD': os.environ['RDS_PASSWORD'],
+            'HOST': os.environ['RDS_HOSTNAME'],
+            'PORT': os.environ['RDS_PORT'],
         }
     }
-}
+else:
+    # Local 実行用 DB パラメータ
+    DATABASES = {
+        'default': {
+            'ENGINE': os.environ.get('DATABASE_ENGINE'),
+            'NAME': os.environ.get('DATABASE_NAME'),
+            'USER' : os.environ.get('DATABASE_USER'),
+            'PASSWORD' : os.environ.get('DATABASE_PASSWORD'),
+            'HOST' : os.environ.get('DATABASE_HOST'),
+            'PORT' : os.environ.get('DATABASE_PORT'),
+            'OPTIONS' : {
+                'charset' : 'utf8mb4',
+            }
+        }
+    }
 
 
 # Password validation
@@ -153,12 +168,23 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
+if (os.getenv('EB_ENV_DEBUG', None) == 'True') or (os.getenv('EB_ENV_DEBUG', None) is None):
+    STATIC_URL = '/static/'
+    STATICFILES_DIRS = [os.path.join('static'), Constants.get_static_file_path()]
+    STATIC_ROOT = ''
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+else:
+    AWS_STORAGE_BUCKET_NAME = 'sharetec-dev'
+    AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+    AWS_LOCATION = 'app_resource/static'
+    STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+    STATICFILES_DIRS = [os.path.join('static'), Constants.get_static_file_path()]
+    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join('static'), Constants.get_static_file_path()]
-STATIC_ROOT = ''
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+    DEFAULT_FILE_STORAGE = 'sharetech.backends.media_storage_backend.MediaStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
