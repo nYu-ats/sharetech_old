@@ -55,9 +55,9 @@ $(function(){
                     index++;
                 }
 
-                resizedBlob = new Blob([barr], {type: file.type});
-                file.blob = resizedBlob;
-                file.size = resizedBlob.size;
+                // resizedBlob = new Blob([barr], {type: file.type});
+                // file.blob = resizedBlob;
+                // file.size = resizedBlob.size;
             }
             targetImage.src = e.target.result;
         }

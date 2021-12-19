@@ -14,6 +14,7 @@ from django.urls import reverse
 from django.contrib.auth import get_user_model
 from django.utils import timezone
 from .base_page_common_view import BasePageCommonView
+from django.conf import settings
 
 User = get_user_model()
 
@@ -44,6 +45,7 @@ class ProfileEditView(BasePageCommonView, generic.UpdateView):
     def form_valid(self, form):
         user = form.save(commit=False)
         user.updated_at = timezone.now()
+        
         if 'icon_path' in self.request.FILES:
             user.icon_path = self.request.FILES['icon_path']
 
@@ -67,6 +69,7 @@ class ProfileEditView(BasePageCommonView, generic.UpdateView):
         return redirect('profile_edit_complete')
     
     def set_speciarize(self, context):
+        # コンテキストにログインユーザーに紐づく専門分野情報をセットする
         user = self.request.user
         specialize_list = list(UserSpecialize.objects.filter(user_id = user, is_deleted=False))
         index = 1
