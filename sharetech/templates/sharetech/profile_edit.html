@@ -6,7 +6,6 @@
 <meta name="discription" content="プロフィール編集">
 <title>Mypage</title>
 <link rel="stylesheet" href="{% static 'sharetech/css/common.css' %}">
-<link rel="stylesheet" href="{% static 'sharetech/css/top.css' %}">
 <link rel="stylesheet" href="{% static 'sharetech/css/profile_edit.css' %}">
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
@@ -30,6 +29,7 @@
             <div class="error_msg">
                 {% for field, error in form.errors.items %}
                 <p>{{error|striptags}}</p>
+                <p>{{field|striptags}}</p>
                 {% endfor %}
             </div>
             {% endif %}
@@ -64,6 +64,19 @@
                     {{form.first_name_en}}
                 </div>
             </div>
+            <div class="form_item large_input">
+                <label for="name">{{form.introduction.label}}</label>
+                {{form.introduction}}
+            </div>
+            <div class="form_item large_input">
+                <label for="name">{{form.archivement.label}}</label>
+                {{form.archivement}}
+            </div>
+            <div class="form_item">
+                <label for="name">{{form.company.label}}</label>
+                {{form.company}}
+            </div>
+
             <div class="form_item">
                 <label for="name">{{form.company.label}}</label>
                 {{form.company}}

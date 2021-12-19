@@ -24,7 +24,7 @@
     <main>
         <!--ログインフォーム-->
         <div class="form_wrapper">
-            <h3>ご登録申請及び、審査項目となります<br>可能な限り項目を埋めていただくことで、審査が通りやすくなります</h3>
+            <h3>ご登録内容を入力してください</h3>
             <form method="POST">
                 {% csrf_token %}
                 {% if form.errors %}
@@ -78,15 +78,15 @@
                             <label for="password_confirm">{{form.password_confirm.label}}</label>
                             {{form.password_confirm}}
                         </div>
-                        <div class="form_item">
-                            <label for="name">{{form.company.label}}</label>
-                            {{form.company}}                
-                        </div>
                     </div>
 
                     <div class="user_info_wrapper">
                         <h2>▼オプション入力項目</h2>
                         <!-- オプション入力の項目についてはこっちの要素div内に入れる -->
+                        <div class="form_item">
+                            <label for="name">{{form.company.label}}</label>
+                            {{form.company}}                
+                        </div>
                         <div class="form_item">
                             <label for="name">{{form.industry_name.label}}</label>
                             {{form.industry_name}}                

@@ -92,12 +92,15 @@ class BasePageCommonView(LoginRequiredMixin, View):
         if len(applying) > 0:
             applying_flg = str(1)
             consult_window_id = applying[0].consult_window_id.id
+            applying_title = applying[0].consult_window_id.consult_window_title
         else:
             applying_flg = str(0)
             consult_window_id = ''
+            applying_title = ''
 
         self._base_context_dict.update({
             'applying_flg': applying_flg,
             'consult_window_id': consult_window_id,
+            'applying_title': applying_title,
         })
 

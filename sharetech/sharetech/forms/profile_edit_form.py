@@ -35,6 +35,13 @@ class ProfileEditForm(ModelForm):
         label = '役職'
         )
 
+    introduction = forms.CharField(
+        widget = forms.Textarea
+    )
+    archivement = forms.CharField(
+        widget = forms.Textarea
+    )
+
     class Meta:
         model = CustomUser
         fields = {
@@ -48,6 +55,8 @@ class ProfileEditForm(ModelForm):
             'occupation_name', 
             'position_name',
             'icon_path',
+            'introduction',
+            'archivement',
         }
         labels = {
             'username': '名前',
@@ -57,6 +66,8 @@ class ProfileEditForm(ModelForm):
             'first_name_en': '名字(ローマ字)', 
             'family_name_en': '氏名(ローマ字)', 
             'icon_path': 'アイコン画像選択',
+            'introduction': '自己紹介', 
+            'archivement': '実績',
         }
 
     def __init__(self, *args, **kwargs):
@@ -67,11 +78,23 @@ class ProfileEditForm(ModelForm):
         self.fields['occupation_name'].required = False
         self.fields['position_name'].required = False
         self.fields['icon_path'].required = False
-
+        self.fields['introduction'].required = False
+        self.fields['archivement'].required = False
+        
         # 画面で画像アップロードのスタイル変更
         self.fields['icon_path'].widget.attrs['id'] = 'file'
         self.fields['icon_path'].widget.initial_text = ''
         self.fields['icon_path'].widget.input_text = ''
+
+        # 自己紹介と実績は文字数が多いためtextareaに変更
+        self.fields['introduction'].widget.attrs.update({
+            'cols': '32',
+            'rows': '16',
+        })
+        self.fields['archivement'].widget.attrs.update({
+            'cols': '32',
+            'rows': '16',
+        })
 
     def clean(self):
         super().clean() 
