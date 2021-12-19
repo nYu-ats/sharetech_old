@@ -14,6 +14,7 @@ class ConsultWindowRegisterForm(ModelForm):
             'consult_window_overview', 
             'consult_price', 
             'archivement',
+            'timerex_url'
             ]
         widgets = {
             'consult_window_overview': forms.Textarea(), # 相談窓口概要

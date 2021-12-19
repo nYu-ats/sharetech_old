@@ -13,47 +13,42 @@ color: #666;
 color: #1e90ff;
 }
 
-.form_wrapper {
-background: #F1F9FF;
-width: 100%;
-box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.form_wrapper h3{
-text-align: center;
-color: #2699FB;
-padding-top: 2em;
-}
-
-.form_wrapper .user_info_wrapper{
-  width: 45%;
-  margin: 2em 2.5%;
-  min-width: 450px;
-}
-
-.form_wrapper .user_info_wrapper .form_item{
+.consult_window_register {
+  margin-top: 1em;
+  margin-bottom: 2em;
   width: 100%;
-  padding: 2em 3em;
+  color: #666;
+  min-height: 100vh;
 }
 
-.form_wrapper .user_info_wrapper .form_item .username label{
+.consult_window_register h2{
+  margin: 2em;
+}
+
+.consult_window_register .form_container{
+  padding: 1em;
+  margin-right: 2em;
+  margin-left: 2em;
+  padding-right: 1em;
+  padding-left: 1em;
+  background-color: white;
+  border-radius: 4px;
+}
+
+.consult_window_register .form_container .form_item{
+  width: 360px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1em;
+}
+
+.consult_window_register .form_container .form_item .text_input label{
   font-size: 1.2em;
-  color: #2699FB;
   font-weight: bold;
 }
 
-.form_wrapper .role_input{
-  padding-bottom: 5em;
-}
-
-.form_wrapper .item_container{
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.form_wrapper .user_info_wrapper .form_item .username input,
-.form_wrapper .user_info_wrapper .form_item .username select{
+.consult_window_register .form_container .form_item .text_input input,
+.consult_window_register .form_container .form_item .text_input select{
 background: #F1F9FF;
 border: 2px solid #2699FB;
 border-radius: 4px;
@@ -65,14 +60,14 @@ width: 100%;
 padding: .5em;
 }
 
-.form_wrapper .form_item input:focus,
-.form_wrapper .form_item textarea:focus,
-.form_wrapper .form_item select:focus{
+.consult_window_register .form_container .form_item .text_input input:focus,
+.consult_window_register .form_container .form_item .text_input textarea:focus,
+.consult_window_register .form_container .form_item .text_input select:focus{
 border: 4px solid #2699FB;
 outline: none;
 }
 
-.form_wrapper .user_info_wrapper .form_item .username textarea{
+.consult_window_register .form_item .text_input textarea{
 background: #F1F9FF;
 border: 2px solid #2699FB;
 border-radius: 4px;
@@ -84,15 +79,14 @@ width: 100%;
 padding: .5em;
 }
 
-.form_wrapper .form_item input:-webkit-autofill,
-.form_wrapper .form_item textarea:-webkit-autofill{
+.consult_window_register .form_item .text_input input:-webkit-autofill,
+.consult_window_register .form_item .text_input textarea:-webkit-autofill{
   box-shadow: 0 0 0 1000px white inset;
 }
 
 /* カテゴリデザイン */
 .big_category label {
   font-size: 1.2em;
-  color: #2699FB;
   font-weight: bold;
 }
 
@@ -105,10 +99,11 @@ padding: .5em;
 .small_category label {
   display: block;
   position: relative;
-  margin: 6px;
-  padding: 7.5px 15px 7.5px 15px;
+  margin: 4px;
+  padding: 5px 10px 5px 10px;
   border: 3px solid #2699FB;
   border-radius: 100px;
+  font-size: 0.8em;
   font-weight: bold;
   color: #666;
   background-color: #fff;

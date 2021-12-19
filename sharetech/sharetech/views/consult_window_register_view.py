@@ -33,7 +33,8 @@ class ConsultWindowRegisterView(LoginRequiredMixin, View):
             consult_window_title = self.request.POST.get("consult_window_title"),
             consult_window_overview = self.request.POST.get("consult_window_overview"),
             consult_price = self.request.POST.get("consult_price"),
-            archivement = self.request.POST.get("archivement")
+            archivement = self.request.POST.get("archivement"),
+            timerex_url = self.request.POST.get("timerex_url")
         )
         consultWindow.save()
         # カテゴリと相談窓口のマッピングを登録
