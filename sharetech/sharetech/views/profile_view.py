@@ -25,7 +25,7 @@ class ProfileView(BasePageCommonView):
             )
         )
         create_consult_window = list(ConsultWindow.objects.filter(expert_user_id = user_info.id))
-        print(vars(user_info.icon_path))
+
         self.prepare().set_category_dict().update(
             {
                 'user_info': user_info,
