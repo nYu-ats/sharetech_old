@@ -25,6 +25,7 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'sharetec-dev-env.ap-northeast-1.elas
 # AWS 環境で実行する場合、EC2 ホスト名を追加する必要がある
 if os.getenv('EXECUTION_ENVIRONMENT', 'dev') == 'prd':
     try:
+        import requests
         TOKEN=requests.put('http://169.254.169.254/latest/api/token', headers={'X-aws-ec2-metadata-token-ttl-seconds': '21600'}).text
         headers = {'X-aws-ec2-metadata-token': TOKEN}
         EC2_PRIVATE_IP = requests.get('http://169.254.169.254/latest/meta-data/local-ipv4', timeout = 0.01, headers = headers).text
@@ -102,21 +103,33 @@ ACTIVATION_TIMEOUT_SECONDS = 60 * 30
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': os.environ.get('DATABASE_ENGINE'),
-        'NAME': os.environ.get('DATABASE_NAME'),
-        'USER' : os.environ.get('DATABASE_USER'),
-        'PASSWORD' : os.environ.get('DATABASE_PASSWORD'),
-        'HOST' : os.environ.get('DATABASE_HOST'),
-        'PORT' : os.environ.get('DATABASE_PORT'),
-        'OPTIONS' : {
-            'charset' : 'utf8mb4',
+if 'RDS_HOSTNAME' in os.environ:
+    # AWS 上 RDS 用パラメータ
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': os.environ['RDS_DB_NAME'],
+            'USER': os.environ['RDS_USERNAME'],
+            'PASSWORD': os.environ['RDS_PASSWORD'],
+            'HOST': os.environ['RDS_HOSTNAME'],
+            'PORT': os.environ['RDS_PORT'],
         }
     }
-}
-
+else:
+    # Local 実行用 DB パラメータ
+    DATABASES = {
+        'default': {
+            'ENGINE': os.environ.get('DATABASE_ENGINE'),
+            'NAME': os.environ.get('DATABASE_NAME'),
+            'USER' : os.environ.get('DATABASE_USER'),
+            'PASSWORD' : os.environ.get('DATABASE_PASSWORD'),
+            'HOST' : os.environ.get('DATABASE_HOST'),
+            'PORT' : os.environ.get('DATABASE_PORT'),
+            'OPTIONS' : {
+                'charset' : 'utf8mb4',
+            }
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -166,33 +179,33 @@ MEDIA_URL = '/img/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Logging
-LOG_BASE_DIR = os.path.join("/var", "log", "app", "sharetech")
-LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    "formatters": {"simple": {"format": "%(asctime)s [%(levelname)s] %(message)s"}},
-    "handlers": {
-        "info": {
-            "level": "INFO",
-            "class": "logging.FileHandler",
-            "filename": os.path.join(LOG_BASE_DIR, "info.log"),
-            "formatter": "simple",
-        },
-        "warning": {
-            "level": "WARNING",
-            "class": "logging.FileHandler",
-            "filename": os.path.join(LOG_BASE_DIR, "warning.log"),
-            "formatter": "simple",
-        },
-        "error": {
-            "level": "ERROR",
-            "class": "logging.FileHandler",
-            "filename": os.path.join(LOG_BASE_DIR, "error.log"),
-            "formatter": "simple",
-        },
-    },
-    "root": {
-        "handlers": ["info", "warning", "error"],
-        "level": "INFO",
-    },
-}
+# LOG_BASE_DIR = os.path.join("/var", "log", "app", "sharetech")
+# LOGGING = {
+#     "version": 1,
+#     "disable_existing_loggers": False,
+#     "formatters": {"simple": {"format": "%(asctime)s [%(levelname)s] %(message)s"}},
+#     "handlers": {
+#         "info": {
+#             "level": "INFO",
+#             "class": "logging.FileHandler",
+#             "filename": os.path.join(LOG_BASE_DIR, "info.log"),
+#             "formatter": "simple",
+#         },
+#         "warning": {
+#             "level": "WARNING",
+#             "class": "logging.FileHandler",
+#             "filename": os.path.join(LOG_BASE_DIR, "warning.log"),
+#             "formatter": "simple",
+#         },
+#         "error": {
+#             "level": "ERROR",
+#             "class": "logging.FileHandler",
+#             "filename": os.path.join(LOG_BASE_DIR, "error.log"),
+#             "formatter": "simple",
+#         },
+#     },
+#     "root": {
+#         "handlers": ["info", "warning", "error"],
+#         "level": "INFO",
+#     },
+# }
