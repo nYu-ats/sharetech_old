@@ -478,6 +478,30 @@ input:checked + .tab_class + .content_class {
     display: block;
 }
   
+/* LP一時的なメッセージ */
+.lp_temp_message{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background-color: #F1F9FF;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+    color: black;
+    font-weight: bold;
+    text-align: center;
+    width: 350px;
+    height: 150px;
+    border: solid 1px white;
+    position: fixed;
+    bottom: 196px;
+    right: 32px;
+    line-height: 1em;
+}
+
+.lp_temp_message a{
+    color: #2699FB;
+}
+
 
 
 /* レスポンシブ */
