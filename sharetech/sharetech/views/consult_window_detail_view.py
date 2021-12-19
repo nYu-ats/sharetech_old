@@ -21,15 +21,15 @@ class ConsultWindowDetailView(BasePageCommonView):
     def get(self, request, *args, **kwargs):
         login_user = self.request.user
         # デフォルトのログインユーザーの種別として相談窓口作成者以外をセットする
-        login_user_flg = self.UserCheck.other_user
+        login_user_flg = self.UserCheck.other_user.value
         consult_window_id = kwargs.get('consult_window_id')
 
         # ログインユーザーと相談窓口の関連の確認
         # TODO apply_status enum化
-        if len(list(CustomUser.objects.filter(email=login_user))) > 0:
-            login_user_flg = self.UserCheck.create_user
-        elif len(list(ConsultApply.objects.filter(user_id = login_user).filter(apply_status__in=[0, 3]))) > 0:
-            login_user_flg = self.UserCheck.applying_user
+        if ConsultWindow.objects.get(id=consult_window_id).expert_user_id == login_user:
+            login_user_flg = self.UserCheck.create_user.value
+        elif len(list(ConsultApply.objects.filter(user_id = login_user, consult_window_id=consult_window_id).filter(apply_status__in=[1, 2]))) > 0:
+            login_user_flg = self.UserCheck.applying_user.value
 
         # 相談窓口詳細取得
         consult_window_detail = ConsultWindow.objects.get(id = consult_window_id)
@@ -38,6 +38,8 @@ class ConsultWindowDetailView(BasePageCommonView):
         category_list = [category.category_id.category_name for category in list(
                 CategoryConsultWindowMapping.objects.filter(consult_window_id = consult_window_id)
                 )]
+
+        print(login_user_flg)
 
         self.prepare().set_category_dict().update(
             {
@@ -54,6 +56,7 @@ class ConsultWindowDetailView(BasePageCommonView):
                 'occupation' : consult_window_detail.expert_user_id.occupation_id.name,
                 'introduction' : consult_window_detail.expert_user_id.introduction,
                 'categories' : category_list,
+                'timerexUrl': consult_window_detail.timerex_url
             }
         )
 

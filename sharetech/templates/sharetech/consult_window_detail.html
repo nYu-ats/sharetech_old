@@ -12,7 +12,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.js"></script>
 <script src="{% static 'sharetech/js/common.js' %}"></script>
-<script src="{% static 'sharetech/js/top.js' %}"></script>
 <script src="{% static 'sharetech/js/apply_check.js' %}"></script>
 {% endblock %}
 
@@ -35,7 +34,7 @@
                 {% endfor %}
             </div>
             <p class="overview">
-                {{overview}}
+                {{overview | linebreaksbr}}
             </p>
             <div class="apply_count">
                 <p>これまで<span>{{applyed_num}}</span>人から相談を受けました</p>
@@ -52,28 +51,28 @@
                     <p class="name">{{username}}</p>
                     <p class="occupation">{{occupation}}</p>
                     <p class="introduction">
-                        {{introduction}}
+                        {{introduction | linebreaksbr}}
                     </p>
                 </div>
             </div>
             <div class="expert_history">
                 <h3 class="title">実績</h3>
                 <p>
-                    {{archivement}}
+                    {{archivement | linebreaksbr}}
                 </p>
             </div>
         </div>
-        {% if  login_user_flg == "1" %}
+        {% if  login_user_flg == 1 %}
         <div class="apply_btn">
-            <button class="button disabled"></button>
+            <button class="button disabled" disabled></button>
         </div>
-        {% elif login_user_flg == "2" %}
+        {% elif login_user_flg == 2 %}
         <div class="apply_btn">
-            <button class="button waiting">申込中</button>
+            <button class="button waiting" disabled>申込中</button>
         </div>
         {% else %}
         <div class="apply_btn">
-            <button class="button">申込に進む</button>
+            <button class="button" redirect="{{timerexUrl}}">申込に進む</button>
         </div>
         {% endif %}
     </div>
@@ -81,20 +80,5 @@
 {% endblock %}
 
 {% block footer %}
-<footer class="page_footer">
-    <div class="footer_list">
-        <ul>
-            <li>
-                <a href="">シェアテックについて</a>
-            </li>
-            <li>
-                <a href="">利用規約</a>
-            </li>
-            <li>
-                <a href="">お問い合せ</a>
-            </li>
-        </ul>
-    </div>
-    <p class="copy_write">©2021 ShareTech Co., Ltd., All rights reserved</p>
-</footer>
+{% include 'sharetech/_footer.html' %}
 {% endblock %}

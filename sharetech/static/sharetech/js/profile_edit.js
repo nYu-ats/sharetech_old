@@ -56,16 +56,9 @@ $(function(){
                     index++;
                 }
 
-                resizedBlob = new Blob([barr], {type: file.type});
-                file.blob = resizedBlob;
-                file.size = resizedBlob.size;
-                console.log("==========after trimming=====================")
-                console.log("resizedBlob.size")
-                console.log(resizedBlob.size)
-                console.log("resizedBlob")
-                console.log(resizedBlob)
-                console.log("file")
-                console.log(file)
+                // resizedBlob = new Blob([barr], {type: file.type});
+                // file.blob = resizedBlob;
+                // file.size = resizedBlob.size;
             }
             targetImage.src = e.target.result;
         }
