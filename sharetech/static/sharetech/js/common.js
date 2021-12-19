@@ -153,53 +153,6 @@ $(function(){
     $window.trigger('scroll');
 });
 
-// 記事の非同期読み込み
-$(function(){
-    var loadingIndex = 1;
-    var isLoading = false;
-    var baseURL = location.href + 'asyncLoad?page=' + document.title + '&index=';
-    // URLに#(自ページへのリンク)が含まれる可能性があるためトリミング
-    var baseURL = baseURL.replace('#', '');
-
-    var $asyncLoadArticleArea = $('.async_load_article_area');
-    var $window = $(window);
-    var $loadingGif = $('.loading_gif');
-    var $bottomArticleArea = $('.article_search');
-
-    // 正常・エラーに関わらずajaxが完了したところで、初期状態に戻す
-    $(document).on('ajaxComplete', function(){
-        $loadingGif.removeClass('loading_gif is_loading');
-        $loadingGif.addClass('loading_gif');
-    });
-
-    // ローディングgifが画面に配置されていれば無限ローディングの対象とする
-    if($loadingGif !== null){
-        $window.on('scroll', function(){
-            if(($window.height() + $window.scrollTop() === $(document).height()) && !isLoading){
-                isLoading = true;
-                $loadingGif.addClass('loading_gif is_loading');
-                console.log(baseURL);
-                // データ取得処理
-                $.ajax({
-                    url: baseURL + loadingIndex,
-                    type: 'GET', 
-                    dataType: 'html',
-                    timeout: 5000,
-                }).done(function(data){
-                    console.log(data);
-                    $asyncLoadArticleArea.append(data);
-                    // エラーの場合は再度リクエストを投げないようにするため、こちらでフラグをoffにする
-                    isLoading = false;
-                }).fail(function(){
-                    console.log('error');
-                });
-
-                loadingIndex += 1;
-            }
-    });
-    }
-});
-
 // 申込状況確認フォーム
 $(function(){
     let requestURL = 'http://' + location.host + '/applyStatus/';

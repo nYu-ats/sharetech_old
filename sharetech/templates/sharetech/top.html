@@ -132,7 +132,7 @@
   <h2 class="recommend_article_title">
       {{keyword}}
   </h2>        
-  <div class="flex_block async_load_article_area">
+  <div class="flex_block">
     {% for article in keyword_filterd %}
     <div class="article">
       <a href="{% url 'consult_window_detail' article.number %}">
@@ -160,7 +160,7 @@
   <h2 class="recommend_article_title">
       {{category_name}}
   </h2>        
-  <div class="flex_block async_load_article_area">
+  <div class="flex_block">
     {% for article in category_filterd %}
     <div class="article">
       <a href="{% url 'consult_window_detail' article.number %}">

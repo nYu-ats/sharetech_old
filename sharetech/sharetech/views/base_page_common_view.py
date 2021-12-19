@@ -29,6 +29,7 @@ class BasePageCommonView(LoginRequiredMixin, View):
     # ログイン状態の場合の共通表示制御
     def prepare(self):
         # ログインユーザー情報取得
+        self._base_context_dict.clear()
         login_user = self.request.user
         login_user_id = User.objects.get(email = login_user)
         self._base_context_dict.update(
