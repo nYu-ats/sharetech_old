@@ -46,6 +46,7 @@ class ProfileEditView(BasePageCommonView, generic.UpdateView):
         user.updated_at = timezone.now()
         if 'icon_path' in self.request.FILES:
             user.icon_path = self.request.FILES['icon_path']
+        print(self.request.FILES)
 
         user.save()
 

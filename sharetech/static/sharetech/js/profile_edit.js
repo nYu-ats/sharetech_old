@@ -59,9 +59,18 @@ $(function(){
                 resizedBlob = new Blob([barr], {type: file.type});
                 file.blob = resizedBlob;
                 file.size = resizedBlob.size;
+                console.log("==========after trimming=====================")
+                console.log("resizedBlob.size")
+                console.log(resizedBlob.size)
+                console.log("resizedBlob")
+                console.log(resizedBlob)
+                console.log("file")
+                console.log(file)
             }
             targetImage.src = e.target.result;
         }
+        console.log("==========before trimming=====================")
+        console.log(file)
         reader.readAsDataURL(file);
     });
 
