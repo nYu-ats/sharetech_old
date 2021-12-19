@@ -20,11 +20,10 @@ class ProfileView(BasePageCommonView):
 
         user_id = self.request.user
         user_info = CustomUser.objects.get(email=user_id)
-        applyed_consult_window = list(
-            ConsultWindow.objects.filter(
-                pk__in = ConsultApply.objects.filter(user_id = user_info.id)
-            )
-        )
+        apply_history_list = list(ConsultApply.objects.filter(user_id = user_info.id))
+        # 重複をなくすため一旦set変換
+        applyed_consult_window_set = {model.consult_window_id for model in apply_history_list}
+
         create_consult_window = list(ConsultWindow.objects.filter(expert_user_id = user_info.id))
         specialize_list = list(UserSpecialize.objects.filter(user_id=user_info.id))
 
@@ -32,7 +31,7 @@ class ProfileView(BasePageCommonView):
             {
                 'user_info': user_info,
                 'icon_img': ImageConstants.get_user_icon_path() + user_info.icon_path.name if user_info.icon_path.name != None else ImageConstants.get_default_icon_path(),
-                'applyed_consult_window': self.create_consult_window_list(applyed_consult_window),
+                'applyed_consult_window': self.create_consult_window_list(list(applyed_consult_window_set)),
                 'create_consult_window': self.create_consult_window_list(create_consult_window),
                 'specialize': specialize_list,
             }
