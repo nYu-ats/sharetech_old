@@ -62,8 +62,6 @@ $(function(){
             }
             targetImage.src = e.target.result;
         }
-        console.log("==========before trimming=====================")
-        console.log(file)
         reader.readAsDataURL(file);
     });
 
