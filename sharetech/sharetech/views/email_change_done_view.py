@@ -1,4 +1,5 @@
 from django.views import generic
+from sharetech.constants.messages import GeneralMessages
 
 class EmailChangeDoneView(generic.TemplateView):
 
@@ -6,9 +7,8 @@ class EmailChangeDoneView(generic.TemplateView):
 
     def get_context_data(self):
         context = super().get_context_data()
-        # TODO メッセージは1ファイルで管理するようにする
-        context['message'] = '新しいメールアドレスに認証URLを送信しました。<br>ご確認の上、添付のURLにアクセスしてください。'
-        # ログアウト状態を示すフラグ
+        context['message'] = GeneralMessages().change_email
+        # ユーザーアイコン非表示にするため、ログアウト状態を画面に渡す
         context['logout'] = True
         return context
 

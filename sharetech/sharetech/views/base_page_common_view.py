@@ -22,7 +22,6 @@ class BasePageCommonView(LoginRequiredMixin, View):
         STANDARD = 24
         LARGE = 36
         
-    DEFAULT_USER_ICON_PATH = 'default_avater.png'
     _template = 'sharetech/top.html'
     # templateへ渡す相談窓口dict
     _base_context_dict = {}

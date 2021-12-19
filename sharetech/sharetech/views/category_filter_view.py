@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
-from sharetech.utils.model_template_adapter import ConsultWindodwAdapter
 from sharetech.models.category_consult_window_mapping import CategoryConsultWindowMapping
 from sharetech.models.category_mst import CategoryMst
 from sharetech.models.consult_window import ConsultWindow

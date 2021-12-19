@@ -4,7 +4,9 @@ from ..models.user import CustomUser
 from django.forms import ModelForm
 from django import forms
 from sharetech.utils import ConvertChoiceFieldDisplay
-from sharetech.models.user import (
+import re
+from sharetech.constants.messages import ErrorMessage, RePatterns
+from sharetech.models import (
     CustomUser,
     IndustryMst,
     OccupationMst,
@@ -36,6 +38,7 @@ class ProfileEditForm(ModelForm):
     class Meta:
         model = CustomUser
         fields = {
+            'username',
             'company', 
             'first_name_jp', 
             'family_name_jp', 
@@ -47,9 +50,10 @@ class ProfileEditForm(ModelForm):
             'icon_path',
         }
         labels = {
+            'username': '名前',
             'company': '会社名', 
-            'first_name_jp': '名字', 
-            'family_name_jp': '氏名', 
+            'first_name_jp': '名字(カナ)', 
+            'family_name_jp': '氏名(カナ)', 
             'first_name_en': '名字(ローマ字)', 
             'family_name_en': '氏名(ローマ字)', 
             'icon_path': 'アイコン画像選択',
@@ -71,3 +75,74 @@ class ProfileEditForm(ModelForm):
 
     def clean(self):
         super().clean() 
+
+    def clean_first_name_jp(self):
+        # カタカナ名チェック
+        first_name_jp = self.cleaned_data.get('first_name_jp')
+        katakana = re.compile(RePatterns().kana_pattern)
+        
+        if not katakana.fullmatch(first_name_jp):
+            raise forms.ValidationError(ErrorMessage().failuer_name_kana)
+        
+        return first_name_jp
+
+    def clean_family_name_jp(self):
+        # カタカナ名チェック
+        family_name_jp = self.cleaned_data.get('family_name_jp')
+        katakana = re.compile(RePatterns().kana_pattern)
+        
+        if not katakana.fullmatch(family_name_jp):
+            raise forms.ValidationError(ErrorMessage().failuer_name_kana)
+
+        return family_name_jp
+
+    def clean_first_name_en(self):
+        # ローマ字名チェック
+        first_name_en = self.cleaned_data.get('first_name_en')
+        roma = re.compile(RePatterns().roma_pattern)
+        
+        if not roma.fullmatch(first_name_en):
+            raise forms.ValidationError(ErrorMessage().failuer_name_roma)
+
+        return first_name_en
+
+    def clean_family_name_en(self):
+        # ローマ字名チェック
+        family_name_en = self.cleaned_data.get('family_name_en')
+        roma = re.compile(RePatterns().roma_pattern)
+        
+        if not roma.fullmatch(family_name_en):
+            raise forms.ValidationError(ErrorMessage().failuer_name_roma)
+
+        return family_name_en
+
+    def set_speciarize(self, **kwargs):
+        # ログインユーザーの専門分野を取得、fieldにセットする
+        user_id = kwargs.get('instance').id
+        specialize_list = list(UserSpecialize.objects.filter(user_id = user_id))
+        index = 1
+        if len(specialize_list) != 0:
+            self.fields['specialize'] = {}
+            for specialize in specialize_list:
+                specialize_id = 'specialize_' + str(index)
+                self.fields['specialize'][specialize_id] = forms.CharField(
+                    label = '専門分野',
+                    required = False,
+                    strip = False,
+                    max_length = UserSpecialize._meta.get_field('specialize').max_length,
+                    initial = specialize,
+                    # widget = forms.TextInput(attrs={'id': specialize_id})
+                    )
+                    
+        else:
+            # 専門分野を1件も登録していなかった場合は空のinput fieldをセットする
+            self.fields['specialize'] = {}
+            specialize_id = 'specialize_' + str(index) 
+            self.fields['specialize'][specialize_id] = forms.CharField(
+                label = '専門分野',
+                required = False,
+                strip = False,
+                max_length = UserSpecialize._meta.get_field('specialize').max_length,
+                initial = '',
+                # widget = forms.TextInput(attrs={'id': specialize_id})
+                )

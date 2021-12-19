@@ -14,9 +14,9 @@ class ConsultWindowDetailView(BasePageCommonView):
     '''
     class UserCheck(IntEnum):
         # 記事詳細ページにアクセスしてきたユーザーの判別に使用
-        other_user = 0
-        create_user = 1
-        applying_user = 2
+        other_user = "0"
+        create_user = "1"
+        applying_user = "2"
 
     def get(self, request, *args, **kwargs):
         login_user = self.request.user
@@ -50,7 +50,7 @@ class ConsultWindowDetailView(BasePageCommonView):
                 'expert_user_id' : consult_window_detail.expert_user_id.id,
                 'icon_path' : Constants.get_image_path() + consult_window_detail.expert_user_id.icon_path if consult_window_detail.expert_user_id.icon_path != None else ImageConstants.get_default_icon_path(),
                 'company' : consult_window_detail.expert_user_id.company,
-                'username' : consult_window_detail.expert_user_id.username_kana,
+                'username' : consult_window_detail.expert_user_id.username,
                 'occupation' : consult_window_detail.expert_user_id.occupation_id.name,
                 'introduction' : consult_window_detail.expert_user_id.introduction,
                 'categories' : category_list,
