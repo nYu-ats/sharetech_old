@@ -90,12 +90,11 @@ git clone https://github.com/aws/aws-elastic-beanstalk-cli-setup.git
 ./aws-elastic-beanstalk-cli-setup/scripts/bundled_installer
 
 # Path
-pipenv shell
+cd /usr/src/sharetech
 echo 'export PATH="/root/.ebcli-virtual-env/executables:$PATH"' >> ~/.bash_profile && source ~/.bash_profile
 echo 'export PATH=/root/.pyenv/versions/3.7.2/bin:$PATH' >> /root/.bash_profile && source /root/.bash_profile
 
 # Setup
-cd /usr/src/sharetech
 eb init
 
 # >>
