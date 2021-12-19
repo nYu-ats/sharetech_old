@@ -3,7 +3,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, render
 from django.contrib.auth import get_user_model
 from ..forms.consult_window_register_form import ConsultWindowRegisterForm
-from sharetech.utils.model_template_adapter import *
 from sharetech.models import *
 
 # ユーザーモデル(カスタム)取得
