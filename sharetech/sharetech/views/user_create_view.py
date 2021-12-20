@@ -8,13 +8,15 @@ from django.core.signing import dumps
 from django.template.loader import render_to_string
 from django.core.mail import send_mail
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth import get_user_model
 
 class UserCreateView(generic.CreateView):
     '''
     ユーザー新規登録
     '''
 
-    form = UserCreateForm
+    model = get_user_model()
+    form_class = UserCreateForm
     template_name = 'sharetech/register.html'
 
     def form_valid(self, form):

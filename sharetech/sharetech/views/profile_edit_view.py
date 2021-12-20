@@ -19,7 +19,7 @@ class ProfileEditView(BasePageCommonView, generic.UpdateView):
     '''
     プロフィール編集画面
     '''
-    model = User
+    model = get_user_model()
     form_class = ProfileEditForm
     template_name = 'sharetech/profile_edit.html'
 
