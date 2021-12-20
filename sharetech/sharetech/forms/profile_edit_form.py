@@ -139,6 +139,19 @@ class ProfileEditForm(ModelForm):
 
         return family_name_en
 
+    def clean_icon_path(self):
+        # ファイルサイズ制限
+        icon_path = self.cleaned_data.get('icon_path')
+
+        IMG_SIZE = 2*1000*1000
+        if icon_path.size > IMG_SIZE:
+            raise forms.ValidationError(
+                '画像サイズが大きすぎます。%sMBより小さいサイズの画像をお願いします。' \
+                % str(IMG_SIZE//1000//1000)
+            )
+
+        return icon_path
+
     def set_speciarize(self, **kwargs):
         # ログインユーザーの専門分野を取得、fieldにセットする
         user_id = kwargs.get('instance').id

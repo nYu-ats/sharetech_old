@@ -18,22 +18,23 @@ $(function(){
     let $previewArea = $fileField.find('canvas');
     let file = null;
     let blob = null;
-
+    
+    
     $inputArea.change(function(){
+        
         // アップロードファイルの画像判定
         file = $(this).prop('files')[0];
-        if (file.type != 'image.jpeg' && file.type != 'image/png'){
+        if (file.type != 'image/jpeg' && file.type != 'image/png'){
             file = null;
             blob = null;
             return 
         }
-
+        
         let reader = new FileReader();
         let targetImage = new Image();
         reader.onload = function(e){
             targetImage.onload = function(){
                 // プレビュー描画
-                targetImage.src = reader.result;
                 let imageSize = ResizeImage(targetImage);
                 
                 $previewArea.attr('width', imageSize.width).attr('height', imageSize.height);
@@ -42,7 +43,7 @@ $(function(){
                 context.drawImage(
                     targetImage,0,0,targetImage.width,targetImage.height,0,0,imageSize.width,imageSize.height
                     );
-                
+
                 // アップロード用のリサイズ画像生成
                 let base64 = $previewArea.get(0).toDataURL(file.type);
                 let bin = atob(base64.split('base64,')[1]);
@@ -61,7 +62,6 @@ $(function(){
             }
             targetImage.src = e.target.result;
         }
-
         reader.readAsDataURL(file);
     });
 

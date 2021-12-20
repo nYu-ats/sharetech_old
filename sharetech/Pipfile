@@ -8,6 +8,9 @@ django = "*"
 pymysql = "*"
 pillow = "*"
 cryptography = "*"
+boto3 = "*"
+django-storages = "*"
+requests = "*"
 
 [dev-packages]
 
