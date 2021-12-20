@@ -1,8 +1,5 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.decorators import login_required
-from django.http.response import JsonResponse
 from sharetech.models.consult_window import ConsultWindow
 from sharetech.models.category_mst import CategoryMst
 from sharetech.models.user import CustomUser

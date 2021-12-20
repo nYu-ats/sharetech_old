@@ -29,7 +29,6 @@
             <div class="error_msg">
                 {% for field, error in form.errors.items %}
                 <p>{{error|striptags}}</p>
-                <p>{{field|striptags}}</p>
                 {% endfor %}
             </div>
             {% endif %}
