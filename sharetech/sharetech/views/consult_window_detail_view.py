@@ -50,10 +50,10 @@ class ConsultWindowDetailView(BasePageCommonView):
                 'created_at' : consult_window_detail.created_at,
                 'archivement' : consult_window_detail.archivement,
                 'expert_user_id' : consult_window_detail.expert_user_id.id,
-                'icon_path' : Constants.get_image_path() + consult_window_detail.expert_user_id.icon_path if consult_window_detail.expert_user_id.icon_path != None else ImageConstants.get_default_icon_path(),
+                'icon_path' : ImageConstants.get_user_icon_path() + consult_window_detail.expert_user_id.icon_path.name if consult_window_detail.expert_user_id.icon_path.name != None else ImageConstants.get_default_icon_path(),
                 'company' : consult_window_detail.expert_user_id.company,
                 'username' : consult_window_detail.expert_user_id.username,
-                'occupation' : consult_window_detail.expert_user_id.occupation_id.name,
+                'occupation' : consult_window_detail.expert_user_id.occupation_id.name if consult_window_detail.expert_user_id.occupation_id else '',
                 'introduction' : consult_window_detail.expert_user_id.introduction,
                 'categories' : category_list,
                 'timerexUrl': consult_window_detail.timerex_url

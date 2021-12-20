@@ -53,6 +53,8 @@ class ErrorMessage:
 
     __FAILURE_EMAIL_MATCH = "確認用メールアドレスが一致しません"
 
+    __FAILURE_TIMEREX_URL_PATTERN = "TimeRexのURLが誤っています"
+
     @property
     def failuer_login_auth(self):
         return self.__FAILURE_LOGIN_AUTH
@@ -93,6 +95,10 @@ class ErrorMessage:
     def failuer_email_match(self):
         return self.__FAILURE_EMAIL_MATCH
 
+    @property
+    def failuer_timerex_url_pattern(self):
+        return self.__FAILURE_TIMEREX_URL_PATTERN
+
 class RePatterns:
 
     __EMAIL_PATTERN = '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
@@ -102,6 +108,8 @@ class RePatterns:
     __KANA_PATTERN = '[\u30A1-\u30F4]+'
     
     __ROMA_PATTERN = '^[a-zA-Z]+$'
+
+    __TIMEREX_URL_PATTERN = 'https://timerex.net/[\w/:%#\$&\?\(\)~\.=\+\-]+'
 
     @property
     def email_pattern(self):
@@ -118,3 +126,7 @@ class RePatterns:
     @property
     def roma_pattern(self):
         return self.__ROMA_PATTERN
+
+    @property
+    def timerex_url_pattern(self):
+        return self.__TIMEREX_URL_PATTERN

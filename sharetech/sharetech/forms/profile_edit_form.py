@@ -34,7 +34,8 @@ class ProfileEditForm(ModelForm):
         empty_label='役職を選択してください',
         label = '役職'
         )
-
+    
+    # 自己紹介と実績は文字数が多いためtextareaに変更
     introduction = forms.CharField(
         widget = forms.Textarea
     )

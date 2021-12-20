@@ -10,7 +10,11 @@ from django.core.mail import send_mail
 from django.contrib.auth.hashers import make_password
 
 class UserCreateView(generic.CreateView):
-    form_class = UserCreateForm
+    '''
+    ユーザー新規登録
+    '''
+
+    form = UserCreateForm
     template_name = 'sharetech/register.html'
 
     def form_valid(self, form):
