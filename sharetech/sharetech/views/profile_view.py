@@ -30,7 +30,7 @@ class ProfileView(BasePageCommonView):
         self.prepare().set_category_dict().update(
             {
                 'user_info': user_info,
-                'icon_img': ImageConstants.get_user_icon_path() + user_info.icon_path.name if user_info.icon_path.name != None else ImageConstants.get_default_icon_path(),
+                'icon_img': ImageConstants.get_user_icon_path() + user_info.icon_path.name if user_info.icon_path.name != '' else ImageConstants.get_default_icon_path(),
                 'applyed_consult_window': self.create_consult_window_list(list(applyed_consult_window_set)),
                 'create_consult_window': self.create_consult_window_list(create_consult_window),
                 'specialize': specialize_list,
