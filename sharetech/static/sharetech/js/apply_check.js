@@ -4,7 +4,7 @@ $(function(){
     let requestURL = baseURL + '/applyCheck/';
     let $applyBtn = $('.apply_btn .button');
 
-    const redirectURL = 'https://www.wrike.com/form/eyJhY2NvdW50SWQiOjQzMzUzNjEsInRhc2tGb3JtSWQiOjU5OTYyNn0JNDc5MTY3NzYzNjk4Ngk3NjAxZDQyZTNlMDUwNmJmNTgwMzFlMWM5ZDVhODkyNThhNmEzYjlhMWM5MjlmMGNkN2E1YWVhNWE2MWYxNDgy';
+    const redirectURL = $applyBtn.attr('redirect');
 
     $applyBtn.on('click', function(){
         // データ取得処理
@@ -21,7 +21,7 @@ $(function(){
                 window.open(redirectURL, '_blank');
             }
         }).fail(function(){
-            console.log('error');
+            
         });
     });
 });

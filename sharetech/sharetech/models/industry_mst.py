@@ -18,7 +18,7 @@ class IndustryMst(models.Model):
     '''
 
     # 業種名
-    industry_name = models.CharField(
+    name = models.CharField(
         verbose_name = 'Industry Name',
         max_length = 64,
     )

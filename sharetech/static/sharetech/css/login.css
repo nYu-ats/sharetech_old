@@ -16,14 +16,17 @@
   min-width: 370px;
   background-color: #F1F9FF;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-  }
+}
 
-  .form_wrapper .error_msg{
-    text-align: center;
-    padding: 3em 0;
-    color: red;
-    font-weight: bold;
-    }
+.form_wrapper .error_msg{
+  text-align: center;
+  padding: 3em 0;
+}
+
+.form_wrapper .error_msg p{
+  color: red;
+  font-weight: bold;
+}
 
 .form_wrapper h1{
   font-weight: normal;

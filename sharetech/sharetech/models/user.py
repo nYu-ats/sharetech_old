@@ -9,6 +9,7 @@ from django.db import models
 from .industry_mst import IndustryMst
 from .position_mst import PositionMst
 from .occupation_mst import OccupationMst
+from sharetech.utils.set_image_name import SetImageName
 
 # ユーザーマネージャカスタム
 class CustomUserManager(BaseUserManager):
@@ -46,7 +47,6 @@ class CustomUserManager(BaseUserManager):
         extra_fields.setdefault('role_id', **extra_fields.get('role_id'))
         return self._create_user(username, email, password, **extra_fields)
 
-
 # ユーザーモデルカスタマイズ
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     """
@@ -76,7 +76,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         verbose_name = 'First Name Japanese',
         help_text='必須項目です。全角文字で20文字以下にしてください。',
         max_length = 20,
-        validators=[username_validator],
     )
 
     # ユーザー日本語名字
@@ -84,7 +83,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         verbose_name = 'Family Name Japanese',
         help_text='必須項目です。全角文字で20文字以下にしてください。',
         max_length = 20,
-        validators=[username_validator],
     )
 
     # ユーザー英語名前
@@ -92,7 +90,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         verbose_name = 'First Name Englist',
         help_text='必須項目です。全角文字で20文字以下にしてください。',
         max_length = 20,
-        validators=[username_validator],
     )
 
     # ユーザー英語名字
@@ -100,15 +97,13 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         verbose_name = 'Family Name Englist',
         help_text='必須項目です。全角文字で20文字以下にしてください。',
         max_length = 20,
-        validators=[username_validator],
     )
 
     # ユーザー名
-    username_kana = models.CharField(
-        verbose_name = 'Name Kana',
-        help_text='必須項目です。全角文字で50文字以下にしてください。',
+    username = models.CharField(
+        verbose_name = 'Name',
         max_length = 64,
-        validators=[username_validator],
+        default = '',
     )
 
     # 権限
@@ -116,18 +111,26 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         verbose_name = 'Account Role',
         max_length = 1,
         choices = roleChoices,
+        default = 2,
     )
     
     # アイコン画像
-    icon_path = models.CharField(
+    icon_path = models.ImageField(
         verbose_name = 'Icon Image Path',
-        max_length = 512,
+        upload_to = SetImageName.set_icon_name,
         null = True,
     )
 
     # 自己紹介文
     introduction = models.CharField(
         verbose_name = 'Introduction',
+        max_length = 512,
+        null = True,
+    )
+
+    # 実績
+    archivement = models.CharField(
+        verbose_name = 'Archivement',
         max_length = 512,
         null = True,
     )
@@ -237,6 +240,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     # ユーザーを一意に特定する値
     USERNAME_FIELD = 'email'
 
-    def clean(self):
-        super().clean()
-        self.email = self.__class__.objects.normalize_email(self.email)
+    # def clean(self):
+    #     super().clean()
+    #     self.email = self.__class__.objects.normalize_email(self.email)

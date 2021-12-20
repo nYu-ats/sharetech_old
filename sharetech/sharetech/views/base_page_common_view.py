@@ -22,30 +22,31 @@ class BasePageCommonView(LoginRequiredMixin, View):
         STANDARD = 24
         LARGE = 36
         
-    DEFAULT_USER_ICON_PATH = 'default_avater.png'
     _template = 'sharetech/top.html'
     # templateへ渡す相談窓口dict
-    _selected_article_dict = {}
+    _base_context_dict = {}
 
     # ログイン状態の場合の共通表示制御
-    def dispatch(self, request, *args, **kwargs):
+    def prepare(self):
         # ログインユーザー情報取得
+        self._base_context_dict.clear()
         login_user = self.request.user
         login_user_id = User.objects.get(email = login_user)
-        self._selected_article_dict.update(
+        self._base_context_dict.update(
             {
-                'login_user_icon': ImageConstants.get_image_path() + login_user_id.icon_path if login_user_id.icon_path != None else ImageConstants.get_default_icon_path(),
+                'login_user_icon': ImageConstants.get_user_icon_path() + login_user_id.icon_path.name if login_user_id.icon_path.name != None else ImageConstants.get_default_icon_path(),
             }
         )
         # 申込中の相談があるか否か判定
         self.__set_apply_status(login_user_id)
-        return super(BasePageCommonView, self).dispatch(request, *args, **kwargs)
+
+        return self
 
     # templateへ渡すパラメータにカテゴリデータをセット
     def set_category_dict(self):
         # すでにカテゴリ取得済みの場合は処理をスキップ
-        if 'category_dict' in self._selected_article_dict:
-            return self._selected_article_dict
+        if 'category_dict' in self._base_context_dict:
+            return self._base_context_dict
 
         category_dict = {}
         
@@ -57,13 +58,13 @@ class BasePageCommonView(LoginRequiredMixin, View):
                             if category.parent_category_id.category_name == big_cat
                             ]
 
-        self._selected_article_dict.update(
+        self._base_context_dict.update(
                 {
                 'category_dict' : category_dict
                 }
             )
 
-        return self._selected_article_dict
+        return self._base_context_dict
 
     def create_consult_window_list(self, consult_window_models):
         consult_window_list = []
@@ -71,7 +72,7 @@ class BasePageCommonView(LoginRequiredMixin, View):
         for _, consult_window_model in enumerate(consult_window_models):
             consult_window_content = {
                 'number' : str(consult_window_model.id),
-                'expert_icon_path' : Constants.get_image_path() + consult_window_model.expert_user_id.icon_path if consult_window_model.expert_user_id.icon_path != None else Constants.get_image_path() + self.DEFAULT_USER_ICON_PATH,
+                'expert_icon_path' : ImageConstants.get_user_icon_path() + consult_window_model.expert_user_id.icon_path.name if consult_window_model.expert_user_id.icon_path.name != None else ImageConstants.get_default_icon_path(),
                 'created_at' : consult_window_model.created_at,
                 'title' : consult_window_model.consult_window_title,
                 'applyed_num' : consult_window_model.applyed_num,
@@ -88,15 +89,18 @@ class BasePageCommonView(LoginRequiredMixin, View):
         # TODO 複数申込中があった場合の対応(templateと合わせて対応の必要あり)
         # TODO 申込済みについても、画面制御が必要
         applying = list(ConsultApply.objects.filter(user_id = login_user_id, apply_status = 1))
-        if not applying:
-            applying_flg = str(0)
-            consult_window_id = ''
-        else:
+        if len(applying) > 0:
             applying_flg = str(1)
             consult_window_id = applying[0].consult_window_id.id
+            applying_title = applying[0].consult_window_id.consult_window_title
+        else:
+            applying_flg = str(0)
+            consult_window_id = ''
+            applying_title = ''
 
-        self._selected_article_dict.update({
+        self._base_context_dict.update({
             'applying_flg': applying_flg,
             'consult_window_id': consult_window_id,
+            'applying_title': applying_title,
         })
 

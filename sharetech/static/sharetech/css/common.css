@@ -44,9 +44,9 @@ a{
     box-shadow: -1px 1px 8px 4px rgb(65, 65, 65, 0.8);
 }
 
-.page_header.sticky{
+.page_header.clone{
   position: fixed;
-  top: 0;
+  top: -105px;
 }
 
 .page_header .global_nav{
@@ -459,3 +459,56 @@ a{
 .page_footer .copy_write{
     margin-top: 10px;
 }
+
+/* エラーメッセージ */
+.form_wrapper .error_msg,
+.form_container .error_msg{
+    text-align: center;
+    padding: 3em 0;
+}
+  
+.form_wrapper .error_msg p,
+.form_container .error_msg p{
+    color: red;
+    font-weight: bold;
+}
+
+/* 500エラーページ */
+.container{
+    text-align: center;
+    height: 70vh;
+ }
+ 
+ .container .system_error h1,
+ .container .system_error  p{
+     color: #666;
+ }
+ 
+ .container .system_error{
+     margin-top: 20vh;
+ }
+ 
+ .container .system_error  p{
+     font-size: 1.25em;
+     font-weight: bold;
+ }
+ 
+ .return_to_toppage{
+     text-align: center;
+ }
+ 
+ .return_to_toppage a{
+     font-weight: bold;
+     min-width: 250px;
+     display: inline-block;
+     border-radius: .5em;
+     background-color: #2699FB;
+     border: 2px solid #2699FB;
+     text-align: center;
+     padding: .5em 1em;
+     margin: 3em 1em;
+     font-size: 1.2em;
+     cursor: pointer;
+     color: white;
+     transition: .5s;
+ }

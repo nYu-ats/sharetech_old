@@ -42,7 +42,6 @@ main .split .split_left .split_left_inner{
   position: -webkit-sticky;
   position: sticky;
   top: 120px;
-  bottom: 60px;
   overflow-y: auto;
   height: 70vh;
   margin-left: 1em;
@@ -93,10 +92,8 @@ main .split .split_right{
 }
 
 .flex_block .article .contain_img{
-    width: 70%;
-    height: 70%;
-    min-width: 150px;
-    min-height: 150px;
+    width: 175px;
+    height: 175px;
     margin-top: 10px;
     margin-bottom: 10px;
     display: block;

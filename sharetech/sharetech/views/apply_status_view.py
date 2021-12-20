@@ -18,6 +18,7 @@ class ApplyStatusView(BasePageCommonView):
         consult_apply = ConsultApply.objects.get(
             consult_window_id = int(apply_data.get('windowId')),
             user_id = CustomUser.objects.get(email = self.request.user).id,
+            apply_status = 1,
             )
         # 申込ステータス更新
         consult_apply.apply_status = int(apply_data.get('applyStatus'))

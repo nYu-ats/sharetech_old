@@ -4,6 +4,8 @@ from ..models.user import CustomUser
 from django.forms import ModelForm
 from django import forms
 from django.contrib.auth.hashers import make_password
+from sharetech.validators.custom_validator import email_validate
+from sharetech.constants.messages import ErrorMessage
 
 class EmailChangeForm(ModelForm):
     '''
@@ -14,6 +16,9 @@ class EmailChangeForm(ModelForm):
         model = CustomUser
         fields = {
             'tmp_email',
+        }
+        labels = {
+            'tmp_email': '新しいメールアドレス',
         }
     
     email_confirm = forms.CharField(
@@ -26,6 +31,13 @@ class EmailChangeForm(ModelForm):
     def __init__(self, *args, **kwargs):
         kwargs.setdefault('label_suffix', '')
         super().__init__(*args, **kwargs)
+        # エラーメッセージ変更のため、defaultのvalidatorを上書き
+        self.fields['tmp_email'].validators = [email_validate]
     
     def clean(self):
         super().clean()
+        email = self.cleaned_data.get('tmp_email')
+        email_confirm = self.cleaned_data.get('email_confirm')
+
+        if email != email_confirm:
+            raise forms.ValidationError(ErrorMessage().failuer_email_match)

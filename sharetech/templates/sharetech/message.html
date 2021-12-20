@@ -20,7 +20,7 @@
 <div class="profile_edit">
     <div class="profile_edit">
         <div class="container">
-            <h2 class="profile_edit_complet_msg">{{ message }}</h2>
+            <h2 class="profile_edit_complet_msg">{{ message | linebreaksbr }}</h2>
             <div class="return_to_mypage">
                 <a href="{% url 'profile' %}">マイページへ戻る</a>
             </div>        
@@ -30,20 +30,5 @@
 {% endblock %}
 
 {% block footer %}
-<footer class="page_footer">
-    <div class="footer_list">
-        <ul>
-            <li>
-                <a href="">シェアテックについて</a>
-            </li>
-            <li>
-                <a href="">利用規約</a>
-            </li>
-            <li>
-                <a href="">お問い合せ</a>
-            </li>
-        </ul>
-    </div>
-    <p class="copy_write">©2021 ShareTech Co., Ltd., All rights reserved</p>
-</footer>
+{% include 'sharetech/_footer.html' %}
 {% endblock %}
