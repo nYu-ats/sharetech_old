@@ -18,9 +18,14 @@ class ConsultWindowCreateView(BasePageCommonView, generic.CreateView):
     '''
     相談窓口新規作成
     '''
-
+    
     form_class = ConsultWindowEditForm
     template_name = 'sharetech/consult_window_edit.html'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        # プロフィール更新対象としてログインユーザー情報を初期セット
+        return queryset.filter(email = self.request.user)
 
     def get_context_data(self, **kwargs):
         # 実績に初期値を設定する
