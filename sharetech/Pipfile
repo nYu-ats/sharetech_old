@@ -11,6 +11,7 @@ cryptography = "*"
 boto3 = "*"
 django-storages = "*"
 requests = "*"
+tzdata = "*"
 
 [dev-packages]
 
