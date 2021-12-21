@@ -155,7 +155,7 @@ $(function(){
 
 // 申込状況確認フォーム
 $(function(){
-    let requestURL = 'http://' + location.host + '/applyStatus/';
+    let requestURL = location.protocol +'//' + location.host + '/applyStatus/';
     let $applyStatus = $('.overlay .apply_declear');
     let windowId = $applyStatus.attr('value_id');
     let date = $applyStatus.attr('value_date');
@@ -193,6 +193,12 @@ $(function(){
                     $overlay.remove();
                 }, 1500);
             }
+        }).fail(function(){
+            $applyStatus.empty();
+            $applyStatus.append('<h3>リクエストの送信に失敗しました</h3>');
+            setTimeout(function(){
+                $overlay.remove();
+            }, 1500);
         });
 
     });
