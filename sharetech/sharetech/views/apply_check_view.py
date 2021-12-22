@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.views import View
 from .base_page_common_view import BasePageCommonView
 from django.http.response import JsonResponse
 from sharetech.models.user import CustomUser
@@ -10,12 +9,19 @@ class ApplyCheckView(BasePageCommonView):
     '''
     申込申請
     '''
+
+    # TODO ここPOSTで受けなきゃ、、
     def get(self, request, *args, **kwargs):
-        apply_result = ConsultApply.objects.create(
-            consult_window_id = ConsultWindow.objects.get(id = kwargs['consult_window_id']),
-            user_id = CustomUser.objects.get(email = self.request.user),
-            apply_status = 1,
-        )
-        return JsonResponse({"result" : apply_result.id})
+        # ajaxリクエストか否か判定
+        if self.request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
+            apply_result = ConsultApply.objects.create(
+                consult_window_id = ConsultWindow.objects.get(id = kwargs['consult_window_id']),
+                user_id = CustomUser.objects.get(email = self.request.user),
+                apply_status = 1,
+            )
+            return JsonResponse({"result" : apply_result.id})
+
+        # 直接GETリクエストが来た場合はトップページにリダイレクト
+        return edirect('top')
 
 apply_check = ApplyCheckView.as_view()
