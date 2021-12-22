@@ -82,7 +82,6 @@ $ python3 manage.py runserver 0.0.0.0:8000
 新しいターミナルウィンドウで下記を実行
 
 ``` sh
-pipenv shell
 mkdir /var/lib/ebcli
 cd /var/lib/ebcli
 
