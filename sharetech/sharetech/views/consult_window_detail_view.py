@@ -40,7 +40,9 @@ class ConsultWindowDetailView(BasePageCommonView):
 
         # 対象記事に付与されているカテゴリ一覧を取得
         category_list = [category.category_id.category_name for category in list(
-                CategoryConsultWindowMapping.objects.filter(consult_window_id = consult_window_id)
+                CategoryConsultWindowMapping.objects.filter(
+                    consult_window_id = consult_window_id,
+                    id_deleted = False)
                 )]
 
         print(login_user_flg)
@@ -56,7 +58,7 @@ class ConsultWindowDetailView(BasePageCommonView):
                 'created_at' : consult_window_detail.created_at,
                 'archivement' : consult_window_detail.archivement,
                 'expert_user_id' : consult_window_detail.expert_user_id.id,
-                'icon_path' : ImageConstants.get_user_icon_path() + consult_window_detail.expert_user_id.icon_path.name if consult_window_detail.expert_user_id.icon_path.name != None else ImageConstants.get_default_icon_path(),
+                'icon_path' : ImageConstants.get_user_icon_path() + consult_window_detail.expert_user_id.icon_path.name if consult_window_detail.expert_user_id.icon_path.name else ImageConstants.get_default_icon_path(),
                 'company' : consult_window_detail.expert_user_id.company,
                 'username' : consult_window_detail.expert_user_id.username,
                 'occupation' : consult_window_detail.expert_user_id.occupation_id.name if consult_window_detail.expert_user_id.occupation_id else '',
