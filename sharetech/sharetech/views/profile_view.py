@@ -20,11 +20,11 @@ class ProfileView(BasePageCommonView):
 
         user_id = self.request.user
         user_info = CustomUser.objects.get(email=user_id)
-        apply_history_list = list(ConsultApply.objects.filter(user_id = user_info.id))
+        apply_history_list = list(ConsultApply.objects.filter(user_id = user_info.id, is_deleted = False))
         # 重複をなくすため一旦set変換
         applyed_consult_window_set = {model.consult_window_id for model in apply_history_list}
 
-        create_consult_window = list(ConsultWindow.objects.filter(expert_user_id = user_info.id))
+        create_consult_window = list(ConsultWindow.objects.filter(expert_user_id = user_info.id, is_deleted = False))
         specialize_list = list(UserSpecialize.objects.filter(user_id=user_info.id))
 
         self.prepare().set_category_dict().update(
