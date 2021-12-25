@@ -21,7 +21,7 @@ class CategoryFilterView(BasePageCommonView):
 
         consult_window_list = list(
             ConsultWindow.objects.filter(
-                pk__in = CategoryConsultWindowMapping.objects.filter(category_id = select_category_id)
+                pk__in = CategoryConsultWindowMapping.objects.filter(category_id = select_category_id, is_deleted = False)
                 ).order_by('created_at')[:self.DisplayNum.SMALL]
             )
         

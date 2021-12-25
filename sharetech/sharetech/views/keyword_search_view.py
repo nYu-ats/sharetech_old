@@ -20,7 +20,7 @@ class KeyWordSearchView(BasePageCommonView):
         article_window_list = list(ConsultWindow.objects.filter(
             Q(consult_window_title__icontains = keyword) | 
             Q(consult_window_overview__icontains = keyword) |
-            Q(archivement__icontains = keyword)
+            Q(archivement__icontains = keyword), is_deleted = False
         ).order_by('created_at')[:self.DisplayNum.SMALL])
 
         self.prepare().set_category_dict().update(
