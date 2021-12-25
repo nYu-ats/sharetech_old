@@ -42,7 +42,7 @@ class ConsultWindowDetailView(BasePageCommonView):
         category_list = [category.category_id.category_name for category in list(
                 CategoryConsultWindowMapping.objects.filter(
                     consult_window_id = consult_window_id,
-                    id_deleted = False)
+                    is_deleted = False)
                 )]
 
         print(login_user_flg)

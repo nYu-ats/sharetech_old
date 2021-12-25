@@ -39,7 +39,7 @@ class CategoryMst(models.Model):
     )
 
     # 論理削除フラグ
-    id_deleted = models.BooleanField(
+    is_deleted = models.BooleanField(
         verbose_name = 'Is Deleted',
         default = False,
     )
