@@ -53,7 +53,7 @@ class ErrorMessage:
 
     __FAILURE_EMAIL_MATCH = "確認用メールアドレスが一致しません"
 
-    __FAILURE_TIMEREX_URL_PATTERN = "TimeRexのURLが誤っています"
+    __FAILURE_TIMEREX_URL_PATTERN = "スケジューラー調整URLが不正な値です"
 
     @property
     def failuer_login_auth(self):
