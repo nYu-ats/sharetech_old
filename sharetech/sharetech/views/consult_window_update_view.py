@@ -28,7 +28,7 @@ class ConsultWindowUpdateView(BasePageCommonView, generic.UpdateView):
         category_mapping_list = list(
             CategoryConsultWindowMapping.objects.filter(
                 consult_window_id = self.kwargs.get('pk'),
-                id_deleted = False)
+                is_deleted = False)
             )
 
         context['checked_list'] = [category_mapping.category_id.id for category_mapping in category_mapping_list]
@@ -57,7 +57,7 @@ class ConsultWindowUpdateView(BasePageCommonView, generic.UpdateView):
         # 過去未登録->削除されてレコードが再登録される場合は、レコード削減のため削除フラグで調整する
         reopen_list = [
             category for category in current_categories
-            if category.category_id.id in new_categories and category.id_deleted == True
+            if category.category_id.id in new_categories and category.is_deleted == True
         ]
         delete_list = [
             category for category in current_categories
@@ -75,12 +75,12 @@ class ConsultWindowUpdateView(BasePageCommonView, generic.UpdateView):
         CategoryConsultWindowMapping.objects.bulk_create(create_category_mapping)
 
         for category_model in reopen_list:
-            category_model.id_deleted = False
-        CategoryConsultWindowMapping.objects.bulk_update(reopen_list, fields=['id_deleted'])
+            category_model.is_deleted = False
+        CategoryConsultWindowMapping.objects.bulk_update(reopen_list, fields=['is_deleted'])
 
         for category_model in delete_list:
-            category_model.id_deleted = True
-        CategoryConsultWindowMapping.objects.bulk_update(delete_list, fields=['id_deleted'])
+            category_model.is_deleted = True
+        CategoryConsultWindowMapping.objects.bulk_update(delete_list, fields=['is_deleted'])
 
         return redirect('consult_window_edit_complete')
 
