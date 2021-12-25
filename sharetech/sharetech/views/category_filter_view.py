@@ -1,7 +1,4 @@
 from django.shortcuts import render
-from django.views import View
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.decorators import login_required
 from sharetech.models.category_consult_window_mapping import CategoryConsultWindowMapping
 from sharetech.models.category_mst import CategoryMst
 from sharetech.models.consult_window import ConsultWindow
@@ -18,10 +15,12 @@ class CategoryFilterView(BasePageCommonView):
             select_category_id = kwargs['category_id']
         
         category_name = CategoryMst.objects.get(id=select_category_id).category_name
+        target_id_list = [model.consult_window_id.id for model in list(CategoryConsultWindowMapping.objects.filter(category_id = select_category_id, is_deleted = False))]
 
         consult_window_list = list(
             ConsultWindow.objects.filter(
-                pk__in = CategoryConsultWindowMapping.objects.filter(category_id = select_category_id, is_deleted = False)
+                pk__in = target_id_list,
+                is_deleted = False
                 ).order_by('created_at')[:self.DisplayNum.SMALL]
             )
         
