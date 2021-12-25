@@ -22,7 +22,11 @@
         <div class="container">
             <h2 class="profile_edit_complet_msg">{{ message | linebreaksbr }}</h2>
             <div class="return_to_mypage">
+                {% if logout == True %}
+                <a href="{% url 'profile' %}">ログインページへ</a>
+                {% else %}
                 <a href="{% url 'profile' %}">マイページへ戻る</a>
+                {% endif %}
             </div>        
         </div>
     </div>
