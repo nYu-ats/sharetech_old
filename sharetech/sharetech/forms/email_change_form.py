@@ -1,4 +1,3 @@
-import django
 from django.core.exceptions import ValidationError
 from ..models.user import CustomUser
 from django.forms import ModelForm

@@ -2,8 +2,7 @@ from django import forms
 from django.forms import Form
 from django.forms.fields import EmailField
 from sharetech.models.user import CustomUser
-from django.contrib.auth import (get_user_model, authenticate)
-from django.utils.translation import gettext_lazy
+from django.contrib.auth import authenticate
 from django.utils.text import capfirst
 from sharetech.constants.messages import ErrorMessage
 from sharetech.validators.custom_validator import email_validate
