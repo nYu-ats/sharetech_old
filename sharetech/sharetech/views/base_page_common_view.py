@@ -35,6 +35,7 @@ class BasePageCommonView(LoginRequiredMixin, View):
         self._base_context_dict.update(
             {
                 'login_user_icon': ImageConstants.get_user_icon_path() + login_user_id.icon_path.name if login_user_id.icon_path.name else ImageConstants.get_default_icon_path(),
+                'role': login_user_id.role_code,
             }
         )
         # 申込中の相談があるか否か判定

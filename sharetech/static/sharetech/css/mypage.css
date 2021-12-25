@@ -25,7 +25,8 @@
 }
 
 .mypage p,
-.mypage h3{
+.mypage h3,
+.mypage h2{
     color: #666;
 }
 

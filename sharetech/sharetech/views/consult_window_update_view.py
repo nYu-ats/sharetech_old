@@ -33,7 +33,8 @@ class ConsultWindowUpdateView(BasePageCommonView, generic.UpdateView):
 
         context['checked_list'] = [category_mapping.category_id.id for category_mapping in category_mapping_list]
         context.update(self.prepare().set_category_dict())
-
+        # 削除ボタン制御用フラグ
+        context['is_deletable'] = 1
         return context
 
     def form_valid(self, form):

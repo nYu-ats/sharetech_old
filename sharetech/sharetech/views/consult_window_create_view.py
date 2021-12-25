@@ -37,6 +37,8 @@ class ConsultWindowCreateView(BasePageCommonView, generic.CreateView):
             context['form'].fields['archivement'].initial = archivement
         
         context['checked_list'] = []
+        # 削除ボタン制御用フラグ
+        context['is_deletable'] = 0
         return context
 
     def form_valid(self, form):
