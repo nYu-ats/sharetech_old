@@ -33,7 +33,6 @@ class EmailChangeComplete(generic.TemplateView):
                 if user.tmp_email is not None:
                     user.email = user.tmp_email
                     user.tmp_email = None
-                    user.email_verified_at = time.strftime('%Y-%m-%d %H:%M:%S')
                     user.save()
                     return redirect('login')
         
