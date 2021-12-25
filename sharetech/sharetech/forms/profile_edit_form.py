@@ -37,10 +37,12 @@ class ProfileEditForm(ModelForm):
     
     # 自己紹介と実績は文字数が多いためtextareaに変更
     introduction = forms.CharField(
-        widget = forms.Textarea
+        widget = forms.Textarea,
+        label = '自己紹介',
     )
     archivement = forms.CharField(
-        widget = forms.Textarea
+        widget = forms.Textarea,
+        label = '実績',
     )
 
     class Meta:
@@ -67,8 +69,6 @@ class ProfileEditForm(ModelForm):
             'first_name_en': '名字(ローマ字)', 
             'family_name_en': '氏名(ローマ字)', 
             'icon_path': 'アイコン画像選択',
-            'introduction': '自己紹介', 
-            'archivement': '実績',
         }
 
     def __init__(self, *args, **kwargs):
