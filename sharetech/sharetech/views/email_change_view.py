@@ -41,7 +41,6 @@ class EmailChangeView(BasePageCommonView, generic.UpdateView):
         # 新規メールアドレスに認証メール送信のため
         new_email = form.cleaned_data.get('tmp_email')
         user.tmp_email = new_email
-        user.email_verified_at = None
         user.save()
 
         # TODO メール送信util化
