@@ -54,7 +54,11 @@
                 <p class="big_cat_name">{{big_cat}}</p>
                 <div class="cat_flex">
                     {% for small_cat in small_cat_list %}
+                        {% if small_cat.0 in checked_list %}
+                        <input type="checkbox" name='category' id={{small_cat.0}} value={{small_cat.0}} checked>
+                        {% else %}
                         <input type="checkbox" name='category' id={{small_cat.0}} value={{small_cat.0}}>
+                        {% endif %}
                         <label for={{small_cat.0}}>{{small_cat.1}}</label>
                         {% endfor %}
                 </div>

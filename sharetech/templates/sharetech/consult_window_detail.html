@@ -16,6 +16,11 @@
 {% endblock %}
 
 {% block content %}
+{% if editable == True%}
+<div class="edit_btn">
+    <a href="{% url 'consult_window_update' consult_window_id %}">相談窓口を編集する</a>
+</div>
+{% endif %}
 <div class="consult_window">
     <div class="content">
         <div class="consult_window_info">
