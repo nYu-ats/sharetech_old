@@ -76,7 +76,7 @@ class BasePageCommonView(LoginRequiredMixin, View):
                 'created_at' : consult_window_model.created_at,
                 'title' : consult_window_model.consult_window_title,
                 'applyed_num' : consult_window_model.applyed_num,
-                'expert_name' : consult_window_model.expert_user_id.family_name_jp + consult_window_model.expert_user_id.first_name_jp,
+                'expert_name' : consult_window_model.expert_user_id.username,
                 'expert_companey' : consult_window_model.expert_user_id.company,
                 }
             consult_window_list.append(consult_window_content)

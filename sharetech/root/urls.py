@@ -5,13 +5,27 @@ from django.views.generic import TemplateView
 from django.conf.urls.static import static
 from . import settings
 from sharetech.views import (
-    login_view, top_page_view, landing_page_view, user_create_view, user_create_done_view,
-    user_create_complete_view, async_consult_window_view, keyword_search_view,
-    category_filter_view, consult_window_detail_view, apply_check_view,
-    apply_status_view, profile_view, profile_edit_view, profile_edit_complete_view,
-    email_change_view, email_change_done_view, email_change_complete_view,
-    password_change_view, password_change_complete_view,consult_window_create_view, 
-    consult_window_edit_complete_view, consult_window_update_view,
+    login_view, top_page_view, 
+    user_create_view, 
+    user_create_done_view,
+    user_create_complete_view, 
+    async_consult_window_view, 
+    keyword_search_view,
+    category_filter_view, 
+    consult_window_detail_view, 
+    apply_check_view,
+    apply_status_view, 
+    profile_view, 
+    profile_edit_view, 
+    profile_edit_complete_view,
+    email_change_view, 
+    email_change_done_view, 
+    email_change_complete_view,
+    password_change_view, 
+    password_change_complete_view,
+    consult_window_create_view, 
+    consult_window_edit_complete_view, 
+    consult_window_update_view,
     )
 
 urlpatterns = [

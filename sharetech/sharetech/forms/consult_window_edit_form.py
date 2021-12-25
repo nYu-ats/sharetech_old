@@ -37,7 +37,7 @@ class ConsultWindowEditForm(ModelForm):
         }
         labels={
             'consult_window_title': 'タイトル',
-            'timerex_url': 'TimeRex URL',
+            'timerex_url': 'スケジューラー調整リンク',
             'consult_price': '設定料金',
         }
 
