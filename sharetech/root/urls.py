@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import include, path
 from django.contrib.auth.views import LogoutView
+from django.views.generic import TemplateView
 from django.conf.urls.static import static
 from . import settings
 from sharetech.views import (
@@ -17,7 +18,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', login_view.auth_login, name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
-    path('', landing_page_view.landing_page, name='landing'),
+    path('', TemplateView.as_view(template_name = 'sharetech/landing.html'), name='landing'),
     path('top/', top_page_view.top_page, name='top'),
     path('register/', user_create_view.user_create, name='register'),
     path('register/done', user_create_done_view.user_create_done, name='register_done'),
