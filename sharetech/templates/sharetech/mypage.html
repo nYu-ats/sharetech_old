@@ -16,11 +16,14 @@
 {% endblock %}
 
 {% block content %}
+{% if role == 1 %}
 <div class="create_btn">
     <a href="{% url 'consult_window_register' %}">相談窓口を作る</a>
 </div>
+{% endif %}
 <div class="mypage">
     <!-- プロフィールブロック -->
+    <h2>プロフィール</h2>
     <div class="profile">
         <div class="icon">
             <img src="{% static icon_img %}" alt="">
@@ -72,9 +75,11 @@
             <div class="applyed active" control_flg='0'>
                 <p>相談申込履歴</p>
             </div>
+            {% if role == 1%}
             <div class="created" control_flg='1'>
                 <p>作成窓口一覧</p>
             </div>
+            {% endif %}
         </div>
         <!-- 申込済み相談窓口一覧 -->
         <div class="consult_window_container">

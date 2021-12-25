@@ -33,6 +33,5 @@ $(function(){
         $formItem.find('.archivement textarea').val(archivementTxt);
         $formItem.find('.price input').val(price);
         $formItem.find('.url input').val(url);
-
     });
 });
