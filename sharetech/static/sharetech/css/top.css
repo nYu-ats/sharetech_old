@@ -149,6 +149,11 @@ main .split .split_left .split_left_inner .category_contena input{
 
 main .split .split_left .split_left_inner .category_contena .big_category{
   font-weight: bold;
+  margin-bottom: 1em;
+}
+
+main .split .split_left .split_left_inner .category_contena .big_category input:hover{
+  cursor:default;
 }
 
 main .split .split_left .split_left_inner .category_contena input:hover{
@@ -165,4 +170,9 @@ main .split .split_left .split_left_inner .small_category{
 
 main .split .split_left .split_left_inner a{
     color: #666;
+    font-weight: lighter;
+}
+
+main .split .split_left .split_left_inner a:hover{
+  color: #2699FB;
 }

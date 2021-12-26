@@ -257,12 +257,17 @@
 
 .form_item .cat_flex label{
     margin-right: .5em;
+    margin-bottom: .2em;
     padding: 0 .5em;
     text-align: center;
     font-size: .8em;
     font-weight: lighter;
     border-radius: 10px;
     border: 1px solid #2699FB;
+}
+
+.form_item .cat_flex label:hover{
+    cursor: pointer;
 }
 
 .form_item .cat_flex input[type="checkbox"]:checked + label{
