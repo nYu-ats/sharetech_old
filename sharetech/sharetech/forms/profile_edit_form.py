@@ -17,6 +17,8 @@ class ProfileEditForm(ModelForm):
     プロフィール編集フォーム
     '''
 
+    __IMG_SIZE = 2*1000*1000
+
     # ドロップダウンリストに書くモデル名称が表示されるよう変換
     industry_name = ConvertChoiceFieldDisplay(
         queryset = IndustryMst.objects.all(),
@@ -144,11 +146,10 @@ class ProfileEditForm(ModelForm):
         # ファイルサイズ制限
         icon_path = self.cleaned_data.get('icon_path')
 
-        IMG_SIZE = 2*1000*1000
-        if icon_path and icon_path.size > IMG_SIZE:
+        if icon_path and icon_path.size > self.__IMG_SIZE:
             raise forms.ValidationError(
                 '画像サイズが大きすぎます。%sMBより小さいサイズの画像をお願いします。' \
-                % str(IMG_SIZE//1000//1000)
+                % str(self.__IMG_SIZE//1000//1000)
             )
 
         return icon_path
