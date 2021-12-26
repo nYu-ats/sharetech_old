@@ -1,6 +1,5 @@
 import os
 from pathlib import Path
-import os
 from sharetech.constants.constants import Constants
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.

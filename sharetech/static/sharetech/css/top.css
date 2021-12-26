@@ -35,7 +35,7 @@ main .split .split_item{
 }
 
 main .split .split_left{
-  width: 250px;
+  width: 300px;
 }
 
 main .split .split_left .split_left_inner{
