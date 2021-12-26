@@ -145,7 +145,7 @@ class ProfileEditForm(ModelForm):
         icon_path = self.cleaned_data.get('icon_path')
 
         IMG_SIZE = 2*1000*1000
-        if icon_path.size > IMG_SIZE:
+        if icon_path and icon_path.size > IMG_SIZE:
             raise forms.ValidationError(
                 '画像サイズが大きすぎます。%sMBより小さいサイズの画像をお願いします。' \
                 % str(IMG_SIZE//1000//1000)
