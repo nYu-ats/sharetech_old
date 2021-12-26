@@ -153,34 +153,3 @@ class ProfileEditForm(ModelForm):
             )
 
         return icon_path
-
-    def set_speciarize(self, **kwargs):
-        # ログインユーザーの専門分野を取得、fieldにセットする
-        user_id = kwargs.get('instance').id
-        specialize_list = list(UserSpecialize.objects.filter(user_id = user_id))
-        index = 1
-        if len(specialize_list) != 0:
-            self.fields['specialize'] = {}
-            for specialize in specialize_list:
-                specialize_id = 'specialize_' + str(index)
-                self.fields['specialize'][specialize_id] = forms.CharField(
-                    label = '専門分野',
-                    required = False,
-                    strip = False,
-                    max_length = UserSpecialize._meta.get_field('specialize').max_length,
-                    initial = specialize,
-                    # widget = forms.TextInput(attrs={'id': specialize_id})
-                    )
-                    
-        else:
-            # 専門分野を1件も登録していなかった場合は空のinput fieldをセットする
-            self.fields['specialize'] = {}
-            specialize_id = 'specialize_' + str(index) 
-            self.fields['specialize'][specialize_id] = forms.CharField(
-                label = '専門分野',
-                required = False,
-                strip = False,
-                max_length = UserSpecialize._meta.get_field('specialize').max_length,
-                initial = '',
-                # widget = forms.TextInput(attrs={'id': specialize_id})
-                )
