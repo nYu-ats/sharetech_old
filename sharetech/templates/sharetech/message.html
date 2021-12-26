@@ -1,0 +1,38 @@
+{% extends 'sharetech/base.html' %}
+{% load static %}
+
+{% block head %}
+<meta charset="UTF-8">
+<meta name="discription" content="マイページ">
+<title>Mypage</title>
+<link rel="stylesheet" href="{% static 'sharetech/css/common.css' %}">
+<link rel="stylesheet" href="{% static 'sharetech/css/top.css' %}">
+<link rel="stylesheet" href="{% static 'sharetech/css/profile_edit.css' %}">
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.js"></script>
+<script src="{% static 'sharetech/js/common.js' %}"></script>
+<script src="{% static 'sharetech/js/top.js' %}"></script>
+<script src="{% static 'sharetech/js/mypage.js' %}"></script>
+{% endblock %}
+
+{% block main %}
+<div class="profile_edit">
+    <div class="profile_edit">
+        <div class="container">
+            <h2 class="profile_edit_complet_msg">{{ message | linebreaksbr }}</h2>
+            <div class="return_to_mypage">
+                {% if logout == True %}
+                <a href="{% url 'profile' %}">ログインページへ</a>
+                {% else %}
+                <a href="{% url 'profile' %}">マイページへ戻る</a>
+                {% endif %}
+            </div>        
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+{% include 'sharetech/_footer.html' %}
+{% endblock %}

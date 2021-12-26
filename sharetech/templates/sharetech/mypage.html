@@ -1,0 +1,134 @@
+{% extends 'sharetech/base_with_sidemenu.html' %}
+{% load static %}
+
+{% block head %}
+<meta charset="UTF-8">
+<meta name="discription" content="マイページ">
+<title>Mypage</title>
+<link rel="stylesheet" href="{% static 'sharetech/css/common.css' %}">
+<link rel="stylesheet" href="{% static 'sharetech/css/top.css' %}">
+<link rel="stylesheet" href="{% static 'sharetech/css/mypage.css' %}">
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.js"></script>
+<script src="{% static 'sharetech/js/common.js' %}"></script>
+<script src="{% static 'sharetech/js/mypage.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+{% if role == '1' %}
+<div class="create_btn">
+    <a href="{% url 'consult_window_register' %}">相談窓口を作る</a>
+</div>
+{% endif %}
+<div class="mypage">
+    <!-- プロフィールブロック -->
+    <h2>プロフィール</h2>
+    <div class="profile">
+        <div class="icon">
+            <img src="{% static icon_img %}" alt="">
+        </div>
+        <div class="content">
+            <p class="name">{{user_info.username}}</p>
+            <p class="user_id">User ID : {{user_info.id}}</p>
+            <p class="company">{{user_info.company}}</p>
+            <p class="industory">{{user_info.industry_id.name}}</p>
+            <p class="occupation">{{user_info.occupation_id.name}}</p>
+            <p class="position">{{user_info.position_id.name}}</p>
+        </div>
+        <div class="edit_profile">
+            <a href="{% url 'profile_edit' user_info.id%}">プロフィール編集</a>
+            <a href="{% url 'password_change' user_info.id%}">パスワード変更</a>
+        </div>
+    </div>
+
+    <!-- 専門分野 -->
+    <div class="specialized_field">
+        <h3>専門分野</h3>
+        <div class="tag_flex">
+            {% for item in specialize %}
+            <p>{{item.specialize}}</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- 自己紹介文エリア -->
+    <div class="introduction">
+        <h3>自己紹介</h3>
+        <p>
+            {{user_info.introduction | linebreaksbr}}
+        </p>
+    </div>
+
+    <!-- 実績エリア -->
+    <div class="archivement">
+        <h3>実績</h3>
+        <p>
+            {{user_info.archivement | linebreaksbr}}
+        </p>
+    </div>
+
+    <!-- 関連相談窓口一覧ブロック -->
+    <div class="consult_window">
+        <!-- 表示相談窓口切り替えタブ -->
+        <div class="switch_tab">
+            <div class="applyed active" control_flg='0'>
+                <p>相談申込履歴</p>
+            </div>
+            {% if role == '1' %}
+            <div class="created" control_flg='1'>
+                <p>作成窓口一覧</p>
+            </div>
+            {% endif %}
+        </div>
+        <!-- 申込済み相談窓口一覧 -->
+        <div class="consult_window_container">
+            <div class="consutl_windodw_flex">
+                <!-- 申込をした相談窓口 -->
+                {% for consult_window in applyed_consult_window %}
+                <div class="article" control_flg='0'>
+                    <a href="{% url 'consult_window_detail' consult_window.number %}">
+                      <img src="{% static consult_window.expert_icon_path %}" class="contain_img"/>
+                      <div class="discription">
+                        <h3>{{ consult_window.title }}</h3>
+                        <div class="presenter_flex">
+                          <div class="presenter_info">
+                            <p>{{consult_window.expert_companey}}</p>
+                          </div>
+                          <div class="presenter_info">
+                            <p>{{consult_window.expert_name}}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                </div>
+                {% endfor %}
+
+                <!-- 作成した相談窓口 -->
+                {% for consult_window in create_consult_window %}
+                <div class="article" control_flg='1'>
+                    <a href="{% url 'consult_window_detail' consult_window.number %}">
+                      <img src="{% static consult_window.expert_icon_path %}" class="contain_img"/>
+                      <div class="discription">
+                        <h3>{{ consult_window.title }}</h3>
+                        <div class="presenter_flex">
+                          <div class="presenter_info">
+                            <p>{{consult_window.expert_companey}}</p>
+                          </div>
+                          <div class="presenter_info">
+                            <p>{{consult_window.expert_name}}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+{% include 'sharetech/_footer.html' %}
+{% endblock %}

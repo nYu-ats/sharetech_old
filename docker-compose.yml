@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+    django:
+        build: ./sharetech
+        volumes:
+            - ./sharetech/:/usr/src/sharetech/
+        ports:
+            - 8000:8000
+        environment:
+            - DEBUG=1
+            - SECRET_KEY=django-insecure-an)d383q66a%4doo4(t1_iut-xcapi87m+rph*na-v@un=d3uu
+            - EXECUTION_ENVIRONMENT=dev
+            - DATABASE_ENGINE=django.db.backends.mysql
+            - DATABASE_NAME=sharetech
+            - DATABASE_USER=django
+            - DATABASE_PASSWORD=django123A!
+            - DATABASE_HOST=mysql
+            - DATABASE_PORT=3306
+        depends_on: 
+            - mysql
+
+    mysql:
+      # M1チップ対応のためplatform指定
+      platform: linux/x86_64
+      image: mysql:8.0
+      volumes:
+        - mysql_data:/var/lib/mysql
+        - ./mysql_cnf/my.cnf:/etc/my.cnf
+        # mysqlサーバー起動時に下記フォルダ内のsqlを自動実行することで、sharetechスキーマを事前に作成する
+        - ./initdb.d:/docker-entrypoint-initdb.d
+      ports:
+        - 3306:3306
+      environment:
+            - MYSQL_ROOT_PASSWORD=root123A!
+            - MYSQL_USER=django
+            - MYSQL_PASSWORD=django123A!
+      # docker-compose実行ユーザーに、volumesで指定したコンテナ内ディレクトリ捜査権限を与える必要がある     
+      command: bash -c 'usermod -o -u $LINUX_MYSQL_UID mysql; groupmod -o -g $LINUX_MYSQL_GID mysql; chown -R mysql:root /var/run/mysqld/ /var/log/mysql/ /var/lib/mysql/; /entrypoint.sh mysqld --user=mysql --console'
+volumes:
+  mysql_data:

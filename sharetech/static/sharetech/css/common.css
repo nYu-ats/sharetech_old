@@ -1,0 +1,514 @@
+/*共通*/
+/* Fonts */
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400);
+
+/* fontawesome */
+@import url(http://weloveiconfonts.com/api/?family=fontawesome);
+[class*="fontawesome-"]:before {
+    font-family: "游ゴシック", "ヒラギノ角ゴ ProN", "メイリオ", "MS Pゴシック","sans-serif";
+}
+
+html{
+    font-family: "游ゴシック", "ヒラギノ角ゴ ProN", "メイリオ", "MS Pゴシック","sans-serif";
+    box-sizing: border-box;
+    overflow-y: scroll;
+    -webkit-text-size-adjust: 100%;  
+}
+
+*, *:before, *:after{
+    margin: 0;
+    padding: 0;  
+    box-sizing: inherit;
+}
+
+body {
+    background-color: #EBEBEB;
+    color: #2699FB;
+    font: 400 87.5%/1.5em "游ゴシック", "ヒラギノ角ゴ ProN", "メイリオ", "MS Pゴシック","sans-serif";
+    font-weight: 300;
+    line-height: 1.8;
+    min-width: 320px;
+}
+
+a{
+    text-decoration: none;
+}
+
+/*ヘッダー*/
+.page_header{
+    background-color:#1e90ff;
+    width: 100%;
+    height: 100px;
+    min-width: 640px;
+    z-index: 99;
+    box-shadow: -1px 1px 8px 4px rgb(65, 65, 65, 0.8);
+}
+
+.page_header.clone{
+  position: fixed;
+  top: -105px;
+}
+
+.page_header .global_nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    height: 50px
+}
+
+.page_header .global_nav .link_other_menu{
+    display: flex;
+    margin-bottom: 0;
+}
+
+.page_header .global_nav .link_other_menu a{
+    color: white;
+    margin-left: 2em;
+    font-weight: bold;
+}
+
+.page_header .global_nav .link_other_menu a.selected{
+    border-bottom: 3px solid white;
+}
+
+.page_header .global_nav .search_menu_area .keyword_search{
+    margin-right: 1em;
+    margin-bottom: .5em;
+}
+
+.page_header .global_nav .search_menu_area .keyword_search .search_keyword{
+    width: 250px;
+    height: 24px;
+    border: none;
+    vertical-align: top;
+    border-radius: 4px 0 0 4px;
+    padding-left: 4px;
+}
+
+.page_header .global_nav .search_menu_area .keyword_search .search_keyword:focus{
+    outline: none;
+}
+
+.page_header .global_nav .search_menu_area .keyword_search .search_button{
+    width: 48px;
+    height: 24px;
+    border: none;
+    background-color: #1B435D;
+    color: white;
+    vertical-align: top;
+    text-align: center;
+    border-radius: 0 4px 4px 0;
+    font-weight: bold;
+}
+
+.page_header .global_nav .search_menu_area .keyword_search .search_button:hover{
+    cursor: pointer;
+}
+
+.page_header .inner{
+    display: flex;
+    height: 50px;
+}
+
+.page_header .site_logo{
+    margin:.25em auto 0 auto;
+}
+
+.page_header .site_logo img{
+    height: 35px;
+    width: auto;
+}
+
+.page_header .user_icon{
+    position: fixed;
+    top: 2em;
+    right: 0em;
+    transform: translate(-50%, -50%);
+    width: 2.5em;
+    height: 2.5em;
+}
+
+.page_header .user_icon:hover{
+    cursor: pointer;
+}
+
+.page_header .user_icon img{
+    width: 2.5em;
+    height: 2.5em;
+    border-radius: 50%;
+    border: 1px solid white;
+}
+
+.page_header .user_menu{
+    position: fixed;
+    top: 4em;
+    right: 1em;
+    width: 240px;
+    height: auto;
+    background-color: rgb(235, 245, 252);
+    text-align: center;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgb(65, 65, 65);
+}
+
+.page_header .user_menu.hidden{
+    visibility: hidden;
+}
+
+.page_header .user_menu a{
+    color: #666;
+}
+
+.page_header .user_menu a p{
+    line-height: 2.5em;
+    margin: 0em 1em;
+    padding: .5em 0em;
+    font-weight: bold;
+}
+
+.page_header .user_menu a p.to_my_page{
+    border-bottom: 1px solid #1e90ff;
+}
+
+.main_nav{
+    background-color: #1B435D;
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 400px;
+    height: 100%;
+    z-index: 100;
+    margin-top: 40px;
+}
+
+.main_nav .my_account{
+    width: 48px;
+    height: 48px;
+    background-color: white;
+    border-radius: 50%;
+    margin: 20px 80px 40px auto;
+}
+
+.main_nav .my_account img{
+    width: 48px;
+    height: 48px;
+}
+
+.main_nav .about_us{
+    position: absolute;
+    bottom: 30px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+
+.main_nav .about_us li{
+    list-style: none;
+    display: flex;
+    margin-bottom: 1em;
+}
+
+.main_nav .about_us li img{
+    width: 24px;
+    height: 24px;
+}
+
+.main_nav .about_us li p{
+    font-size: 16px;
+    color: white;
+    line-height: 1.5em;
+    margin-left: 1.5em;
+}
+
+/* 検索ボックス */
+.main_nav .keyword_search .search_keyword{
+    margin-left: auto;
+}
+
+.main_nav .keyword_search .search_keyword{
+    width: 250px;
+    height: 32px;
+    border: none;
+    vertical-align: top;
+    border-radius: 8px 0 0 8px;
+    padding-left: 4px;
+}
+
+.main_nav .keyword_search .search_keyword:focus{
+    outline: none;
+}
+
+.main_nav .keyword_search .search_button{
+    width: 48px;
+    height: 32px;
+    border: none;
+    background-color: #709ecc;
+    color: white;
+    vertical-align: top;
+    text-align: center;
+    border-radius: 0 8px 8px 0;
+}
+
+.main_nav .keyword_search .search_button:hover{
+    cursor: pointer;
+    background-color: #1e90ff;
+}
+
+/* タグ検索 */
+.main_nav .tag_search{
+    margin: 24px;
+    color: white;
+}
+
+.main_nav .tag_search h2{
+    margin-bottom: 16px;
+}
+
+.main_nav .tag_search .category_contena input{
+    background-color: #1B435D;
+    color: white;
+    border: none;
+    font-size: 16px;
+}
+
+.main_nav .tag_search .category_contena input:hover{
+    cursor: pointer;
+}
+
+.main_nav .tag_search li{
+    list-style: none;
+}
+
+.main_nav .tag_search .small_category{
+    margin-left: 24px;
+    overflow: hidden;
+    height: 0;
+}
+
+.main_nav .tag_search .open_small_tags{
+    height: 48px;
+}
+
+.main_nav .tag_search .small_category li{
+    display: inline-block;
+}
+
+.main_nav .tag_search a{
+    color: white;
+}
+
+.menu_btn{
+    visibility: hidden;
+    position: fixed;
+    top: 100px;
+    left: 0px;
+    display: flex;
+    height: 30px;
+    width: 30px;
+    justify-content: center;
+    align-items: center;
+    z-index: 101;
+    background-color: rgba(50, 50, 50, 0.8);
+    border-radius: 0 2px 2px 0;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.menu_btn .top, .menu_btn .middle, .menu_btn .bottom{
+    content: '';
+    display: block;
+    height: 2px;
+    width: 20px;
+    border-radius: 3px;
+    background-color: white;
+    position: absolute;
+}
+
+.menu_btn .top{
+    top: 8px;
+    transform: rotate(0deg);
+}
+
+.menu_btn .bottom{
+    bottom: 8px;
+    transform: rotate(0deg);
+}
+
+.back_to_top{
+    width: 48px;
+    height: 48px;
+    border: none;
+    border-radius: 50%;
+    position: fixed;
+    bottom: 96px;
+    right: 32px;
+    cursor: pointer;
+    opacity: 0;
+    background-color: #1e90ff;
+    color: white;
+    line-height: 1em;
+    transition: .2s;
+}
+
+.back_to_top:hover{
+    box-shadow: 6px 6px 12px #C0C0C0 !important;
+}
+
+.back_to_top span{
+    font-size: 32px;
+}
+
+/* 申込状況確認フォーム */
+.overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 100;
+}
+
+.overlay .apply_declear{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 300px;
+    background-color: white;
+    margin:auto;
+    border-radius: 4px;
+    border: solid 2px #1e90ff;
+    padding: 2em;
+}
+
+.overlay .apply_declear h3{
+    text-align: center;
+    font-weight: bold;
+    margin-top: 100px;
+}
+
+.overlay .apply_declear p{
+    text-align: center;
+    font-weight: bold;
+}
+
+.overlay .apply_declear .apply_status{
+    display: flex;
+    justify-content: space-between;
+    padding: 2em;
+}
+
+.overlay .apply_declear .consult_date_input{
+    padding: 0 2em;
+}
+
+.overlay .apply_declear .apply_status_submit{
+    padding: 2em;
+    width: 100%;
+    text-align: center;
+}
+
+.overlay .apply_declear .apply_status_submit button{
+    border: none;
+    border-radius: 4px;
+    background-color: #1e90ff;
+    color: white;
+    margin: 0 auto;
+    padding: .5em 1em;
+}
+
+.overlay .apply_declear .apply_status_submit button:hover{
+    cursor: pointer;
+}
+
+/* ローディング */
+.loading_gif{
+    opacity: 0;    
+    width: 48px;
+    height: 48px;
+    margin: 0 auto;
+    display: block;
+}
+.loading_gif.is_loading{
+    opacity: 1;
+}
+
+/* フッター */
+.page_footer{
+    background-color:#1e90ff;
+    width: 100%;
+    height: 60px;
+    min-width: 640px;
+    z-index: 100;
+    box-shadow: -1px 1px 8px 4px rgb(65, 65, 65, 0.8);
+}
+
+.page_footer .footer_list li{
+    list-style: none;
+    display: inline-block;
+    margin-left: 32px;
+}
+
+.page_footer .copy_write, .page_footer .footer_list a{
+    color: white;
+    text-align: center;
+    line-height: 1em;
+}
+
+.page_footer .copy_write{
+    margin-top: 10px;
+}
+
+/* エラーメッセージ */
+.form_wrapper .error_msg,
+.form_container .error_msg{
+    text-align: center;
+    padding: 3em 0;
+}
+  
+.form_wrapper .error_msg p,
+.form_container .error_msg p{
+    color: red;
+    font-weight: bold;
+}
+
+/* 500エラーページ */
+.container{
+    text-align: center;
+    height: 70vh;
+ }
+ 
+ .container .system_error h1,
+ .container .system_error  p{
+     color: #666;
+ }
+ 
+ .container .system_error{
+     margin-top: 20vh;
+ }
+ 
+ .container .system_error  p{
+     font-size: 1.25em;
+     font-weight: bold;
+ }
+ 
+ .return_to_toppage{
+     text-align: center;
+ }
+ 
+ .return_to_toppage a{
+     font-weight: bold;
+     min-width: 250px;
+     display: inline-block;
+     border-radius: .5em;
+     background-color: #2699FB;
+     border: 2px solid #2699FB;
+     text-align: center;
+     padding: .5em 1em;
+     margin: 3em 1em;
+     font-size: 1.2em;
+     cursor: pointer;
+     color: white;
+     transition: .5s;
+ }
