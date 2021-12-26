@@ -80,6 +80,7 @@ class ProfileEditForm(ModelForm):
         self.fields['icon_path'].required = False
         self.fields['introduction'].required = False
         self.fields['archivement'].required = False
+        self.fields['company'].required = False
         
         # 画面で画像アップロードのスタイル変更
         self.fields['icon_path'].widget.attrs['id'] = 'file'
