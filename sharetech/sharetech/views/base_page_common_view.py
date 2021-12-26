@@ -34,7 +34,8 @@ class BasePageCommonView(LoginRequiredMixin, View):
         login_user_id = User.objects.get(email = login_user)
         self._base_context_dict.update(
             {
-                'login_user_icon': ImageConstants.get_user_icon_path() + login_user_id.icon_path.name if login_user_id.icon_path.name != '' else ImageConstants.get_default_icon_path(),
+                'login_user_icon': ImageConstants.get_user_icon_path() + login_user_id.icon_path.name if login_user_id.icon_path.name else ImageConstants.get_default_icon_path(),
+                'role': login_user_id.role_code,
             }
         )
         # 申込中の相談があるか否か判定
@@ -72,11 +73,11 @@ class BasePageCommonView(LoginRequiredMixin, View):
         for _, consult_window_model in enumerate(consult_window_models):
             consult_window_content = {
                 'number' : str(consult_window_model.id),
-                'expert_icon_path' : ImageConstants.get_user_icon_path() + consult_window_model.expert_user_id.icon_path.name if consult_window_model.expert_user_id.icon_path.name != None else ImageConstants.get_default_icon_path(),
+                'expert_icon_path' : ImageConstants.get_user_icon_path() + consult_window_model.expert_user_id.icon_path.name if consult_window_model.expert_user_id.icon_path.name else ImageConstants.get_default_icon_path(),
                 'created_at' : consult_window_model.created_at,
                 'title' : consult_window_model.consult_window_title,
                 'applyed_num' : consult_window_model.applyed_num,
-                'expert_name' : consult_window_model.expert_user_id.family_name_jp + consult_window_model.expert_user_id.first_name_jp,
+                'expert_name' : consult_window_model.expert_user_id.username,
                 'expert_companey' : consult_window_model.expert_user_id.company,
                 }
             consult_window_list.append(consult_window_content)

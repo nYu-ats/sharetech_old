@@ -1,13 +1,10 @@
-import django
 from django.core.exceptions import ValidationError
 from django.forms import ModelForm
 from django import forms
 import re
 from sharetech.constants.messages import ErrorMessage, RePatterns
 from sharetech.models import (
-    CustomUser,
     ConsultWindow,
-    CategoryMst,
 )
 
 class ConsultWindowEditForm(ModelForm):
@@ -37,7 +34,7 @@ class ConsultWindowEditForm(ModelForm):
         }
         labels={
             'consult_window_title': 'タイトル',
-            'timerex_url': 'TimeRex URL',
+            'timerex_url': 'スケジューラー調整リンク',
             'consult_price': '設定料金',
         }
 

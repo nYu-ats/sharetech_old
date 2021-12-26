@@ -1,6 +1,5 @@
 import os
 from pathlib import Path
-import os
 from sharetech.constants.constants import Constants
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -91,7 +90,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'root.wsgi.application'
 
 # Mail
-# TODO メール認証情報は環境変数うに埋め込む必要あり
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
@@ -192,33 +190,33 @@ else:
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Logging
-# LOG_BASE_DIR = os.path.join("/var", "log", "app", "sharetech")
-# LOGGING = {
-#     "version": 1,
-#     "disable_existing_loggers": False,
-#     "formatters": {"simple": {"format": "%(asctime)s [%(levelname)s] %(message)s"}},
-#     "handlers": {
-#         "info": {
-#             "level": "INFO",
-#             "class": "logging.FileHandler",
-#             "filename": os.path.join(LOG_BASE_DIR, "info.log"),
-#             "formatter": "simple",
-#         },
-#         "warning": {
-#             "level": "WARNING",
-#             "class": "logging.FileHandler",
-#             "filename": os.path.join(LOG_BASE_DIR, "warning.log"),
-#             "formatter": "simple",
-#         },
-#         "error": {
-#             "level": "ERROR",
-#             "class": "logging.FileHandler",
-#             "filename": os.path.join(LOG_BASE_DIR, "error.log"),
-#             "formatter": "simple",
-#         },
-#     },
-#     "root": {
-#         "handlers": ["info", "warning", "error"],
-#         "level": "INFO",
-#     },
-# }
+LOG_BASE_DIR = os.path.join("/var", "log", "app", "sharetech")
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {"simple": {"format": "%(asctime)s [%(levelname)s] %(message)s"}},
+    "handlers": {
+        "info": {
+            "level": "INFO",
+            "class": "logging.FileHandler",
+            "filename": os.path.join(LOG_BASE_DIR, "info.log"),
+            "formatter": "simple",
+        },
+        "warning": {
+            "level": "WARNING",
+            "class": "logging.FileHandler",
+            "filename": os.path.join(LOG_BASE_DIR, "warning.log"),
+            "formatter": "simple",
+        },
+        "error": {
+            "level": "ERROR",
+            "class": "logging.FileHandler",
+            "filename": os.path.join(LOG_BASE_DIR, "error.log"),
+            "formatter": "simple",
+        },
+    },
+    "root": {
+        "handlers": ["info", "warning", "error"],
+        "level": "INFO",
+    },
+}

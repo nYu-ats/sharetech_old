@@ -8,7 +8,6 @@ from sharetech.models.user_specialize import UserSpecialize
 from django.views import generic
 from sharetech.forms.consult_window_edit_form import ConsultWindowEditForm
 from sharetech.models.category_consult_window_mapping import CategoryConsultWindowMapping
-from django.urls import reverse
 from django.contrib.auth import get_user_model
 from django.utils import timezone
 from .base_page_common_view import BasePageCommonView
@@ -18,7 +17,7 @@ class ConsultWindowCreateView(BasePageCommonView, generic.CreateView):
     '''
     相談窓口新規作成
     '''
-    
+
     form_class = ConsultWindowEditForm
     template_name = 'sharetech/consult_window_edit.html'
 
@@ -36,7 +35,10 @@ class ConsultWindowCreateView(BasePageCommonView, generic.CreateView):
         archivement = CustomUser.objects.get(email=self.request.user).archivement
         if archivement:
             context['form'].fields['archivement'].initial = archivement
-
+        
+        context['checked_list'] = []
+        # 削除ボタン制御用フラグ
+        context['is_deletable'] = 0
         return context
 
     def form_valid(self, form):

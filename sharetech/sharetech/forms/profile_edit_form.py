@@ -1,4 +1,3 @@
-import django
 from django.core.exceptions import ValidationError
 from ..models.user import CustomUser
 from django.forms import ModelForm
@@ -17,6 +16,8 @@ class ProfileEditForm(ModelForm):
     '''
     プロフィール編集フォーム
     '''
+
+    __IMG_SIZE = 2*1000*1000
 
     # ドロップダウンリストに書くモデル名称が表示されるよう変換
     industry_name = ConvertChoiceFieldDisplay(
@@ -37,10 +38,12 @@ class ProfileEditForm(ModelForm):
     
     # 自己紹介と実績は文字数が多いためtextareaに変更
     introduction = forms.CharField(
-        widget = forms.Textarea
+        widget = forms.Textarea,
+        label = '自己紹介',
     )
     archivement = forms.CharField(
-        widget = forms.Textarea
+        widget = forms.Textarea,
+        label = '実績',
     )
 
     class Meta:
@@ -67,8 +70,6 @@ class ProfileEditForm(ModelForm):
             'first_name_en': '名字(ローマ字)', 
             'family_name_en': '氏名(ローマ字)', 
             'icon_path': 'アイコン画像選択',
-            'introduction': '自己紹介', 
-            'archivement': '実績',
         }
 
     def __init__(self, *args, **kwargs):
@@ -81,6 +82,7 @@ class ProfileEditForm(ModelForm):
         self.fields['icon_path'].required = False
         self.fields['introduction'].required = False
         self.fields['archivement'].required = False
+        self.fields['company'].required = False
         
         # 画面で画像アップロードのスタイル変更
         self.fields['icon_path'].widget.attrs['id'] = 'file'
@@ -144,42 +146,10 @@ class ProfileEditForm(ModelForm):
         # ファイルサイズ制限
         icon_path = self.cleaned_data.get('icon_path')
 
-        IMG_SIZE = 2*1000*1000
-        if icon_path.size > IMG_SIZE:
+        if icon_path and icon_path.size > self.__IMG_SIZE:
             raise forms.ValidationError(
                 '画像サイズが大きすぎます。%sMBより小さいサイズの画像をお願いします。' \
-                % str(IMG_SIZE//1000//1000)
+                % str(self.__IMG_SIZE//1000//1000)
             )
 
         return icon_path
-
-    def set_speciarize(self, **kwargs):
-        # ログインユーザーの専門分野を取得、fieldにセットする
-        user_id = kwargs.get('instance').id
-        specialize_list = list(UserSpecialize.objects.filter(user_id = user_id))
-        index = 1
-        if len(specialize_list) != 0:
-            self.fields['specialize'] = {}
-            for specialize in specialize_list:
-                specialize_id = 'specialize_' + str(index)
-                self.fields['specialize'][specialize_id] = forms.CharField(
-                    label = '専門分野',
-                    required = False,
-                    strip = False,
-                    max_length = UserSpecialize._meta.get_field('specialize').max_length,
-                    initial = specialize,
-                    # widget = forms.TextInput(attrs={'id': specialize_id})
-                    )
-                    
-        else:
-            # 専門分野を1件も登録していなかった場合は空のinput fieldをセットする
-            self.fields['specialize'] = {}
-            specialize_id = 'specialize_' + str(index) 
-            self.fields['specialize'][specialize_id] = forms.CharField(
-                label = '専門分野',
-                required = False,
-                strip = False,
-                max_length = UserSpecialize._meta.get_field('specialize').max_length,
-                initial = '',
-                # widget = forms.TextInput(attrs={'id': specialize_id})
-                )

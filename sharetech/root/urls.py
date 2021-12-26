@@ -1,23 +1,38 @@
 from django.contrib import admin
 from django.urls import include, path
 from django.contrib.auth.views import LogoutView
+from django.views.generic import TemplateView
 from django.conf.urls.static import static
 from . import settings
 from sharetech.views import (
-    login_view, top_page_view, landing_page_view, user_create_view, user_create_done_view,
-    user_create_complete_view, async_consult_window_view, keyword_search_view,
-    category_filter_view, consult_window_detail_view, apply_check_view,
-    apply_status_view, profile_view, profile_edit_view, profile_edit_complete_view,
-    email_change_view, email_change_done_view, email_change_complete_view,
-    password_change_view, password_change_complete_view,consult_window_create_view, 
-    consult_window_edit_complete_view,
+    login_view, top_page_view, 
+    user_create_view, 
+    user_create_done_view,
+    user_create_complete_view, 
+    async_consult_window_view, 
+    keyword_search_view,
+    category_filter_view, 
+    consult_window_detail_view, 
+    apply_check_view,
+    apply_status_view, 
+    profile_view, 
+    profile_edit_view, 
+    profile_edit_complete_view,
+    email_change_view, 
+    email_change_done_view, 
+    email_change_complete_view,
+    password_change_view, 
+    password_change_complete_view,
+    consult_window_create_view, 
+    consult_window_edit_complete_view, 
+    consult_window_update_view,
     )
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', login_view.auth_login, name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
-    path('', landing_page_view.landing_page, name='landing'),
+    path('', TemplateView.as_view(template_name = 'sharetech/landing.html'), name='landing'),
     path('top/', top_page_view.top_page, name='top'),
     path('register/', user_create_view.user_create, name='register'),
     path('register/done', user_create_done_view.user_create_done, name='register_done'),
@@ -38,6 +53,7 @@ urlpatterns = [
     path('password-change/complete/', password_change_complete_view.password_change_complete, name='password_change_complete'),
     path('consult-window/create', consult_window_create_view.consult_window_create, name='consult_window_register'),
     path('consult-window/edit/complete', consult_window_edit_complete_view.consult_window_edit_complete, name='consult_window_edit_complete'),
+    path('consult-window/update/<int:pk>/', consult_window_update_view.consult_window_update, name='consult_window_update')
 ]
 
 # 画像保存先パス

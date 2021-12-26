@@ -1,8 +1,6 @@
-import django
 from django.core.exceptions import ValidationError
 from django.forms import ModelForm
 from django import forms
-from django.contrib.auth.hashers import make_password
 from sharetech.constants.messages import ErrorMessage, RePatterns
 from sharetech.utils import ConvertChoiceFieldDisplay
 from sharetech.validators.custom_validator import email_validate
@@ -99,6 +97,7 @@ class UserCreateForm(ModelForm):
         self.fields['industry_name'].required = False
         self.fields['occupation_name'].required = False
         self.fields['position_name'].required = False
+        self.fields['company'].required = False
 
     def clean(self):
         super().clean()

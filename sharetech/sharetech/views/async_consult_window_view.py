@@ -19,7 +19,7 @@ class AsyncArticleLoadView(BasePageCommonView):
         if self.request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
             article_start_index = int(request.GET.get('index')) * self.LoadNum.SMALL + 1
             article_end_index = article_start_index + self.LoadNum.SMALL
-            article_object_list = list(ConsultWindow.objects.order_by('-created_at')[article_start_index:article_end_index])
+            article_object_list = list(ConsultWindow.objects.filter(is_deleted = False).order_by('-created_at')[article_start_index:article_end_index])
 
             load_article = {
                 'discover_article' : self.create_consult_window_list(article_object_list),

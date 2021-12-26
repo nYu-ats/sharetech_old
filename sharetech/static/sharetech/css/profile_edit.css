@@ -257,6 +257,7 @@
 
 .form_item .cat_flex label{
     margin-right: .5em;
+    margin-bottom: .2em;
     padding: 0 .5em;
     text-align: center;
     font-size: .8em;
@@ -265,7 +266,86 @@
     border: 1px solid #2699FB;
 }
 
+.form_item .cat_flex label:hover{
+    cursor: pointer;
+}
+
 .form_item .cat_flex input[type="checkbox"]:checked + label{
     background-color: #2699FB;
     color: white;
+}
+
+.profile_edit .delete_btn{
+    text-align: right;
+}
+
+.profile_edit .delete_btn img{
+    width: 24px;
+    height: 24px;
+}
+
+.profile_edit .delete_btn img:hover{
+    cursor: pointer;
+}
+
+.delete_confirm{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 150px;
+    background-color: white;
+    border-radius: 4px;
+    border: solid 3px #1e90ff;
+}
+
+.delete_confirm .flex{
+    display: flex;
+    justify-content: center;
+    margin-top: 2em;
+}
+
+.delete_confirm .message{
+    text-align: center;
+    margin-top: 1em;
+}
+
+.delete_confirm .flex input{
+    margin: 0;
+}
+
+.delete_confirm .flex input,
+.delete_confirm .flex p{
+    font-size: 1em;
+    padding: 1em;
+    background-color: white;
+    color: #666;
+    border: none;
+    font-weight: bold;
+}
+
+.delete_confirm .flex input:hover,
+.delete_confirm .flex p:hover{
+    color: #1e90ff;
+    cursor: pointer;
+    box-shadow: none;
+}
+
+.delete_confirm .delete_flg{
+    display: none;
+}
+
+.delete_overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 100;
+}
+
+.delete_overlay.hidden{
+    display: none;
 }

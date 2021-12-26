@@ -35,7 +35,7 @@ main .split .split_item{
 }
 
 main .split .split_left{
-  width: 250px;
+  width: 300px;
 }
 
 main .split .split_left .split_left_inner{
@@ -60,7 +60,14 @@ main .split .split_right{
 }
 
 .flex_block .discription h3{
-  font-size: 18px;
+  font-size: 1.2em;
+  color: #666;
+  font-weight: bold;
+  /* 以下IE非対応らしいので、要検討 */
+  display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
 }
 
 .flex_block h3, .flex_block p{
@@ -94,8 +101,8 @@ main .split .split_right{
 .flex_block .article .contain_img{
     width: 175px;
     height: 175px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -106,11 +113,6 @@ main .split .split_right{
 .flex_block .article .article_info_flex p,
 .flex_block .article h3{
   line-height: 1em;
-}
-
-.flex_block .article h3{
-  color: #666;
-  font-weight: bold;
 }
 
 .flex_block .article .presenter_flex{
@@ -135,7 +137,6 @@ main .split .split_right{
   line-height: 1em;
   margin-left: 1em;
   color: #666;
-  font-weight: bold;
 }
 
 /* カテゴリ検索欄 */
@@ -148,6 +149,11 @@ main .split .split_left .split_left_inner .category_contena input{
 
 main .split .split_left .split_left_inner .category_contena .big_category{
   font-weight: bold;
+  margin-bottom: 1em;
+}
+
+main .split .split_left .split_left_inner .category_contena .big_category input:hover{
+  cursor:default;
 }
 
 main .split .split_left .split_left_inner .category_contena input:hover{
@@ -164,4 +170,9 @@ main .split .split_left .split_left_inner .small_category{
 
 main .split .split_left .split_left_inner a{
     color: #666;
+    font-weight: lighter;
+}
+
+main .split .split_left .split_left_inner a:hover{
+  color: #2699FB;
 }

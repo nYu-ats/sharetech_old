@@ -21,21 +21,21 @@ class TopPageView(BasePageCommonView):
         # TODO 注目、おすすめ、発見については、フィルタ条件要検討
         # TODO 記事取得のクエリ1本にまとめて(all)ロジック部分で記事の切り出ししたほうがいいかも？
         # 注目窓口抽出
-        attention_consult_window_object_list = list(ConsultWindow.objects.order_by('-viewed_num')[:self.DisplayNum.SMALL])
+        attention_consult_window_object_list = list(ConsultWindow.objects.filter(is_deleted = False).order_by('-viewed_num')[:self.DisplayNum.SMALL])
         selected_obj_array.extend([int(consult_window_obj.id) for consult_window_obj in attention_consult_window_object_list])
 
         # おすすめ窓口抽出
-        reccomend_consult_window_object_list = list(ConsultWindow.objects.exclude(
+        reccomend_consult_window_object_list = list(ConsultWindow.objects.filter(is_deleted = False).exclude(
             pk__in=selected_obj_array).order_by('-applyed_num')[:self.DisplayNum.SMALL])
         selected_obj_array.extend([int(consult_window_obj.id) for consult_window_obj in reccomend_consult_window_object_list])
 
         # 新着窓口抽出
-        latest_consult_window_object_list = list(ConsultWindow.objects.exclude(
+        latest_consult_window_object_list = list(ConsultWindow.objects.filter(is_deleted = False).exclude(
             pk__in=selected_obj_array).order_by('created_at')[:self.DisplayNum.SMALL])
         selected_obj_array.extend([int(consult_window_obj.id) for consult_window_obj in latest_consult_window_object_list])
 
         # 発見窓口抽出
-        discover_consult_window_object_list = list(ConsultWindow.objects.exclude(
+        discover_consult_window_object_list = list(ConsultWindow.objects.filter(is_deleted = False).exclude(
             pk__in=selected_obj_array).order_by('-viewed_num')[:self.DisplayNum.SMALL])
         
         self.prepare().set_category_dict().update(
