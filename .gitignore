@@ -5,3 +5,4 @@
 ./sharetech/db.sqlite
 .devcontainer
 .env
+./sharetech/media/
