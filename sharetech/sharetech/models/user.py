@@ -211,6 +211,12 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         default = False,
     )
 
+    # 有効フラグ(パスワードリセットに必要)
+    is_active = models.BooleanField(
+        verbose_name = 'Is Activated',
+        default = True,
+    )
+
     # ログインカウンター
     login_counter = models.PositiveIntegerField(
         verbose_name = 'Login Counter',
