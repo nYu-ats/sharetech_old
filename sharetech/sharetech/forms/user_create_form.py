@@ -39,17 +39,17 @@ class UserCreateForm(ModelForm):
     )
 
     # ドロップダウンリストに書くモデル名称が表示されるよう変換
-    industry_name = ConvertChoiceFieldDisplay(
+    industry_id = ConvertChoiceFieldDisplay(
         queryset = IndustryMst.objects.all(),
         empty_label='業種を選択してください',
         label = '業種'
         )
-    occupation_name = ConvertChoiceFieldDisplay(
+    occupation_id = ConvertChoiceFieldDisplay(
         queryset = OccupationMst.objects.all(),
         empty_label='職種を選択してください',
         label = '職種'
         )
-    position_name = ConvertChoiceFieldDisplay(
+    position_id = ConvertChoiceFieldDisplay(
         queryset = PositionMst.objects.all(),
         empty_label='役職を選択してください',
         label = '役職'
@@ -66,15 +66,15 @@ class UserCreateForm(ModelForm):
             'family_name_en', 
             'email', 
             'role_code', 
-            'industry_name', 
-            'occupation_name', 
-            'position_name',
+            'industry_id', 
+            'occupation_id', 
+            'position_id',
             'password', 
             'specialize',
             ]
         labels = {
             'username': '名前',
-            'company': '会社名', 
+            'company': '会社名',
             'first_name_jp': '名字(カナ)', 
             'family_name_jp': '氏名(カナ)', 
             'first_name_en': '名字(ローマ字)', 
@@ -94,9 +94,9 @@ class UserCreateForm(ModelForm):
         # 最大入力文字数設定
         self.fields['password'].widget.attrs['maxlength'] = self.__MAX_PASSWORD_LENGTH
         # 以下必須でない入力項目
-        self.fields['industry_name'].required = False
-        self.fields['occupation_name'].required = False
-        self.fields['position_name'].required = False
+        self.fields['industry_id'].required = False
+        self.fields['occupation_id'].required = False
+        self.fields['position_id'].required = False
         self.fields['company'].required = False
 
     def clean(self):
