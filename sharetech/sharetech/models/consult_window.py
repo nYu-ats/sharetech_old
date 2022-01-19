@@ -41,9 +41,9 @@ class ConsultWindow(models.Model):
         default = 0,
     )
 
-    # timerex URL
-    timerex_url = models.CharField(
-        verbose_name = 'timerex URL',
+    # Scheduler URL
+    scheduler_url = models.CharField(
+        verbose_name = 'Scheduler URL',
         max_length = 512,
     )
 
