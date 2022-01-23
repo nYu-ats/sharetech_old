@@ -52,7 +52,7 @@ class ConsultWindowTestData(BaseTestDataClass):
     # 相談料金
     price = 0
     # timerex url
-    timerex_url = 'https://timerex.test/testtesttest/'
+    scheduler_url = 'https://timerex.test/testtesttest/'
     # 実績
     archivement = '1950~1955年に「共産主義者と平和」を書く。¥n1956~1960年にはハンガリー事件に感銘を受け、「第三世界」の重要性を認識する。¥n'
 
@@ -71,7 +71,7 @@ class ConsultWindowTestData(BaseTestDataClass):
                 consult_window_title = self.base_title + str(i),
                 consult_window_overview = self.base_overview + str(i) + '.¥n',
                 consult_price = self.price * i,
-                timerex_url = self.timerex_url,
+                scheduler_url = self.scheduler_url,
                 archivement = self.archivement,
             )
             self.obj_list.append(consult_window_obj)

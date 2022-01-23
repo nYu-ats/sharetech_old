@@ -29,12 +29,12 @@ class ConsultWindowEditForm(ModelForm):
             'consult_window_title',
             'consult_window_overview',
             'archivement',
-            'timerex_url',
+            'scheduler_url',
             'consult_price',
         }
         labels={
             'consult_window_title': 'タイトル',
-            'timerex_url': 'スケジューラー調整リンク',
+            'scheduler_url': 'スケジューラー調整リンク',
             'consult_price': '設定料金',
         }
 
@@ -57,16 +57,16 @@ class ConsultWindowEditForm(ModelForm):
         })
         # 以下必須入力
         self.fields['consult_window_title'].required = True
-        self.fields['timerex_url'].required = True
+        self.fields['scheduler_url'].required = True
         self.fields['consult_price'].required = True        
 
     def clean(self):
         super().clean()
     
-    def clean_timerex_url(self):
+    def clean_scheduler_url(self):
         # URLフォーマットチェック
-        timerex_url = self.cleaned_data.get('timerex_url')
-        if not re.match(RePatterns().timerex_url_pattern, timerex_url):
-            raise forms.ValidationError(ErrorMessage().failuer_timerex_url_pattern)
+        scheduler_url = self.cleaned_data.get('scheduler_url')
+        if not re.match(RePatterns().scheduler_url_pattern, scheduler_url):
+            raise forms.ValidationError(ErrorMessage().failuer_scheduler_url_pattern)
         
-        return timerex_url
+        return scheduler_url
