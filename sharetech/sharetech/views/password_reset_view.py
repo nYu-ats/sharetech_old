@@ -1,5 +1,6 @@
 from django.contrib.auth import views as auth_views
 from django.urls import reverse_lazy
+from sharetech.forms.password_reset_form import PasswordResetForm
 
 class PasswordResetView(auth_views.PasswordResetView):
     '''
@@ -17,6 +18,7 @@ class PasswordResetView(auth_views.PasswordResetView):
     token_generator = default_token_generator
     '''
 
+    form_class = PasswordResetForm
     success_url = reverse_lazy('password_reset_mail_done')
     template_name = 'sharetech/password_reset.html'
 

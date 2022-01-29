@@ -14,6 +14,6 @@ class PasswordResetConfirmView(auth_views.PasswordResetConfirmView):
     token_generator = default_token_generator
     '''
     
-    template_name = 'sharetech/password_reset_confirm.html'
+    template_name = 'sharetech/password_reset_confirmation.html'
 
 password_reset_confirm = PasswordResetConfirmView.as_view()
