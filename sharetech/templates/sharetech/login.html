@@ -46,7 +46,6 @@
                     <input type="submit" class="button" title="Sign In" value="ログイン">
                 </div>
             </form>
-            <p><a href="{% url 'password_reset' %}">Forgot Your Password?</a></p>
 
             <!-- SSO未実装のため一時コメントアウト -->
             <!-- <h2>別のアカウントを使う</h2>
@@ -56,7 +55,7 @@
             </div> -->
             <div class="form_footer">
                 <p><a href="{% url 'register' %}">Create an account</a></p>
-                <p><a href="#">Forget password?</a></p>
+                <p><a href="{% url 'password_reset' %}">Forget password?</a></p>
             </div>
         </div>
     </main>
