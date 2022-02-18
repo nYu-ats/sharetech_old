@@ -1,0 +1,19 @@
+.rule .title{
+    color: #000000;
+    line-height: 40px;
+}
+
+.rule .content{
+    display: flex;
+    justify-content: left;
+    color: #000000;
+    background-color: white;
+    flex-wrap: wrap;
+    padding: 1em;
+    border-radius: 4px 4px 0 0;
+}
+
+.rule .under{
+    /* 第X条に下線を引くためのクラス、これから対応 */
+    text-decoration: underline;
+}
