@@ -119,6 +119,19 @@ a{
     width: auto;
 }
 
+.page_header .home_icon:hover{
+    background-color: #1B435D;
+}
+
+.page_header .home_icon img{
+    position: fixed;
+    top: 2em;
+    right: 3em;
+    transform: translate(-50%, -50%);
+    width: 2.5em;
+    height: 2.5em;
+}
+
 .page_header .user_icon{
     position: fixed;
     top: 2em;
