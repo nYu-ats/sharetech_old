@@ -1,4 +1,5 @@
 from django.contrib.auth import views as auth_views
+from sharetech.forms.set_password_form import SetPasswordForm
 
 class PasswordResetConfirmView(auth_views.PasswordResetConfirmView):
     '''
@@ -14,6 +15,7 @@ class PasswordResetConfirmView(auth_views.PasswordResetConfirmView):
     token_generator = default_token_generator
     '''
     
+    form_class = SetPasswordForm
     template_name = 'sharetech/password_reset_confirmation.html'
 
 password_reset_confirm = PasswordResetConfirmView.as_view()
